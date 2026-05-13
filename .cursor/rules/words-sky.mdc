@@ -1,0 +1,37 @@
+---
+description: Words Sky product defaults, stack, and agent expectations
+alwaysApply: true
+---
+
+# Words Sky
+
+## Product
+
+- Treat [UX.md](UX.md) as the rulebook. Core flow: `Landing → Topic → Study → (optional) Map`.
+- Copy: Study (not Learn), Map (not Explore), Show translations (not Reveal), Got it (not Next as primary), Still learning (no negative framing), Close (not lone × without label).
+- Do not ship [UX.md](UX.md) section 8 out-of-scope items (accounts, streaks/XP, advanced graph editing, pronunciation scoring) without an explicit product decision.
+
+## Skills (optional deep dives)
+
+- Map / React Flow: [.cursor/skills/words-sky-map-layout/SKILL.md](.cursor/skills/words-sky-map-layout/SKILL.md)
+- Copy / voice: [.cursor/skills/words-sky-language/SKILL.md](.cursor/skills/words-sky-language/SKILL.md)
+- PM / ship check: [.cursor/skills/words-sky-pm-check/SKILL.md](.cursor/skills/words-sky-pm-check/SKILL.md)
+- PWA: [.cursor/skills/words-sky-pwa/SKILL.md](.cursor/skills/words-sky-pwa/SKILL.md)
+
+## Code
+
+- Stack: React, Vite, TypeScript, Vitest, react-router-dom, React Flow (`reactflow`).
+- Study UI: [`src/components/StudyCard.tsx`](src/components/StudyCard.tsx) plus scoped styles in [`src/index.css`](src/index.css) (`study-*`, `study-anchor-panel`, `speak-button`). Follow [UX.md](UX.md) Study bullets on layout, contrast, cognate/caution rows, and interaction (including `prefers-reduced-motion`).
+- Pure logic in `src/lib/` (e.g. progress, queue, anchor, **wordSearch**, **latinFold**, **crossLangLemmaAffinity**): extend or add **unit tests** when behavior changes.
+- Topic rows and tags: [.cursor/rules/words-sky-topic-data.mdc](.cursor/rules/words-sky-topic-data.mdc) (`false-friend-XX-YY`, full `examples` / `articles` when those objects exist). **A1 / CEFRLex-style** manual checks and **planned build-later tasks** are in that file (*A1 level checks*).
+- Match existing patterns; keep changes scoped.
+
+## Documentation
+
+- When a change affects user-visible behavior, copy or flows, configuration, build/run steps, public APIs, or topic/agent conventions—update the **minimum** docs that would otherwise go stale.
+- Prefer existing sources of truth: [UX.md](UX.md); [.cursor/rules/words-sky-topic-data.mdc](.cursor/rules/words-sky-topic-data.mdc); the relevant [.cursor/skills/](.cursor/skills/) `SKILL.md` when its conventions change; [README.md](README.md) only if install, dev, or build workflow changes.
+- Do not add or expand markdown without a concrete stale-doc reason; if nothing needs updating, skip (note in summary if helpful).
+
+## Before claiming a task done
+
+Run `npm run test` and `npm run build` (and `npm run lint` when touching TS/TSX). Fix failures or say what is intentionally deferred. When applicable, include documentation updates per **Documentation** above.

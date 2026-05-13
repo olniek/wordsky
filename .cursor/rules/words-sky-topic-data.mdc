@@ -1,0 +1,70 @@
+---
+description: Topic word data — mapGroup, languages, MAP_GROUP_ORDER, tags, search folding
+globs:
+  - src/data/words.ts
+  - src/data/topicEverydayNouns100.ts
+alwaysApply: false
+---
+
+# Topic data (`src/data/words.ts` + imported topic modules)
+
+- Every `TopicWord` needs **`mapGroup`** (learner-meaningful band for that topic): pick by **scene / subdomain** (e.g. animals: pets vs `rodents` vs farm vs birds—not by synonym sets). Same band = words that belong in the same mental “island” on the Map.
+- Every word needs **`forms`** with all of `EN`, `DE`, `PT`, `ES`, `FR`, `IT` (see `LanguageCode`).
+- Optional **`examples`**: `Partial<Record<LanguageCode, string>>` — short A1 example sentences; when present for a word, fill every language with the same meaning (like `forms`). Study shows the **anchor** example only in the anchor language (no silent fallback to English).
+- New `mapGroup` id: append it to **`MAP_GROUP_ORDER`** for that topic’s slug (order = vertical bands on the Map).
+- Prefer reusing an existing `mapGroup` when it fits; see [.cursor/skills/words-sky-map-layout/SKILL.md](.cursor/skills/words-sky-map-layout/SKILL.md).
+- Optional **`tags`**: cross-cutting notes for authors and **runtime Study behaviour**:
+  - **`false-friend-XX-YY`** (where `XX` and `YY` are two distinct codes from `EN`, `DE`, `PT`, `ES`, `FR`, `IT`): for that word, the pair is **never** treated as a helpful same-spelling or near-spelling match in Study. The translation row gets a **caution** style and copy instead of cognate highlighting, and the anchor word does not get the “echoes a translation” glow for that pair. Order does not matter (`false-friend-DE-EN` equals `false-friend-EN-DE`). Case-insensitive in data.
+  - **`cognate-*`**: reserved for author notes; does not change UI today. Do not replace `mapGroup` with tags.
+- After edits: `npm run test`, `npm run build`, and `npm run lint` when you change TypeScript or topic data that affects types.
+- **Search / lemma folding** for EU Latin script lives in [`src/lib/latinFold.ts`](src/lib/latinFold.ts) (accent-insensitive match, `ß`↔`ss`) and [`src/lib/crossLangLemmaAffinity.ts`](src/lib/crossLangLemmaAffinity.ts) (cognate detection and `false-friend-*` handling).
+- **Automated checks**: run `npm run lint:topic-data` after editing topic data in [`src/data/words.ts`](src/data/words.ts) or an imported module such as [`src/data/topicEverydayNouns100.ts`](src/data/topicEverydayNouns100.ts) (unique `concept`, `mapGroup` vs `MAP_GROUP_ORDER`, `examples` all-or-none).
+
+---
+
+## Multilingual sense hygiene (Bond et al., LREC 2020)
+
+Background: [Bond et al., 2020](https://aclanthology.org/2020.lrec-1.389/) links hand-built beginner vocab (TUFS) across languages, then maps translation sets to WordNet synsets with human review. Words Sky already uses **`concept`** as the cross-language slot (like a translation-set id). The useful part for this repo is **editorial discipline**, not shipping WordNet in Study.
+
+### Split polysemy into separate rows
+
+- If one surface form covers **two A1-relevant senses** (paper: homographs like “bus” vs “bass”; affix vs free morpheme), use **two `concept` values** and separate `forms` / `examples`. Pick `mapGroup` so each row sits in the right scene on the Map.
+- If you must keep one row temporarily, document ambiguity in **`tags`** or a short author comment in the PR; prefer splitting once copy and examples can target one sense each.
+
+### Register, gender, and domain (cross-lingual granularity)
+
+- When languages **split lemmas** where others use one word (e.g. school vs university teacher, male vs female job title), either use the **lemma that matches the shared example’s meaning** and note the rest in **`tags` / `cognate-*` / PR text**, or split **`concept`** if both senses deserve their own card.
+- Use **`false-friend-XX-YY`** when similar spelling must not get cognate highlighting (see above).
+- **Learner-facing microcopy** beyond tags belongs behind an explicit [UX.md](UX.md) decision.
+
+### Optional authoring-only metadata (no UI today)
+
+- For richer “meaning column” style notes per language (paper: usage glosses), a future optional field such as **`senseNotes?: Partial<Record<LanguageCode, string>>`** can live in data **authoring-only** (same bar as planned **`cefrHint`**). Do not add to `TopicWord` or UI until needed.
+
+---
+
+## A1 level checks (CEFRLex-style, no app dependency)
+
+Background: [LREC 2020](https://www.aclweb.org/anthology/2020.lrec-1.43/) — graded textbook lexicons (CEFRLex family) are usable for learner apps but can be sparse or topic-skewed; cross-language alignment can refine level estimates. Words Sky stays **hand-curated**; anything below is **optional QA**, then **planned** automation.
+
+### MVP (do now, zero code)
+
+- When adding or doubting a word, optionally check the **English** lemma in the [CEFRLex demo search](https://cental.uclouvain.be/cefrlex-demo/search) (EFLLex): prefer items with **clear A1 mass** in the level distribution, not a lone tiny A1 blip with most mass at B+ unless the topic truly needs it.
+- **Topic overrides** are valid (graded materials also introduce harder words in context); if you override, you already have `difficulty` and `mapGroup` to control Study order.
+
+### Planned tasks (build later, in order)
+
+1. **Optional metadata in `words.ts`** — e.g. `cefrHint?: 'A1' | 'A2' | …` or per-language codes, **authoring-only** at first (no UI). Enables audits and tests without shipping a model in the client.
+2. **CI or dev script: cross-language sanity** — flag concepts where aligned languages disagree by more than *N* CEFR steps once per-language hints exist (idea: multilingual δ from Gräen et al.; lightweight table, not full regression). `npm run lint:topic-data` already covers structural checks (see above).
+3. **Offline tooling** — small Node script or CSV pipeline that suggests `difficulty` from a **static, license-cleared** extract (e.g. EFLLex snapshot, KELLY); output is a report for humans, not runtime fetches. Keep frequency / BNC-style signals out of the app bundle.
+4. **Batch QA at scale** — if vocabulary grows large, consider ingesting [multiCEFRLex](http://pub.cl.uzh.ch/purl/multiCEFRLex) or similar for alignment-backed checks; verify URL, license, and language coverage (including Italian) before depending on it.
+5. **Product: readability / “hard words in pasted text”** — only after an explicit [UX.md](UX.md) product decision (today treated like other §8 expansions: not default MVP).
+6. **Editorial reference only** — EVP / GSE and similar can inform human picks; do not embed proprietary APIs or datasets in the shipped app without clearance.
+
+---
+
+## Deferred: Open Multilingual Wordnet / CILI (Bond et al. tooling path)
+
+**Not in the shipped app** unless there is an explicit product decision: linking rows to **OMW synsets** or **CILI** ids would enable hypernyms, definitions, and sense inventories, but it adds bundle or network complexity and fights the A1 “one card, one word” Study flow ([UX.md](UX.md) Map is visual progress only).
+
+**Acceptable later (authoring-only):** offline lookup by English lemma or `concept` to suggest `mapGroup` neighbors or missing senses—human still commits changes to `words.ts` (or a topic module re-exported from there). Do not import TUFS dumps wholesale (different L1 design and language set than this project’s `EN`–`IT` core).
