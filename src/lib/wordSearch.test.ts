@@ -58,7 +58,7 @@ describe('searchVocabulary', () => {
   })
 
   it('finds by corpus example sentence text', () => {
-    const hits = searchVocabulary('garden', 30)
+    const hits = searchVocabulary('home', 30)
     expect(hits.some((h) => h.concept === 'cat')).toBe(true)
   })
 })

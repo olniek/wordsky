@@ -48,10 +48,28 @@ describe('pickSpeechVoice', () => {
     expect(pickSpeechVoice(voices, 'en-US')).toBe(samantha)
   })
 
-  it('for en-US prefers non-local when both match the locale', () => {
+  it('for en-US prefers local when both are generic cloud/local names (avoids odd cloud defaults)', () => {
     const local: SpeechVoiceLike = { lang: 'en-US', name: 'Local Voice', localService: true }
     const cloud: SpeechVoiceLike = { lang: 'en-US', name: 'Cloud Voice', localService: false }
     const voices: SpeechVoiceLike[] = [local, cloud]
-    expect(pickSpeechVoice(voices, 'en-US')).toBe(cloud)
+    expect(pickSpeechVoice(voices, 'en-US')).toBe(local)
+  })
+
+  it('for en-US prefers a known standard voice over alphabetical generic cloud', () => {
+    const genericCloud: SpeechVoiceLike = { lang: 'en-US', name: 'Aaron', localService: false }
+    const googleUs: SpeechVoiceLike = {
+      lang: 'en-US',
+      name: 'Google US English',
+      localService: false,
+    }
+    const voices: SpeechVoiceLike[] = [genericCloud, googleUs]
+    expect(pickSpeechVoice(voices, 'en-US')).toBe(googleUs)
+  })
+
+  it('for en-US deprioritizes suspicious engine names when a normal voice exists', () => {
+    const espeak: SpeechVoiceLike = { lang: 'en-US', name: 'espeak US', localService: true }
+    const normal: SpeechVoiceLike = { lang: 'en-US', name: 'Some English Voice', localService: true }
+    const voices: SpeechVoiceLike[] = [espeak, normal]
+    expect(pickSpeechVoice(voices, 'en-US')).toBe(normal)
   })
 })
