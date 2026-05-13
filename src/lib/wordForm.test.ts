@@ -6,6 +6,14 @@ const baseWord: TopicWord = {
   concept: 'tree',
   mapGroup: 'plants',
   forms: { EN: 'tree', DE: 'Baum', PT: 'árvore', ES: 'árbol', FR: 'arbre', IT: 'albero' },
+  examples: {
+    EN: 'That tree is tall.',
+    DE: 'Dieser Baum ist hoch.',
+    PT: 'Aquela árvore é alta.',
+    ES: 'Ese árbol es alto.',
+    FR: 'Cet arbre est grand.',
+    IT: 'Quell’albero è alto.',
+  },
 }
 
 describe('displayWordForm', () => {

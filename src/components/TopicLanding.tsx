@@ -1,3 +1,4 @@
+import { useMemo } from 'react'
 import { Link } from 'react-router-dom'
 import { topics, topicWords } from '../data/words'
 import {
@@ -7,45 +8,37 @@ import {
   useProgress,
 } from '../lib/progress'
 import { strings } from '../lib/strings'
-import AnchorPicker from './AnchorPicker'
-import TranslationLanguagePicker from './TranslationLanguagePicker'
+import LanguageToolbar from './LanguageToolbar'
 import WordSearch from './WordSearch'
 import { useAnchorLanguage } from '../lib/anchor'
+import { mapVisibleLanguageCodes } from '../lib/graph'
 import { useTranslationLanguages } from '../lib/translationLanguages'
-import { useProgressLanguages } from '../lib/progressLanguages'
 import { useSession } from '../lib/session'
-import ProgressLanguagesPicker from './ProgressLanguagesPicker'
 
 function TopicLanding() {
   const [anchor, setAnchor] = useAnchorLanguage()
   const [translationLanguages, setTranslationLanguages] = useTranslationLanguages(anchor)
-  const [progressLanguages, setProgressLanguages] = useProgressLanguages(anchor, translationLanguages)
+  const progressLanguages = useMemo(
+    () => mapVisibleLanguageCodes(anchor, translationLanguages),
+    [anchor, translationLanguages],
+  )
   const { snapshot } = useProgress()
   const { lastTopic, setLastTopic } = useSession()
 
   return (
     <main className="page-shell">
       <section className="landing-intro" aria-label={strings.landing.title}>
-        <p className="hero-kicker">{strings.landing.kicker}</p>
-        <div className="landing-intro-body">
+        <div className="landing-intro-head">
           <div className="landing-intro-copy">
             <h1>{strings.landing.title}</h1>
-            <p>{strings.landing.subtitle}</p>
+            <p>{strings.landing.subtitleShort}</p>
           </div>
-          <div className="landing-intro-controls">
-            <AnchorPicker value={anchor} onChange={setAnchor} />
-            <TranslationLanguagePicker
-              anchor={anchor}
-              value={translationLanguages}
-              onChange={setTranslationLanguages}
-            />
-            <ProgressLanguagesPicker
-              anchor={anchor}
-              translationLanguages={translationLanguages}
-              value={progressLanguages}
-              onChange={setProgressLanguages}
-            />
-          </div>
+          <LanguageToolbar
+            anchor={anchor}
+            onAnchorChange={setAnchor}
+            translationLanguages={translationLanguages}
+            onTranslationLanguagesChange={setTranslationLanguages}
+          />
         </div>
         <WordSearch anchor={anchor} />
       </section>
@@ -66,6 +59,8 @@ function TopicLanding() {
           const isLast = lastTopic === topic.slug
           const focusReview = isReview && learningConcepts > 0
           const to = focusReview ? `/topic/${topic.slug}?focus=learning` : `/topic/${topic.slug}`
+          const pct = totalForms > 0 ? Math.round((knownForms / totalForms) * 100) : 0
+          const ctaTone = isReview ? 'review' : started ? 'continue' : 'start'
 
           return (
             <Link
@@ -74,15 +69,24 @@ function TopicLanding() {
               to={to}
               onClick={() => setLastTopic(topic.slug)}
             >
-              <p className="topic-card-kicker">{strings.landing.progressLearned(knownForms, totalForms)}</p>
-              {learningConcepts > 0 ? (
-                <p className="topic-card-learning">
-                  {strings.landing.cardStillLearningLine(learningConcepts)}
-                </p>
-              ) : null}
-              <h2>{topic.title}</h2>
-              <p>{topic.description}</p>
-              <span>{cta}</span>
+              <div className="topic-card-head">
+                <h2>{topic.title}</h2>
+                <span className={`topic-card-cta topic-card-cta-${ctaTone}`}>{cta}</span>
+              </div>
+              <div className="topic-card-progress" aria-hidden="true">
+                <div className="topic-card-progress-bar">
+                  <span className="topic-card-progress-fill" style={{ width: `${pct}%` }} />
+                </div>
+              </div>
+              <p className="topic-card-meta">
+                <span>{strings.landing.progressLearned(knownForms, totalForms)}</span>
+                {learningConcepts > 0 ? (
+                  <>
+                    <span aria-hidden="true">·</span>
+                    <span>{strings.landing.cardStillLearningLine(learningConcepts)}</span>
+                  </>
+                ) : null}
+              </p>
             </Link>
           )
         })}

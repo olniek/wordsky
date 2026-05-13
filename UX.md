@@ -18,7 +18,7 @@ If something is confusing, remove it.
 Learn one word quickly:
 1. See the word in a known language
 2. Show translations
-3. Mark `Got it` or `Still learning` **for each language row** that **counts toward progress** (anchor and each translation you study, minus any you left unchecked under **Count toward progress** on Landing)
+3. Mark `Got it` or `Still learning` **for each language row** (anchor and each translation you chose on Landing)
 4. Tap `Continue` to move to the next word
 
 ---
@@ -37,9 +37,9 @@ Map is secondary and optional.
 ## 3) Screen Rules
 
 ### Landing
-- Above the grid: short hero, **anchor language** (I speak), **translation languages** for Study, **which languages count toward progress** (subset of the languages shown; at least one stays on), and optional **Find a word** search
+- Above the grid: short hero, a single compact **Languages** toolbar that summarizes the current setup (e.g. `English · 4 languages`) and opens a popover containing **anchor language** (I speak) and **translation languages** for Study; plus an optional **Find a word** search. The popover is keyboard-accessible (Esc closes, focus returns to the trigger)
 - Main area: **topic cards** with progress and a single CTA each
-- Show progress on each card: `learned / total` (**total** counts each word once per language that **counts toward progress** — a subset of anchor + translations — not just once per topic row)
+- Show progress on each card: `learned / total` (**total** counts each word once per visible study language — anchor plus each chosen translation — not just once per topic row)
 - Show one action per card:
   - `Start` (no progress)
   - `Continue` (in progress)
@@ -59,12 +59,13 @@ Map is secondary and optional.
 - One card, one word
 - Two clear states:
   - **Before translations are shown**: only `Show translations`
-  - **After translations are shown**: each **language row** (anchor and each translation) shows the word in that language. Rows that **count toward progress** have `Got it` (primary) and `Still learning` (secondary) for **that language only**; rows you left out of **Count toward progress** stay visible for reference without those buttons. When every **counted** row has been marked, a single `Continue` control moves to the next word
+  - **After translations are shown**: each **language row** (anchor and each translation) shows the word in that language. Each row has `Got it` (primary) and `Still learning` (secondary) for **that language only**. When every row has been marked, a single `Continue` control moves to the next word
 - Always show the next action as a clear button
 - Do not require graph interaction to learn
-- **Layout and readability:** Keep the **anchor** prompt (and anchor-only example, when present) in one grouped block. After reveal, **translation** rows share a calm, consistent frame; use **language color as an accent** (for example along one edge plus the language tag), not a one-off heavy border treatment that makes one language look like a different screen. **Example sentences** stay visually secondary but **readable** (contrast and line spacing matter; do not rely on faint gray italic alone for long lines). **Meta lines** (step, optional keyboard hint on fine pointers, “up next”) stay short and legible, not whisper-quiet.
+- **Layout and readability:** Keep the **anchor** prompt (and anchor-only example sentence) in one grouped block. After reveal, **translation** rows share a calm, consistent frame; use **language color as an accent** (for example along one edge plus the language tag), not a one-off heavy border treatment that makes one language look like a different screen. **Example sentences** stay visually secondary but **readable** (contrast and line spacing matter; do not rely on faint gray italic alone for long lines). **Meta lines** (step, optional keyboard hint on fine pointers, “up next”) stay short and legible, not whisper-quiet.
 - After translations are shown, some rows may be highlighted when the spelling matches or almost matches the anchor (helpful cognates). If topic data includes a `false-friend-L1-L2` tag for that pair, the row uses a **caution** treatment and a short line of copy instead of the “same spelling” highlight, so learners are not nudged toward the wrong meaning.
-- When topic data includes **example sentences**, the line under the anchor word is shown **only in the anchor language** (parallel sentences exist for other languages on each translation row after reveal).
+- Topic rows ship a **primary example sentence** per language in data; the line under the anchor word is shown **only in the anchor language** (parallel sentences appear on each translation row after reveal).
+- Optional **More detail**: when a row includes **`corpusExamples`** for any language in your current Study set (anchor plus translation languages on Landing), you can open short lists of extra example sentences per language that has them, in the same order as Study. A small word-frequency strip is built from the **anchor** language’s extra lines only when that language has a list. It is optional reading and does not change how you mark `Got it` / `Still learning`.
 
 ### Map (Secondary)
 - Purpose: visual progress, not teaching
@@ -111,7 +112,6 @@ Every screen must answer:
 Persist in `localStorage`:
 - anchor language
 - which languages appear in Study translations (subset of non-anchor, or all)
-- which of those visible languages **count toward progress** (non-empty subset; defaults to all visible)
 - current topic
 - last word index in topic
 - per-word **per language** status: `unseen | learning | known` (each anchor and translation surface is tracked separately)

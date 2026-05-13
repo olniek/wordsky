@@ -27,6 +27,12 @@ function collectSearchableStrings(word: TopicWord): { lang: LanguageCode; text: 
     if (art) out.push({ lang, text: art })
     const sentence = word.examples?.[lang]
     if (sentence?.trim()) out.push({ lang, text: sentence })
+    const corpusLines = word.corpusExamples?.[lang]
+    if (corpusLines) {
+      for (const line of corpusLines) {
+        if (line.trim()) out.push({ lang, text: line })
+      }
+    }
   }
   return out
 }

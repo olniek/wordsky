@@ -1,8 +1,8 @@
 // Layout grid for clustering concepts in Map mode.
 export const CLUSTER_COLUMNS = 5
 /** Wide enough for radial language clusters (anchor + up to five satellites). */
-export const CLUSTER_COL_WIDTH = 460
-export const CLUSTER_ROW_HEIGHT = 410
+export const CLUSTER_COL_WIDTH = 540
+export const CLUSTER_ROW_HEIGHT = 470
 export const CLUSTER_ORIGIN_X = 180
 export const CLUSTER_ORIGIN_Y = 190
 export const CLUSTER_ZIGZAG_OFFSET = 0
@@ -16,7 +16,8 @@ export const CLUSTER_BAND_LABEL_OFFSET_Y = 78
 
 /** Estimated map node box for orbit math (see `.word-node` in `src/index.css`). */
 export const CLUSTER_MAP_NODE_BOX_W = 132
-export const CLUSTER_MAP_NODE_BOX_H = 70
+/** Slightly above single-line height so short wrapped phrases still clear the hub orbit. */
+export const CLUSTER_MAP_NODE_BOX_H = 82
 export const CLUSTER_ORBIT_GAP = 10
 export const CLUSTER_ORBIT_R_MIN = 56
 export const CLUSTER_ORBIT_GRID_PAD_X = 38

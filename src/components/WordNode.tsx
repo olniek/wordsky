@@ -1,6 +1,6 @@
 import { memo, type CSSProperties, type KeyboardEvent } from 'react'
 import { Handle, Position, type NodeProps } from 'reactflow'
-import type { WordNodeData } from '../lib/graph'
+import { MAP_EDGE_HANDLES, type WordNodeData } from '../lib/graph'
 
 function WordNode({ data, selected }: NodeProps<WordNodeData>) {
   // Forward Enter / Space to the same click handler ReactFlow listens for.
@@ -28,10 +28,71 @@ function WordNode({ data, selected }: NodeProps<WordNodeData>) {
       aria-label={`${data.word} — ${data.language}`}
       onKeyDown={handleKeyDown}
     >
-      <Handle type="target" position={Position.Top} className="word-handle" aria-hidden="true" />
+      {data.isAnchorLanguage ? (
+        <>
+          <Handle
+            type="source"
+            position={Position.Top}
+            id={MAP_EDGE_HANDLES.top}
+            className="word-handle"
+            aria-hidden="true"
+          />
+          <Handle
+            type="source"
+            position={Position.Bottom}
+            id={MAP_EDGE_HANDLES.bottom}
+            className="word-handle"
+            aria-hidden="true"
+          />
+          <Handle
+            type="source"
+            position={Position.Left}
+            id={MAP_EDGE_HANDLES.left}
+            className="word-handle"
+            aria-hidden="true"
+          />
+          <Handle
+            type="source"
+            position={Position.Right}
+            id={MAP_EDGE_HANDLES.right}
+            className="word-handle"
+            aria-hidden="true"
+          />
+        </>
+      ) : (
+        <>
+          <Handle
+            type="target"
+            position={Position.Top}
+            id={MAP_EDGE_HANDLES.top}
+            className="word-handle"
+            aria-hidden="true"
+          />
+          <Handle
+            type="target"
+            position={Position.Bottom}
+            id={MAP_EDGE_HANDLES.bottom}
+            className="word-handle"
+            aria-hidden="true"
+          />
+          <Handle
+            type="target"
+            position={Position.Left}
+            id={MAP_EDGE_HANDLES.left}
+            className="word-handle"
+            aria-hidden="true"
+          />
+          <Handle
+            type="target"
+            position={Position.Right}
+            id={MAP_EDGE_HANDLES.right}
+            className="word-handle"
+            aria-hidden="true"
+          />
+        </>
+      )}
       <span className="word-language">{data.language}</span>
       <span className="word-label">{data.word}</span>
-      <Handle type="source" position={Position.Bottom} className="word-handle" aria-hidden="true" />
     </div>
   )
 }

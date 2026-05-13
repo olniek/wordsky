@@ -2,6 +2,7 @@ import { describe, expect, it } from 'vitest'
 import { everydayNouns100 } from './topicEverydayNouns100'
 import {
   MAP_GROUP_ORDER,
+  cefrHintLevels,
   getGuidedTopicWords,
   languageOrder,
   topicWords,
@@ -47,6 +48,29 @@ describe('topic data integrity', () => {
     expect(failures).toEqual([])
   })
 
+  it('when corpusExamples is set for a language, that list has 1–5 non-empty strings', () => {
+    const failures: string[] = []
+    for (const [slug, rows] of Object.entries(topicWords) as [TopicSlug, TopicWord[]][]) {
+      for (const row of rows) {
+        const c = row.corpusExamples
+        if (!c) continue
+        for (const lang of languageOrder) {
+          const list = c[lang]
+          if (list === undefined) continue
+          if (!Array.isArray(list) || list.length === 0 || list.length > 5) {
+            failures.push(`${slug}/${row.concept} corpusExamples.${lang} bad length`)
+          }
+          for (const line of list) {
+            if (typeof line !== 'string' || !line.trim()) {
+              failures.push(`${slug}/${row.concept} corpusExamples.${lang} empty line`)
+            }
+          }
+        }
+      }
+    }
+    expect(failures).toEqual([])
+  })
+
   it('every word has a non-empty article in every language', () => {
     const failures: string[] = []
     for (const [slug, rows] of Object.entries(topicWords) as [TopicSlug, TopicWord[]][]) {
@@ -84,6 +108,20 @@ describe('topic data integrity', () => {
       const unique = new Set(concepts)
       expect(unique.size, `duplicate concepts in ${slug}`).toBe(concepts.length)
     }
+  })
+
+  it('cefrHint when set is one of the allowed authoring levels', () => {
+    const allowed = new Set(cefrHintLevels)
+    const failures: string[] = []
+    for (const [slug, rows] of Object.entries(topicWords) as [TopicSlug, TopicWord[]][]) {
+      for (const row of rows) {
+        if (row.cefrHint === undefined) continue
+        if (!allowed.has(row.cefrHint)) {
+          failures.push(`${slug}/${row.concept} invalid cefrHint "${row.cefrHint}"`)
+        }
+      }
+    }
+    expect(failures).toEqual([])
   })
 
   it('getGuidedTopicWords keeps difficulty ascending and is a permutation of topicWords', () => {

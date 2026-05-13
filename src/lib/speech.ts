@@ -53,7 +53,8 @@ function speakImmediate(text: string, lang: LanguageCode): void {
     const picked = pickSpeechVoice(voices, bcp47)
     const utterance = new window.SpeechSynthesisUtterance(text)
     utterance.lang = bcp47
-    utterance.rate = 0.95
+    // Slightly slower non-English can help beginners; English at 1.0 avoids a strained/draggy read.
+    utterance.rate = lang === 'EN' ? 1 : 0.95
     utterance.pitch = 1
     utterance.onerror = () => {
       // Best-effort speech — swallow async errors so they don't surface as unhandled.

@@ -106,17 +106,48 @@ function resolveGraphVisibleLanguages(
 
 const pairKey = (a: string, b: string) => [a, b].sort().join('::')
 
+/** React Flow `Handle` ids on `WordNode`: hub uses matching `sourceHandle`, satellites use `targetHandle`. */
+export const MAP_EDGE_HANDLES = {
+  top: 'map-edge-top',
+  bottom: 'map-edge-bottom',
+  left: 'map-edge-left',
+  right: 'map-edge-right',
+} as const
+
+/**
+ * Given hub→satellite offset in cluster space (same units as `clusterOffsetsForVisible`),
+ * pick the side of each box that faces the other so edges run outside the cards, not through labels.
+ */
+export function mapEdgeHandlesForOffset(dx: number, dy: number): {
+  sourceHandle: string
+  targetHandle: string
+} {
+  const pickPort = (vx: number, vy: number): string => {
+    if (Math.abs(vy) >= Math.abs(vx)) {
+      return vy < 0 ? MAP_EDGE_HANDLES.top : MAP_EDGE_HANDLES.bottom
+    }
+    return vx < 0 ? MAP_EDGE_HANDLES.left : MAP_EDGE_HANDLES.right
+  }
+  return {
+    sourceHandle: pickPort(dx, dy),
+    targetHandle: pickPort(-dx, -dy),
+  }
+}
+
 function createHubEdge(
   source: string,
   target: string,
   id: string,
   concept: string,
   targetLanguage: LanguageCode,
+  handles: { sourceHandle: string; targetHandle: string },
 ): Edge<HubEdgeData> {
   return {
     id,
     source,
     target,
+    sourceHandle: handles.sourceHandle,
+    targetHandle: handles.targetHandle,
     type: 'hubEdge',
     animated: false,
     data: { kind: 'direct', targetLanguage, concept },
@@ -278,13 +309,20 @@ export function buildTopicGraph(topic: TopicSlug, options: BuildTopicGraphOption
     nodes.push(createBandLabelNode(band))
   }
 
-  const addEdge = (source: string, target: string, concept: string, targetLanguage: LanguageCode) => {
+  const addEdge = (
+    source: string,
+    target: string,
+    concept: string,
+    targetLanguage: LanguageCode,
+    handles: { sourceHandle: string; targetHandle: string },
+  ) => {
     const id = `direct::${pairKey(source, target)}`
     if (seen.has(id)) return
     seen.add(id)
-    edges.push(createHubEdge(source, target, id, concept, targetLanguage))
+    edges.push(createHubEdge(source, target, id, concept, targetLanguage, handles))
   }
 
+  const offsets = clusterOffsetsForVisible(anchorLanguage, visible)
   for (const { row, centerX, centerY } of placements) {
     nodes.push(
       ...buildClusterNodesAt(
@@ -299,7 +337,8 @@ export function buildTopicGraph(topic: TopicSlug, options: BuildTopicGraphOption
     const hubId = buildNodeId(row.concept, anchorLanguage)
     for (const lang of visible) {
       if (lang === anchorLanguage) continue
-      addEdge(hubId, buildNodeId(row.concept, lang), row.concept, lang)
+      const { x, y } = offsets[lang]
+      addEdge(hubId, buildNodeId(row.concept, lang), row.concept, lang, mapEdgeHandlesForOffset(x, y))
     }
   }
 

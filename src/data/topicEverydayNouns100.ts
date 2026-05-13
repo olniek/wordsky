@@ -2,7 +2,7 @@ import type { TopicWord } from './words'
 
 /**
  * 100 high-frequency everyday nouns (English-led lemmas), A1-oriented.
- * Full EN–IT forms and articles; no examples (add later with all six languages).
+ * Full EN–IT forms, articles, and parallel `examples` (all six languages; required by `npm run lint:topic-data`).
  */
 export const everydayNouns100: TopicWord[] = [
   // people (16) — difficulty 1
@@ -12,6 +12,14 @@ export const everydayNouns100: TopicWord[] = [
     difficulty: 1,
     forms: { EN: 'man', DE: 'Mann', PT: 'homem', ES: 'hombre', FR: 'homme', IT: 'uomo' },
     articles: { EN: 'the', DE: 'der', PT: 'o', ES: 'el', FR: 'l\'', IT: 'l\'' },
+    examples: {
+      EN: 'The man reads the newspaper.',
+      DE: 'Der Mann liest die Zeitung.',
+      PT: 'O homem lê o jornal.',
+      ES: 'El hombre lee el periódico.',
+      FR: 'L’homme lit le journal.',
+      IT: 'L’uomo legge il giornale.',
+    },
   },
   {
     concept: 'woman',
@@ -19,6 +27,14 @@ export const everydayNouns100: TopicWord[] = [
     difficulty: 1,
     forms: { EN: 'woman', DE: 'Frau', PT: 'mulher', ES: 'mujer', FR: 'femme', IT: 'donna' },
     articles: { EN: 'the', DE: 'die', PT: 'a', ES: 'la', FR: 'la', IT: 'la' },
+    examples: {
+      EN: 'The woman works in a shop.',
+      DE: 'Die Frau arbeitet in einem Geschäft.',
+      PT: 'A mulher trabalha numa loja.',
+      ES: 'La mujer trabaja en una tienda.',
+      FR: 'La femme travaille dans un magasin.',
+      IT: 'La donna lavora in un negozio.',
+    },
   },
   {
     concept: 'boy',
@@ -26,6 +42,14 @@ export const everydayNouns100: TopicWord[] = [
     difficulty: 1,
     forms: { EN: 'boy', DE: 'Junge', PT: 'menino', ES: 'niño', FR: 'garçon', IT: 'ragazzo' },
     articles: { EN: 'the', DE: 'der', PT: 'o', ES: 'el', FR: 'le', IT: 'il' },
+    examples: {
+      EN: 'The boy plays in the park.',
+      DE: 'Der Junge spielt im Park.',
+      PT: 'O menino brinca no parque.',
+      ES: 'El niño juega en el parque.',
+      FR: 'Le garçon joue dans le parc.',
+      IT: 'Il ragazzo gioca al parco.',
+    },
   },
   {
     concept: 'girl',
@@ -33,6 +57,14 @@ export const everydayNouns100: TopicWord[] = [
     difficulty: 1,
     forms: { EN: 'girl', DE: 'Mädchen', PT: 'menina', ES: 'niña', FR: 'fille', IT: 'ragazza' },
     articles: { EN: 'the', DE: 'das', PT: 'a', ES: 'la', FR: 'la', IT: 'la' },
+    examples: {
+      EN: 'The girl draws a picture.',
+      DE: 'Das Mädchen zeichnet ein Bild.',
+      PT: 'A menina desenha um desenho.',
+      ES: 'La niña dibuja un dibujo.',
+      FR: 'La fille dessine un dessin.',
+      IT: 'La ragazza disegna un disegno.',
+    },
   },
   {
     concept: 'child',
@@ -41,6 +73,14 @@ export const everydayNouns100: TopicWord[] = [
     tags: ['false-friend-DE-EN'],
     forms: { EN: 'child', DE: 'Kind', PT: 'criança', ES: 'niño', FR: 'enfant', IT: 'bambino' },
     articles: { EN: 'the', DE: 'das', PT: 'a', ES: 'el', FR: 'l\'', IT: 'il' },
+    examples: {
+      EN: 'The child drinks milk.',
+      DE: 'Das Kind trinkt Milch.',
+      PT: 'A criança bebe leite.',
+      ES: 'El niño bebe leche.',
+      FR: 'L’enfant boit du lait.',
+      IT: 'Il bambino beve latte.',
+    },
   },
   {
     concept: 'baby',
@@ -48,6 +88,14 @@ export const everydayNouns100: TopicWord[] = [
     difficulty: 1,
     forms: { EN: 'baby', DE: 'Baby', PT: 'bebé', ES: 'bebé', FR: 'bébé', IT: 'bebè' },
     articles: { EN: 'the', DE: 'das', PT: 'o', ES: 'el', FR: 'le', IT: 'il' },
+    examples: {
+      EN: 'The baby sleeps in the bed.',
+      DE: 'Das Baby schläft im Bett.',
+      PT: 'O bebé dorme na cama.',
+      ES: 'El bebé duerme en la cama.',
+      FR: 'Le bébé dort dans le lit.',
+      IT: 'Il bebè dorme nel letto.',
+    },
   },
   {
     concept: 'mother',
@@ -55,6 +103,14 @@ export const everydayNouns100: TopicWord[] = [
     difficulty: 1,
     forms: { EN: 'mother', DE: 'Mutter', PT: 'mãe', ES: 'madre', FR: 'mère', IT: 'madre' },
     articles: { EN: 'the', DE: 'die', PT: 'a', ES: 'la', FR: 'la', IT: 'la' },
+    examples: {
+      EN: 'My mother calls me every day.',
+      DE: 'Meine Mutter ruft mich jeden Tag an.',
+      PT: 'A minha mãe telefona-me todos os dias.',
+      ES: 'Mi madre me llama todos los días.',
+      FR: 'Ma mère m’appelle tous les jours.',
+      IT: 'Mia madre mi chiama ogni giorno.',
+    },
   },
   {
     concept: 'father',
@@ -62,6 +118,14 @@ export const everydayNouns100: TopicWord[] = [
     difficulty: 1,
     forms: { EN: 'father', DE: 'Vater', PT: 'pai', ES: 'padre', FR: 'père', IT: 'padre' },
     articles: { EN: 'the', DE: 'der', PT: 'o', ES: 'el', FR: 'le', IT: 'il' },
+    examples: {
+      EN: 'My father drives the car.',
+      DE: 'Mein Vater fährt das Auto.',
+      PT: 'O meu pai conduz o carro.',
+      ES: 'Mi padre conduce el coche.',
+      FR: 'Mon père conduit la voiture.',
+      IT: 'Mio padre guida la macchina.',
+    },
   },
   {
     concept: 'parents',
@@ -69,6 +133,14 @@ export const everydayNouns100: TopicWord[] = [
     difficulty: 1,
     forms: { EN: 'parents', DE: 'Eltern', PT: 'pais', ES: 'padres', FR: 'parents', IT: 'genitori' },
     articles: { EN: 'the', DE: 'die', PT: 'os', ES: 'los', FR: 'les', IT: 'i' },
+    examples: {
+      EN: 'My parents live in this town.',
+      DE: 'Meine Eltern leben in diesem Dorf.',
+      PT: 'Os meus pais vivem nesta vila.',
+      ES: 'Mis padres viven en este pueblo.',
+      FR: 'Mes parents vivent dans ce village.',
+      IT: 'I miei genitori vivono in questo paese.',
+    },
   },
   {
     concept: 'family',
@@ -76,6 +148,14 @@ export const everydayNouns100: TopicWord[] = [
     difficulty: 1,
     forms: { EN: 'family', DE: 'Familie', PT: 'família', ES: 'familia', FR: 'famille', IT: 'famiglia' },
     articles: { EN: 'the', DE: 'die', PT: 'a', ES: 'la', FR: 'la', IT: 'la' },
+    examples: {
+      EN: 'Our family eats dinner together.',
+      DE: 'Unsere Familie isst zusammen zu Abend.',
+      PT: 'A nossa família janta junta.',
+      ES: 'Nuestra familia cena juntos.',
+      FR: 'Notre famille dîne ensemble.',
+      IT: 'La nostra famiglia cena insieme.',
+    },
   },
   {
     concept: 'friend',
@@ -83,6 +163,14 @@ export const everydayNouns100: TopicWord[] = [
     difficulty: 1,
     forms: { EN: 'friend', DE: 'Freund', PT: 'amigo', ES: 'amigo', FR: 'ami', IT: 'amico' },
     articles: { EN: 'the', DE: 'der', PT: 'o', ES: 'el', FR: 'l\'', IT: 'l\'' },
+    examples: {
+      EN: 'I meet my friend at school.',
+      DE: 'Ich treffe meinen Freund in der Schule.',
+      PT: 'Encontro o meu amigo na escola.',
+      ES: 'Veo a mi amigo en el colegio.',
+      FR: 'Je retrouve mon ami à l’école.',
+      IT: 'Incontro il mio amico a scuola.',
+    },
   },
   {
     concept: 'person',
@@ -90,6 +178,14 @@ export const everydayNouns100: TopicWord[] = [
     difficulty: 1,
     forms: { EN: 'person', DE: 'Person', PT: 'pessoa', ES: 'persona', FR: 'personne', IT: 'persona' },
     articles: { EN: 'the', DE: 'die', PT: 'a', ES: 'la', FR: 'la', IT: 'la' },
+    examples: {
+      EN: 'That person works at the hospital.',
+      DE: 'Diese Person arbeitet im Krankenhaus.',
+      PT: 'Essa pessoa trabalha no hospital.',
+      ES: 'Esa persona trabaja en el hospital.',
+      FR: 'Cette personne travaille à l’hôpital.',
+      IT: 'Quella persona lavora in ospedale.',
+    },
   },
   {
     concept: 'people',
@@ -97,6 +193,14 @@ export const everydayNouns100: TopicWord[] = [
     difficulty: 1,
     forms: { EN: 'people', DE: 'Leute', PT: 'pessoas', ES: 'gente', FR: 'gens', IT: 'persone' },
     articles: { EN: 'the', DE: 'die', PT: 'as', ES: 'la', FR: 'les', IT: 'le' },
+    examples: {
+      EN: 'Many people wait at the station.',
+      DE: 'Viele Leute warten am Bahnhof.',
+      PT: 'Muitas pessoas esperam na estação.',
+      ES: 'Mucha gente espera en la estación.',
+      FR: 'Beaucoup de gens attendent à la gare.',
+      IT: 'Molte persone aspettano in stazione.',
+    },
   },
   {
     concept: 'name',
@@ -104,6 +208,14 @@ export const everydayNouns100: TopicWord[] = [
     difficulty: 1,
     forms: { EN: 'name', DE: 'Name', PT: 'nome', ES: 'nombre', FR: 'nom', IT: 'nome' },
     articles: { EN: 'the', DE: 'der', PT: 'o', ES: 'el', FR: 'le', IT: 'il' },
+    examples: {
+      EN: 'Please write your name here.',
+      DE: 'Bitte schreiben Sie hier Ihren Namen.',
+      PT: 'Por favor escreva o seu nome aqui.',
+      ES: 'Por favor escriba su nombre aquí.',
+      FR: 'Veuillez écrire votre nom ici.',
+      IT: 'Per favore scriva il suo nome qui.',
+    },
   },
   {
     concept: 'teacher',
@@ -111,6 +223,14 @@ export const everydayNouns100: TopicWord[] = [
     difficulty: 1,
     forms: { EN: 'teacher', DE: 'Lehrer', PT: 'professor', ES: 'profesor', FR: 'professeur', IT: 'insegnante' },
     articles: { EN: 'the', DE: 'der', PT: 'o', ES: 'el', FR: 'le', IT: 'l\'' },
+    examples: {
+      EN: 'The teacher explains the word.',
+      DE: 'Der Lehrer erklärt das Wort.',
+      PT: 'O professor explica a palavra.',
+      ES: 'El profesor explica la palabra.',
+      FR: 'Le professeur explique le mot.',
+      IT: 'L’insegnante spiega la parola.',
+    },
   },
   {
     concept: 'student',
@@ -118,6 +238,14 @@ export const everydayNouns100: TopicWord[] = [
     difficulty: 1,
     forms: { EN: 'student', DE: 'Student', PT: 'estudante', ES: 'estudiante', FR: 'étudiant', IT: 'studente' },
     articles: { EN: 'the', DE: 'der', PT: 'o', ES: 'el', FR: 'l\'', IT: 'lo' },
+    examples: {
+      EN: 'The student reads a book.',
+      DE: 'Der Student liest ein Buch.',
+      PT: 'O estudante lê um livro.',
+      ES: 'El estudiante lee un libro.',
+      FR: 'L’étudiant lit un livre.',
+      IT: 'Lo studente legge un libro.',
+    },
   },
   // body (12)
   {
@@ -126,6 +254,14 @@ export const everydayNouns100: TopicWord[] = [
     difficulty: 1,
     forms: { EN: 'head', DE: 'Kopf', PT: 'cabeça', ES: 'cabeza', FR: 'tête', IT: 'testa' },
     articles: { EN: 'the', DE: 'der', PT: 'a', ES: 'la', FR: 'la', IT: 'la' },
+    examples: {
+      EN: 'My head hurts a little.',
+      DE: 'Mein Kopf tut ein bisschen weh.',
+      PT: 'A minha cabeça dói um pouco.',
+      ES: 'Me duele un poco la cabeza.',
+      FR: 'J’ai un peu mal à la tête.',
+      IT: 'Mi fa un po’ male la testa.',
+    },
   },
   {
     concept: 'face',
@@ -133,6 +269,14 @@ export const everydayNouns100: TopicWord[] = [
     difficulty: 1,
     forms: { EN: 'face', DE: 'Gesicht', PT: 'rosto', ES: 'cara', FR: 'visage', IT: 'viso' },
     articles: { EN: 'the', DE: 'das', PT: 'o', ES: 'la', FR: 'le', IT: 'il' },
+    examples: {
+      EN: 'She washes her face in the morning.',
+      DE: 'Sie wäscht sich morgens das Gesicht.',
+      PT: 'Ela lava o rosto de manhã.',
+      ES: 'Ella se lava la cara por la mañana.',
+      FR: 'Elle se lave le visage le matin.',
+      IT: 'Lei si lava il viso al mattino.',
+    },
   },
   {
     concept: 'eye',
@@ -140,6 +284,14 @@ export const everydayNouns100: TopicWord[] = [
     difficulty: 1,
     forms: { EN: 'eye', DE: 'Auge', PT: 'olho', ES: 'ojo', FR: 'œil', IT: 'occhio' },
     articles: { EN: 'the', DE: 'das', PT: 'o', ES: 'el', FR: 'l\'', IT: 'l\'' },
+    examples: {
+      EN: 'Close your eye for a moment.',
+      DE: 'Schließen Sie für einen Moment das Auge.',
+      PT: 'Feche o olho por um momento.',
+      ES: 'Cierre el ojo un momento.',
+      FR: 'Fermez l’œil un instant.',
+      IT: 'Chiuda l’occhio per un momento.',
+    },
   },
   {
     concept: 'ear',
@@ -147,6 +299,14 @@ export const everydayNouns100: TopicWord[] = [
     difficulty: 1,
     forms: { EN: 'ear', DE: 'Ohr', PT: 'orelha', ES: 'oreja', FR: 'oreille', IT: 'orecchio' },
     articles: { EN: 'the', DE: 'das', PT: 'a', ES: 'la', FR: 'l\'', IT: 'l\'' },
+    examples: {
+      EN: 'I hear music in my ear.',
+      DE: 'Ich höre Musik in meinem Ohr.',
+      PT: 'Ouço música na orelha.',
+      ES: 'Oigo música en la oreja.',
+      FR: 'J’entends de la musique dans l’oreille.',
+      IT: 'Sento musica nell’orecchio.',
+    },
   },
   {
     concept: 'nose',
@@ -154,6 +314,14 @@ export const everydayNouns100: TopicWord[] = [
     difficulty: 1,
     forms: { EN: 'nose', DE: 'Nase', PT: 'nariz', ES: 'nariz', FR: 'nez', IT: 'naso' },
     articles: { EN: 'the', DE: 'die', PT: 'o', ES: 'la', FR: 'le', IT: 'il' },
+    examples: {
+      EN: 'The nose is in the middle of the face.',
+      DE: 'Die Nase ist in der Mitte des Gesichts.',
+      PT: 'O nariz fica no meio do rosto.',
+      ES: 'La nariz está en el centro de la cara.',
+      FR: 'Le nez est au milieu du visage.',
+      IT: 'Il naso è al centro del viso.',
+    },
   },
   {
     concept: 'mouth',
@@ -161,6 +329,14 @@ export const everydayNouns100: TopicWord[] = [
     difficulty: 1,
     forms: { EN: 'mouth', DE: 'Mund', PT: 'boca', ES: 'boca', FR: 'bouche', IT: 'bocca' },
     articles: { EN: 'the', DE: 'der', PT: 'a', ES: 'la', FR: 'la', IT: 'la' },
+    examples: {
+      EN: 'Open your mouth, please.',
+      DE: 'Öffnen Sie bitte den Mund.',
+      PT: 'Abra a boca, por favor.',
+      ES: 'Abra la boca, por favor.',
+      FR: 'Ouvrez la bouche, s’il vous plaît.',
+      IT: 'Apra la bocca, per favore.',
+    },
   },
   {
     concept: 'hand',
@@ -168,6 +344,14 @@ export const everydayNouns100: TopicWord[] = [
     difficulty: 1,
     forms: { EN: 'hand', DE: 'Hand', PT: 'mão', ES: 'mano', FR: 'main', IT: 'mano' },
     articles: { EN: 'the', DE: 'die', PT: 'a', ES: 'la', FR: 'la', IT: 'la' },
+    examples: {
+      EN: 'I write with my right hand.',
+      DE: 'Ich schreibe mit meiner rechten Hand.',
+      PT: 'Escrevo com a mão direita.',
+      ES: 'Escribo con la mano derecha.',
+      FR: 'J’écris avec la main droite.',
+      IT: 'Scrivo con la mano destra.',
+    },
   },
   {
     concept: 'arm',
@@ -176,6 +360,14 @@ export const everydayNouns100: TopicWord[] = [
     tags: ['false-friend-EN-FR'],
     forms: { EN: 'arm', DE: 'Arm', PT: 'braço', ES: 'brazo', FR: 'bras', IT: 'braccio' },
     articles: { EN: 'the', DE: 'der', PT: 'o', ES: 'el', FR: 'le', IT: 'il' },
+    examples: {
+      EN: 'He broke his arm last week.',
+      DE: 'Er hat sich letzte Woche den Arm gebrochen.',
+      PT: 'Ele partiu o braço na semana passada.',
+      ES: 'Se rompió el brazo la semana pasada.',
+      FR: 'Il s’est cassé le bras la semaine dernière.',
+      IT: 'Si è rotto il braccio la settimana scorsa.',
+    },
   },
   {
     concept: 'leg',
@@ -183,6 +375,14 @@ export const everydayNouns100: TopicWord[] = [
     difficulty: 1,
     forms: { EN: 'leg', DE: 'Bein', PT: 'perna', ES: 'pierna', FR: 'jambe', IT: 'gamba' },
     articles: { EN: 'the', DE: 'das', PT: 'a', ES: 'la', FR: 'la', IT: 'la' },
+    examples: {
+      EN: 'The leg feels better today.',
+      DE: 'Das Bein fühlt sich heute besser an.',
+      PT: 'A perna está melhor hoje.',
+      ES: 'La pierna está mejor hoy.',
+      FR: 'La jambe va mieux aujourd’hui.',
+      IT: 'La gamba sta meglio oggi.',
+    },
   },
   {
     concept: 'foot',
@@ -190,6 +390,14 @@ export const everydayNouns100: TopicWord[] = [
     difficulty: 1,
     forms: { EN: 'foot', DE: 'Fuß', PT: 'pé', ES: 'pie', FR: 'pied', IT: 'piede' },
     articles: { EN: 'the', DE: 'der', PT: 'o', ES: 'el', FR: 'le', IT: 'il' },
+    examples: {
+      EN: 'My foot is tired after the walk.',
+      DE: 'Mein Fuß ist nach dem Spaziergang müde.',
+      PT: 'O meu pé está cansado depois do passeio.',
+      ES: 'Mi pie está cansado después del paseo.',
+      FR: 'Mon pied est fatigué après la promenade.',
+      IT: 'Il mio piede è stanco dopo la passeggiata.',
+    },
   },
   {
     concept: 'hair',
@@ -197,6 +405,14 @@ export const everydayNouns100: TopicWord[] = [
     difficulty: 1,
     forms: { EN: 'hair', DE: 'Haare', PT: 'cabelo', ES: 'pelo', FR: 'cheveux', IT: 'capelli' },
     articles: { EN: 'the', DE: 'die', PT: 'o', ES: 'el', FR: 'les', IT: 'i' },
+    examples: {
+      EN: 'Her hair is long and dark.',
+      DE: 'Ihre Haare sind lang und dunkel.',
+      PT: 'O cabelo dela é comprido e escuro.',
+      ES: 'Su pelo es largo y oscuro.',
+      FR: 'Ses cheveux sont longs et foncés.',
+      IT: 'I suoi capelli sono lunghi e scuri.',
+    },
   },
   {
     concept: 'body',
@@ -204,6 +420,14 @@ export const everydayNouns100: TopicWord[] = [
     difficulty: 1,
     forms: { EN: 'body', DE: 'Körper', PT: 'corpo', ES: 'cuerpo', FR: 'corps', IT: 'corpo' },
     articles: { EN: 'the', DE: 'der', PT: 'o', ES: 'el', FR: 'le', IT: 'il' },
+    examples: {
+      EN: 'Water is good for the body.',
+      DE: 'Wasser ist gut für den Körper.',
+      PT: 'A água faz bem ao corpo.',
+      ES: 'El agua es buena para el cuerpo.',
+      FR: 'L’eau est bonne pour le corps.',
+      IT: 'L’acqua fa bene al corpo.',
+    },
   },
   // home (12)
   {
@@ -212,6 +436,14 @@ export const everydayNouns100: TopicWord[] = [
     difficulty: 1,
     forms: { EN: 'house', DE: 'Haus', PT: 'casa', ES: 'casa', FR: 'maison', IT: 'casa' },
     articles: { EN: 'the', DE: 'das', PT: 'a', ES: 'la', FR: 'la', IT: 'la' },
+    examples: {
+      EN: 'Our house has a small garden.',
+      DE: 'Unser Haus hat einen kleinen Garten.',
+      PT: 'A nossa casa tem um jardim pequeno.',
+      ES: 'Nuestra casa tiene un jardín pequeño.',
+      FR: 'Notre maison a un petit jardin.',
+      IT: 'La nostra casa ha un piccolo giardino.',
+    },
   },
   {
     concept: 'home',
@@ -219,6 +451,14 @@ export const everydayNouns100: TopicWord[] = [
     difficulty: 1,
     forms: { EN: 'home', DE: 'Zuhause', PT: 'lar', ES: 'hogar', FR: 'foyer', IT: 'casa' },
     articles: { EN: 'the', DE: 'das', PT: 'o', ES: 'el', FR: 'le', IT: 'la' },
+    examples: {
+      EN: 'I am happy to be home.',
+      DE: 'Ich bin froh, zu Hause zu sein.',
+      PT: 'Estou feliz por estar em casa.',
+      ES: 'Estoy contento de estar en casa.',
+      FR: 'Je suis content d’être chez moi.',
+      IT: 'Sono felice di essere a casa.',
+    },
   },
   {
     concept: 'room',
@@ -226,6 +466,14 @@ export const everydayNouns100: TopicWord[] = [
     difficulty: 1,
     forms: { EN: 'room', DE: 'Zimmer', PT: 'quarto', ES: 'habitación', FR: 'chambre', IT: 'stanza' },
     articles: { EN: 'the', DE: 'das', PT: 'o', ES: 'la', FR: 'la', IT: 'la' },
+    examples: {
+      EN: 'This room is very quiet.',
+      DE: 'Dieses Zimmer ist sehr ruhig.',
+      PT: 'Este quarto é muito calmo.',
+      ES: 'Esta habitación es muy tranquila.',
+      FR: 'Cette chambre est très calme.',
+      IT: 'Questa stanza è molto silenziosa.',
+    },
   },
   {
     concept: 'door',
@@ -233,6 +481,14 @@ export const everydayNouns100: TopicWord[] = [
     difficulty: 1,
     forms: { EN: 'door', DE: 'Tür', PT: 'porta', ES: 'puerta', FR: 'porte', IT: 'porta' },
     articles: { EN: 'the', DE: 'die', PT: 'a', ES: 'la', FR: 'la', IT: 'la' },
+    examples: {
+      EN: 'Please close the door.',
+      DE: 'Bitte schließen Sie die Tür.',
+      PT: 'Feche a porta, por favor.',
+      ES: 'Cierre la puerta, por favor.',
+      FR: 'Fermez la porte, s’il vous plaît.',
+      IT: 'Chiuda la porta, per favore.',
+    },
   },
   {
     concept: 'window',
@@ -240,6 +496,14 @@ export const everydayNouns100: TopicWord[] = [
     difficulty: 1,
     forms: { EN: 'window', DE: 'Fenster', PT: 'janela', ES: 'ventana', FR: 'fenêtre', IT: 'finestra' },
     articles: { EN: 'the', DE: 'das', PT: 'a', ES: 'la', FR: 'la', IT: 'la' },
+    examples: {
+      EN: 'Open the window for fresh air.',
+      DE: 'Öffnen Sie das Fenster für frische Luft.',
+      PT: 'Abra a janela para o ar fresco.',
+      ES: 'Abra la ventana para el aire fresco.',
+      FR: 'Ouvrez la fenêtre pour l’air frais.',
+      IT: 'Apra la finestra per aria fresca.',
+    },
   },
   {
     concept: 'bed',
@@ -247,6 +511,14 @@ export const everydayNouns100: TopicWord[] = [
     difficulty: 1,
     forms: { EN: 'bed', DE: 'Bett', PT: 'cama', ES: 'cama', FR: 'lit', IT: 'letto' },
     articles: { EN: 'the', DE: 'das', PT: 'a', ES: 'la', FR: 'le', IT: 'il' },
+    examples: {
+      EN: 'The bed is soft and warm.',
+      DE: 'Das Bett ist weich und warm.',
+      PT: 'A cama é macia e quente.',
+      ES: 'La cama es blanda y cálida.',
+      FR: 'Le lit est doux et chaud.',
+      IT: 'Il letto è morbido e caldo.',
+    },
   },
   {
     concept: 'table',
@@ -254,6 +526,14 @@ export const everydayNouns100: TopicWord[] = [
     difficulty: 1,
     forms: { EN: 'table', DE: 'Tisch', PT: 'mesa', ES: 'mesa', FR: 'table', IT: 'tavolo' },
     articles: { EN: 'the', DE: 'der', PT: 'a', ES: 'la', FR: 'la', IT: 'il' },
+    examples: {
+      EN: 'The keys are on the table.',
+      DE: 'Die Schlüssel liegen auf dem Tisch.',
+      PT: 'As chaves estão na mesa.',
+      ES: 'Las llaves están en la mesa.',
+      FR: 'Les clés sont sur la table.',
+      IT: 'Le chiavi sono sul tavolo.',
+    },
   },
   {
     concept: 'chair',
@@ -261,6 +541,14 @@ export const everydayNouns100: TopicWord[] = [
     difficulty: 1,
     forms: { EN: 'chair', DE: 'Stuhl', PT: 'cadeira', ES: 'silla', FR: 'chaise', IT: 'sedia' },
     articles: { EN: 'the', DE: 'der', PT: 'a', ES: 'la', FR: 'la', IT: 'la' },
+    examples: {
+      EN: 'Sit on this chair, please.',
+      DE: 'Setzen Sie sich bitte auf diesen Stuhl.',
+      PT: 'Sente-se nesta cadeira, por favor.',
+      ES: 'Siéntese en esta silla, por favor.',
+      FR: 'Asseyez-vous sur cette chaise, s’il vous plaît.',
+      IT: 'Si sieda su questa sedia, per favore.',
+    },
   },
   {
     concept: 'kitchen',
@@ -268,6 +556,14 @@ export const everydayNouns100: TopicWord[] = [
     difficulty: 1,
     forms: { EN: 'kitchen', DE: 'Küche', PT: 'cozinha', ES: 'cocina', FR: 'cuisine', IT: 'cucina' },
     articles: { EN: 'the', DE: 'die', PT: 'a', ES: 'la', FR: 'la', IT: 'la' },
+    examples: {
+      EN: 'We cook dinner in the kitchen.',
+      DE: 'Wir kochen das Abendessen in der Küche.',
+      PT: 'Cozinhamos o jantar na cozinha.',
+      ES: 'Cocinamos la cena en la cocina.',
+      FR: 'Nous cuisinons le dîner dans la cuisine.',
+      IT: 'Cuciniamo la cena in cucina.',
+    },
   },
   {
     concept: 'floor',
@@ -275,6 +571,14 @@ export const everydayNouns100: TopicWord[] = [
     difficulty: 1,
     forms: { EN: 'floor', DE: 'Boden', PT: 'chão', ES: 'suelo', FR: 'sol', IT: 'pavimento' },
     articles: { EN: 'the', DE: 'der', PT: 'o', ES: 'el', FR: 'le', IT: 'il' },
+    examples: {
+      EN: 'The floor is clean now.',
+      DE: 'Der Boden ist jetzt sauber.',
+      PT: 'O chão está limpo agora.',
+      ES: 'El suelo está limpio ahora.',
+      FR: 'Le sol est propre maintenant.',
+      IT: 'Il pavimento è pulito ora.',
+    },
   },
   {
     concept: 'bathroom',
@@ -282,6 +586,14 @@ export const everydayNouns100: TopicWord[] = [
     difficulty: 1,
     forms: { EN: 'bathroom', DE: 'Badezimmer', PT: 'casa de banho', ES: 'baño', FR: 'salle de bains', IT: 'bagno' },
     articles: { EN: 'the', DE: 'das', PT: 'a', ES: 'el', FR: 'la', IT: 'il' },
+    examples: {
+      EN: 'The bathroom is on the left.',
+      DE: 'Das Badezimmer ist links.',
+      PT: 'A casa de banho fica à esquerda.',
+      ES: 'El baño está a la izquierda.',
+      FR: 'La salle de bains est à gauche.',
+      IT: 'Il bagno è a sinistra.',
+    },
   },
   {
     concept: 'wall',
@@ -289,6 +601,14 @@ export const everydayNouns100: TopicWord[] = [
     difficulty: 1,
     forms: { EN: 'wall', DE: 'Wand', PT: 'parede', ES: 'pared', FR: 'mur', IT: 'parete' },
     articles: { EN: 'the', DE: 'die', PT: 'a', ES: 'la', FR: 'le', IT: 'la' },
+    examples: {
+      EN: 'The picture hangs on the wall.',
+      DE: 'Das Bild hängt an der Wand.',
+      PT: 'O quadro está na parede.',
+      ES: 'El cuadro cuelga en la pared.',
+      FR: 'Le tableau est accroché au mur.',
+      IT: 'Il quadro è appeso alla parete.',
+    },
   },
   // food (10)
   {
@@ -297,6 +617,14 @@ export const everydayNouns100: TopicWord[] = [
     difficulty: 1,
     forms: { EN: 'food', DE: 'Essen', PT: 'comida', ES: 'comida', FR: 'nourriture', IT: 'cibo' },
     articles: { EN: 'the', DE: 'das', PT: 'a', ES: 'la', FR: 'la', IT: 'il' },
+    examples: {
+      EN: 'Hot food smells good.',
+      DE: 'Warmes Essen riecht gut.',
+      PT: 'Comida quente cheira bem.',
+      ES: 'La comida caliente huele bien.',
+      FR: 'La nourriture chaude sent bon.',
+      IT: 'Il cibo caldo profuma bene.',
+    },
   },
   {
     concept: 'water',
@@ -304,6 +632,14 @@ export const everydayNouns100: TopicWord[] = [
     difficulty: 1,
     forms: { EN: 'water', DE: 'Wasser', PT: 'água', ES: 'agua', FR: 'eau', IT: 'acqua' },
     articles: { EN: 'the', DE: 'das', PT: 'a', ES: 'la', FR: 'l\'', IT: 'l\'' },
+    examples: {
+      EN: 'Drink water every day.',
+      DE: 'Trinken Sie jeden Tag Wasser.',
+      PT: 'Beba água todos os dias.',
+      ES: 'Beba agua todos los días.',
+      FR: 'Buvez de l’eau tous les jours.',
+      IT: 'Beva acqua ogni giorno.',
+    },
   },
   {
     concept: 'bread',
@@ -312,6 +648,14 @@ export const everydayNouns100: TopicWord[] = [
     tags: ['false-friend-EN-FR'],
     forms: { EN: 'bread', DE: 'Brot', PT: 'pão', ES: 'pan', FR: 'pain', IT: 'pane' },
     articles: { EN: 'the', DE: 'das', PT: 'o', ES: 'el', FR: 'le', IT: 'il' },
+    examples: {
+      EN: 'I buy fresh bread at the shop.',
+      DE: 'Ich kaufe frisches Brot im Geschäft.',
+      PT: 'Compro pão fresco na loja.',
+      ES: 'Compro pan fresco en la tienda.',
+      FR: 'J’achète du pain frais au magasin.',
+      IT: 'Compro pane fresco al negozio.',
+    },
   },
   {
     concept: 'milk',
@@ -319,6 +663,14 @@ export const everydayNouns100: TopicWord[] = [
     difficulty: 1,
     forms: { EN: 'milk', DE: 'Milch', PT: 'leite', ES: 'leche', FR: 'lait', IT: 'latte' },
     articles: { EN: 'the', DE: 'die', PT: 'o', ES: 'la', FR: 'le', IT: 'il' },
+    examples: {
+      EN: 'The milk is in the fridge.',
+      DE: 'Die Milch steht im Kühlschrank.',
+      PT: 'O leite está no frigorífico.',
+      ES: 'La leche está en la nevera.',
+      FR: 'Le lait est dans le réfrigérateur.',
+      IT: 'Il latte è in frigorifero.',
+    },
   },
   {
     concept: 'egg',
@@ -326,6 +678,14 @@ export const everydayNouns100: TopicWord[] = [
     difficulty: 1,
     forms: { EN: 'egg', DE: 'Ei', PT: 'ovo', ES: 'huevo', FR: 'œuf', IT: 'uovo' },
     articles: { EN: 'the', DE: 'das', PT: 'o', ES: 'el', FR: 'l\'', IT: 'l\'' },
+    examples: {
+      EN: 'I eat an egg for breakfast.',
+      DE: 'Ich esse ein Ei zum Frühstück.',
+      PT: 'Como um ovo ao pequeno-almoço.',
+      ES: 'Como un huevo en el desayuno.',
+      FR: 'Je mange un œuf au petit-déjeuner.',
+      IT: 'Mangio un uovo a colazione.',
+    },
   },
   {
     concept: 'apple',
@@ -333,6 +693,14 @@ export const everydayNouns100: TopicWord[] = [
     difficulty: 1,
     forms: { EN: 'apple', DE: 'Apfel', PT: 'maçã', ES: 'manzana', FR: 'pomme', IT: 'mela' },
     articles: { EN: 'the', DE: 'der', PT: 'a', ES: 'la', FR: 'la', IT: 'la' },
+    examples: {
+      EN: 'An apple is a healthy snack.',
+      DE: 'Ein Apfel ist ein gesunder Snack.',
+      PT: 'Uma maçã é um lanche saudável.',
+      ES: 'Una manzana es un tentempié sano.',
+      FR: 'Une pomme est une collation saine.',
+      IT: 'Una mela è uno spuntino sano.',
+    },
   },
   {
     concept: 'meat',
@@ -340,6 +708,14 @@ export const everydayNouns100: TopicWord[] = [
     difficulty: 1,
     forms: { EN: 'meat', DE: 'Fleisch', PT: 'carne', ES: 'carne', FR: 'viande', IT: 'carne' },
     articles: { EN: 'the', DE: 'das', PT: 'a', ES: 'la', FR: 'la', IT: 'la' },
+    examples: {
+      EN: 'We cook meat for dinner.',
+      DE: 'Wir kochen Fleisch zum Abendessen.',
+      PT: 'Cozinhamos carne para o jantar.',
+      ES: 'Cocinamos carne para la cena.',
+      FR: 'Nous cuisinons de la viande pour le dîner.',
+      IT: 'Cuociamo carne per cena.',
+    },
   },
   {
     concept: 'fish',
@@ -347,6 +723,14 @@ export const everydayNouns100: TopicWord[] = [
     difficulty: 1,
     forms: { EN: 'fish', DE: 'Fisch', PT: 'peixe', ES: 'pescado', FR: 'poisson', IT: 'pesce' },
     articles: { EN: 'the', DE: 'der', PT: 'o', ES: 'el', FR: 'le', IT: 'il' },
+    examples: {
+      EN: 'I like fish with rice.',
+      DE: 'Ich esse gern Fisch mit Reis.',
+      PT: 'Gosto de peixe com arroz.',
+      ES: 'Me gusta el pescado con arroz.',
+      FR: 'J’aime le poisson avec du riz.',
+      IT: 'Mi piace il pesce con il riso.',
+    },
   },
   {
     concept: 'rice',
@@ -354,6 +738,14 @@ export const everydayNouns100: TopicWord[] = [
     difficulty: 1,
     forms: { EN: 'rice', DE: 'Reis', PT: 'arroz', ES: 'arroz', FR: 'riz', IT: 'riso' },
     articles: { EN: 'the', DE: 'der', PT: 'o', ES: 'el', FR: 'le', IT: 'il' },
+    examples: {
+      EN: 'Rice is cheap and filling.',
+      DE: 'Reis ist billig und sättigend.',
+      PT: 'O arroz é barato e sacia.',
+      ES: 'El arroz es barato y sacia.',
+      FR: 'Le riz est bon marché et nourrissant.',
+      IT: 'Il riso è economico e sazia.',
+    },
   },
   {
     concept: 'breakfast',
@@ -368,6 +760,14 @@ export const everydayNouns100: TopicWord[] = [
       IT: 'colazione',
     },
     articles: { EN: 'the', DE: 'das', PT: 'o', ES: 'el', FR: 'le', IT: 'la' },
+    examples: {
+      EN: 'Breakfast is at eight o’clock.',
+      DE: 'Das Frühstück ist um acht Uhr.',
+      PT: 'O pequeno-almoço é às oito.',
+      ES: 'El desayuno es a las ocho.',
+      FR: 'Le petit-déjeuner est à huit heures.',
+      IT: 'La colazione è alle otto.',
+    },
   },
   // time (10)
   {
@@ -376,6 +776,14 @@ export const everydayNouns100: TopicWord[] = [
     difficulty: 1,
     forms: { EN: 'day', DE: 'Tag', PT: 'dia', ES: 'día', FR: 'jour', IT: 'giorno' },
     articles: { EN: 'the', DE: 'der', PT: 'o', ES: 'el', FR: 'le', IT: 'il' },
+    examples: {
+      EN: 'Today is a sunny day.',
+      DE: 'Heute ist ein sonniger Tag.',
+      PT: 'Hoje é um dia de sol.',
+      ES: 'Hoy es un día soleado.',
+      FR: 'Aujourd’hui, c’est une journée ensoleillée.',
+      IT: 'Oggi è una giornata di sole.',
+    },
   },
   {
     concept: 'night',
@@ -383,6 +791,14 @@ export const everydayNouns100: TopicWord[] = [
     difficulty: 1,
     forms: { EN: 'night', DE: 'Nacht', PT: 'noite', ES: 'noche', FR: 'nuit', IT: 'notte' },
     articles: { EN: 'the', DE: 'die', PT: 'a', ES: 'la', FR: 'la', IT: 'la' },
+    examples: {
+      EN: 'The stars shine at night.',
+      DE: 'Die Sterne leuchten in der Nacht.',
+      PT: 'As estrelas brilham à noite.',
+      ES: 'Las estrellas brillan por la noche.',
+      FR: 'Les étoiles brillent la nuit.',
+      IT: 'Le stelle brillano di notte.',
+    },
   },
   {
     concept: 'morning',
@@ -390,6 +806,14 @@ export const everydayNouns100: TopicWord[] = [
     difficulty: 1,
     forms: { EN: 'morning', DE: 'Morgen', PT: 'manhã', ES: 'mañana', FR: 'matin', IT: 'mattina' },
     articles: { EN: 'the', DE: 'der', PT: 'a', ES: 'la', FR: 'le', IT: 'la' },
+    examples: {
+      EN: 'I drink coffee in the morning.',
+      DE: 'Ich trinke morgens Kaffee.',
+      PT: 'Bebo café de manhã.',
+      ES: 'Bebo café por la mañana.',
+      FR: 'Je bois du café le matin.',
+      IT: 'Bevo caffè al mattino.',
+    },
   },
   {
     concept: 'week',
@@ -397,6 +821,14 @@ export const everydayNouns100: TopicWord[] = [
     difficulty: 1,
     forms: { EN: 'week', DE: 'Woche', PT: 'semana', ES: 'semana', FR: 'semaine', IT: 'settimana' },
     articles: { EN: 'the', DE: 'die', PT: 'a', ES: 'la', FR: 'la', IT: 'la' },
+    examples: {
+      EN: 'This week we visit my aunt.',
+      DE: 'Diese Woche besuchen wir meine Tante.',
+      PT: 'Esta semana visitamos a minha tia.',
+      ES: 'Esta semana visitamos a mi tía.',
+      FR: 'Cette semaine, nous rendons visite à ma tante.',
+      IT: 'Questa settimana visitiamo mia zia.',
+    },
   },
   {
     concept: 'month',
@@ -404,6 +836,14 @@ export const everydayNouns100: TopicWord[] = [
     difficulty: 1,
     forms: { EN: 'month', DE: 'Monat', PT: 'mês', ES: 'mes', FR: 'mois', IT: 'mese' },
     articles: { EN: 'the', DE: 'der', PT: 'o', ES: 'el', FR: 'le', IT: 'il' },
+    examples: {
+      EN: 'January is the first month.',
+      DE: 'Januar ist der erste Monat.',
+      PT: 'Janeiro é o primeiro mês.',
+      ES: 'Enero es el primer mes.',
+      FR: 'Janvier est le premier mois.',
+      IT: 'Gennaio è il primo mese.',
+    },
   },
   {
     concept: 'year',
@@ -411,6 +851,14 @@ export const everydayNouns100: TopicWord[] = [
     difficulty: 1,
     forms: { EN: 'year', DE: 'Jahr', PT: 'ano', ES: 'año', FR: 'an', IT: 'anno' },
     articles: { EN: 'the', DE: 'das', PT: 'o', ES: 'el', FR: 'l\'', IT: 'l\'' },
+    examples: {
+      EN: 'Next year we travel by train.',
+      DE: 'Nächstes Jahr reisen wir mit dem Zug.',
+      PT: 'No próximo ano viajamos de comboio.',
+      ES: 'El año que viene viajamos en tren.',
+      FR: 'L’année prochaine, nous voyageons en train.',
+      IT: 'L’anno prossimo viaggiamo in treno.',
+    },
   },
   {
     concept: 'moment',
@@ -418,6 +866,14 @@ export const everydayNouns100: TopicWord[] = [
     difficulty: 1,
     forms: { EN: 'moment', DE: 'Moment', PT: 'momento', ES: 'momento', FR: 'moment', IT: 'momento' },
     articles: { EN: 'the', DE: 'der', PT: 'o', ES: 'el', FR: 'le', IT: 'il' },
+    examples: {
+      EN: 'Wait a moment, please.',
+      DE: 'Warten Sie bitte einen Moment.',
+      PT: 'Espere um momento, por favor.',
+      ES: 'Espere un momento, por favor.',
+      FR: 'Attendez un moment, s’il vous plaît.',
+      IT: 'Aspetti un momento, per favore.',
+    },
   },
   {
     concept: 'time',
@@ -425,6 +881,14 @@ export const everydayNouns100: TopicWord[] = [
     difficulty: 2,
     forms: { EN: 'time', DE: 'Zeit', PT: 'tempo', ES: 'tiempo', FR: 'temps', IT: 'tempo' },
     articles: { EN: 'the', DE: 'die', PT: 'o', ES: 'el', FR: 'le', IT: 'il' },
+    examples: {
+      EN: 'We have time after work.',
+      DE: 'Wir haben nach der Arbeit Zeit.',
+      PT: 'Temos tempo depois do trabalho.',
+      ES: 'Tenemos tiempo después del trabajo.',
+      FR: 'Nous avons du temps après le travail.',
+      IT: 'Abbiamo tempo dopo il lavoro.',
+    },
   },
   {
     concept: 'hour',
@@ -432,6 +896,14 @@ export const everydayNouns100: TopicWord[] = [
     difficulty: 2,
     forms: { EN: 'hour', DE: 'Stunde', PT: 'hora', ES: 'hora', FR: 'heure', IT: 'ora' },
     articles: { EN: 'the', DE: 'die', PT: 'a', ES: 'la', FR: 'l\'', IT: 'l\'' },
+    examples: {
+      EN: 'The shop opens in one hour.',
+      DE: 'Das Geschäft öffnet in einer Stunde.',
+      PT: 'A loja abre daqui a uma hora.',
+      ES: 'La tienda abre en una hora.',
+      FR: 'Le magasin ouvre dans une heure.',
+      IT: 'Il negozio apre tra un’ora.',
+    },
   },
   {
     concept: 'minute',
@@ -439,6 +911,14 @@ export const everydayNouns100: TopicWord[] = [
     difficulty: 2,
     forms: { EN: 'minute', DE: 'Minute', PT: 'minuto', ES: 'minuto', FR: 'minute', IT: 'minuto' },
     articles: { EN: 'the', DE: 'die', PT: 'o', ES: 'el', FR: 'la', IT: 'il' },
+    examples: {
+      EN: 'The bus leaves in five minutes.',
+      DE: 'Der Bus fährt in fünf Minuten ab.',
+      PT: 'O autocarro sai daqui a cinco minutos.',
+      ES: 'El autobús sale en cinco minutos.',
+      FR: 'Le bus part dans cinq minutes.',
+      IT: 'L’autobus parte tra cinque minuti.',
+    },
   },
   // place (10)
   {
@@ -447,6 +927,14 @@ export const everydayNouns100: TopicWord[] = [
     difficulty: 2,
     forms: { EN: 'place', DE: 'Ort', PT: 'lugar', ES: 'lugar', FR: 'endroit', IT: 'luogo' },
     articles: { EN: 'the', DE: 'der', PT: 'o', ES: 'el', FR: 'l\'', IT: 'il' },
+    examples: {
+      EN: 'This is a quiet place.',
+      DE: 'Dies ist ein ruhiger Ort.',
+      PT: 'Este é um lugar calmo.',
+      ES: 'Este es un lugar tranquilo.',
+      FR: 'C’est un endroit calme.',
+      IT: 'È un luogo tranquillo.',
+    },
   },
   {
     concept: 'country',
@@ -454,6 +942,14 @@ export const everydayNouns100: TopicWord[] = [
     difficulty: 1,
     forms: { EN: 'country', DE: 'Land', PT: 'país', ES: 'país', FR: 'pays', IT: 'paese' },
     articles: { EN: 'the', DE: 'das', PT: 'o', ES: 'el', FR: 'le', IT: 'il' },
+    examples: {
+      EN: 'Spain is a beautiful country.',
+      DE: 'Spanien ist ein schönes Land.',
+      PT: 'Espanha é um país bonito.',
+      ES: 'España es un país bonito.',
+      FR: 'L’Espagne est un beau pays.',
+      IT: 'La Spagna è un bel paese.',
+    },
   },
   {
     concept: 'city',
@@ -461,6 +957,14 @@ export const everydayNouns100: TopicWord[] = [
     difficulty: 1,
     forms: { EN: 'city', DE: 'Stadt', PT: 'cidade', ES: 'ciudad', FR: 'ville', IT: 'città' },
     articles: { EN: 'the', DE: 'die', PT: 'a', ES: 'la', FR: 'la', IT: 'la' },
+    examples: {
+      EN: 'We live in a small city.',
+      DE: 'Wir leben in einer kleinen Stadt.',
+      PT: 'Vivemos numa cidade pequena.',
+      ES: 'Vivimos en una ciudad pequeña.',
+      FR: 'Nous vivons dans une petite ville.',
+      IT: 'Viviamo in una piccola città.',
+    },
   },
   {
     concept: 'town',
@@ -468,6 +972,14 @@ export const everydayNouns100: TopicWord[] = [
     difficulty: 1,
     forms: { EN: 'town', DE: 'Dorf', PT: 'vila', ES: 'pueblo', FR: 'village', IT: 'paese' },
     articles: { EN: 'the', DE: 'das', PT: 'a', ES: 'el', FR: 'le', IT: 'il' },
+    examples: {
+      EN: 'The town has an old square.',
+      DE: 'Das Dorf hat einen alten Platz.',
+      PT: 'A vila tem uma praça antiga.',
+      ES: 'El pueblo tiene una plaza antigua.',
+      FR: 'Le village a une vieille place.',
+      IT: 'Il paese ha una piazza antica.',
+    },
   },
   {
     concept: 'street',
@@ -475,6 +987,14 @@ export const everydayNouns100: TopicWord[] = [
     difficulty: 1,
     forms: { EN: 'street', DE: 'Straße', PT: 'rua', ES: 'calle', FR: 'rue', IT: 'strada' },
     articles: { EN: 'the', DE: 'die', PT: 'a', ES: 'la', FR: 'la', IT: 'la' },
+    examples: {
+      EN: 'Our street is very wide.',
+      DE: 'Unsere Straße ist sehr breit.',
+      PT: 'A nossa rua é muito larga.',
+      ES: 'Nuestra calle es muy ancha.',
+      FR: 'Notre rue est très large.',
+      IT: 'La nostra strada è molto larga.',
+    },
   },
   {
     concept: 'school',
@@ -482,6 +1002,14 @@ export const everydayNouns100: TopicWord[] = [
     difficulty: 1,
     forms: { EN: 'school', DE: 'Schule', PT: 'escola', ES: 'escuela', FR: 'école', IT: 'scuola' },
     articles: { EN: 'the', DE: 'die', PT: 'a', ES: 'la', FR: 'l\'', IT: 'la' },
+    examples: {
+      EN: 'The school starts at nine.',
+      DE: 'Die Schule beginnt um neun.',
+      PT: 'A escola começa às nove.',
+      ES: 'La escuela empieza a las nueve.',
+      FR: 'L’école commence à neuf heures.',
+      IT: 'La scuola inizia alle nove.',
+    },
   },
   {
     concept: 'shop',
@@ -489,6 +1017,14 @@ export const everydayNouns100: TopicWord[] = [
     difficulty: 1,
     forms: { EN: 'shop', DE: 'Geschäft', PT: 'loja', ES: 'tienda', FR: 'magasin', IT: 'negozio' },
     articles: { EN: 'the', DE: 'das', PT: 'a', ES: 'la', FR: 'le', IT: 'il' },
+    examples: {
+      EN: 'I buy bread at the shop.',
+      DE: 'Ich kaufe Brot im Geschäft.',
+      PT: 'Compro pão na loja.',
+      ES: 'Compro pan en la tienda.',
+      FR: 'J’achète du pain au magasin.',
+      IT: 'Compro pane al negozio.',
+    },
   },
   {
     concept: 'park',
@@ -496,6 +1032,14 @@ export const everydayNouns100: TopicWord[] = [
     difficulty: 1,
     forms: { EN: 'park', DE: 'Park', PT: 'parque', ES: 'parque', FR: 'parc', IT: 'parco' },
     articles: { EN: 'the', DE: 'der', PT: 'o', ES: 'el', FR: 'le', IT: 'il' },
+    examples: {
+      EN: 'Children play in the park.',
+      DE: 'Kinder spielen im Park.',
+      PT: 'As crianças brincam no parque.',
+      ES: 'Los niños juegan en el parque.',
+      FR: 'Les enfants jouent dans le parc.',
+      IT: 'I bambini giocano al parco.',
+    },
   },
   {
     concept: 'hospital',
@@ -503,6 +1047,14 @@ export const everydayNouns100: TopicWord[] = [
     difficulty: 1,
     forms: { EN: 'hospital', DE: 'Krankenhaus', PT: 'hospital', ES: 'hospital', FR: 'hôpital', IT: 'ospedale' },
     articles: { EN: 'the', DE: 'das', PT: 'o', ES: 'el', FR: 'l\'', IT: 'l\'' },
+    examples: {
+      EN: 'The hospital is near the river.',
+      DE: 'Das Krankenhaus liegt nahe dem Fluss.',
+      PT: 'O hospital fica perto do rio.',
+      ES: 'El hospital está cerca del río.',
+      FR: 'L’hôpital est près de la rivière.',
+      IT: 'L’ospedale è vicino al fiume.',
+    },
   },
   {
     concept: 'station',
@@ -510,6 +1062,14 @@ export const everydayNouns100: TopicWord[] = [
     difficulty: 1,
     forms: { EN: 'station', DE: 'Bahnhof', PT: 'estação', ES: 'estación', FR: 'gare', IT: 'stazione' },
     articles: { EN: 'the', DE: 'der', PT: 'a', ES: 'la', FR: 'la', IT: 'la' },
+    examples: {
+      EN: 'We meet at the station.',
+      DE: 'Wir treffen uns am Bahnhof.',
+      PT: 'Encontramo-nos na estação.',
+      ES: 'Nos vemos en la estación.',
+      FR: 'Nous nous retrouvons à la gare.',
+      IT: 'Ci vediamo in stazione.',
+    },
   },
   // transport (5)
   {
@@ -518,6 +1078,14 @@ export const everydayNouns100: TopicWord[] = [
     difficulty: 1,
     forms: { EN: 'car', DE: 'Auto', PT: 'carro', ES: 'coche', FR: 'voiture', IT: 'macchina' },
     articles: { EN: 'the', DE: 'das', PT: 'o', ES: 'el', FR: 'la', IT: 'la' },
+    examples: {
+      EN: 'He washes the car on Sunday.',
+      DE: 'Er wäscht das Auto am Sonntag.',
+      PT: 'Ele lava o carro ao domingo.',
+      ES: 'Él lava el coche el domingo.',
+      FR: 'Il lave la voiture le dimanche.',
+      IT: 'Lava la macchina la domenica.',
+    },
   },
   {
     concept: 'bus',
@@ -525,6 +1093,14 @@ export const everydayNouns100: TopicWord[] = [
     difficulty: 1,
     forms: { EN: 'bus', DE: 'Bus', PT: 'autocarro', ES: 'autobús', FR: 'bus', IT: 'autobus' },
     articles: { EN: 'the', DE: 'der', PT: 'o', ES: 'el', FR: 'le', IT: 'l\'' },
+    examples: {
+      EN: 'The bus stops here.',
+      DE: 'Der Bus hält hier.',
+      PT: 'O autocarro para aqui.',
+      ES: 'El autobús para aquí.',
+      FR: 'Le bus s’arrête ici.',
+      IT: 'L’autobus si ferma qui.',
+    },
   },
   {
     concept: 'train',
@@ -532,6 +1108,14 @@ export const everydayNouns100: TopicWord[] = [
     difficulty: 1,
     forms: { EN: 'train', DE: 'Zug', PT: 'comboio', ES: 'tren', FR: 'train', IT: 'treno' },
     articles: { EN: 'the', DE: 'der', PT: 'o', ES: 'el', FR: 'le', IT: 'il' },
+    examples: {
+      EN: 'The train arrives on time.',
+      DE: 'Der Zug kommt pünktlich an.',
+      PT: 'O comboio chega a horas.',
+      ES: 'El tren llega a tiempo.',
+      FR: 'Le train arrive à l’heure.',
+      IT: 'Il treno arriva in orario.',
+    },
   },
   {
     concept: 'bike',
@@ -539,6 +1123,14 @@ export const everydayNouns100: TopicWord[] = [
     difficulty: 1,
     forms: { EN: 'bike', DE: 'Fahrrad', PT: 'bicicleta', ES: 'bicicleta', FR: 'vélo', IT: 'bicicletta' },
     articles: { EN: 'the', DE: 'das', PT: 'a', ES: 'la', FR: 'le', IT: 'la' },
+    examples: {
+      EN: 'She rides her bike to school.',
+      DE: 'Sie fährt mit dem Fahrrad zur Schule.',
+      PT: 'Ela vai de bicicleta para a escola.',
+      ES: 'Ella va en bicicleta al colegio.',
+      FR: 'Elle va à l’école à vélo.',
+      IT: 'Lei va a scuola in bicicletta.',
+    },
   },
   {
     concept: 'plane',
@@ -546,6 +1138,14 @@ export const everydayNouns100: TopicWord[] = [
     difficulty: 1,
     forms: { EN: 'plane', DE: 'Flugzeug', PT: 'avião', ES: 'avión', FR: 'avion', IT: 'aereo' },
     articles: { EN: 'the', DE: 'das', PT: 'o', ES: 'el', FR: 'l\'', IT: 'l\'' },
+    examples: {
+      EN: 'The plane flies above the sea.',
+      DE: 'Das Flugzeug fliegt über dem Meer.',
+      PT: 'O avião voa sobre o mar.',
+      ES: 'El avión vuela sobre el mar.',
+      FR: 'L’avion vole au-dessus de la mer.',
+      IT: 'L’aereo vola sopra il mare.',
+    },
   },
   // nature (9)
   {
@@ -554,6 +1154,14 @@ export const everydayNouns100: TopicWord[] = [
     difficulty: 1,
     forms: { EN: 'sun', DE: 'Sonne', PT: 'sol', ES: 'sol', FR: 'soleil', IT: 'sole' },
     articles: { EN: 'the', DE: 'die', PT: 'o', ES: 'el', FR: 'le', IT: 'il' },
+    examples: {
+      EN: 'The sun is bright today.',
+      DE: 'Die Sonne scheint heute hell.',
+      PT: 'O sol está brilhante hoje.',
+      ES: 'El sol brilla hoy.',
+      FR: 'Le soleil est brillant aujourd’hui.',
+      IT: 'Il sole è luminoso oggi.',
+    },
   },
   {
     concept: 'moon',
@@ -561,6 +1169,14 @@ export const everydayNouns100: TopicWord[] = [
     difficulty: 1,
     forms: { EN: 'moon', DE: 'Mond', PT: 'lua', ES: 'luna', FR: 'lune', IT: 'luna' },
     articles: { EN: 'the', DE: 'der', PT: 'a', ES: 'la', FR: 'la', IT: 'la' },
+    examples: {
+      EN: 'The moon is full tonight.',
+      DE: 'Der Mond ist heute Nacht voll.',
+      PT: 'A lua está cheia esta noite.',
+      ES: 'La luna está llena esta noche.',
+      FR: 'La lune est pleine ce soir.',
+      IT: 'La luna è piena stanotte.',
+    },
   },
   {
     concept: 'star',
@@ -568,6 +1184,14 @@ export const everydayNouns100: TopicWord[] = [
     difficulty: 1,
     forms: { EN: 'star', DE: 'Stern', PT: 'estrela', ES: 'estrella', FR: 'étoile', IT: 'stella' },
     articles: { EN: 'the', DE: 'der', PT: 'a', ES: 'la', FR: 'l\'', IT: 'la' },
+    examples: {
+      EN: 'I see a star in the sky.',
+      DE: 'Ich sehe einen Stern am Himmel.',
+      PT: 'Vejo uma estrela no céu.',
+      ES: 'Veo una estrella en el cielo.',
+      FR: 'Je vois une étoile dans le ciel.',
+      IT: 'Vedo una stella nel cielo.',
+    },
   },
   {
     concept: 'sky',
@@ -575,6 +1199,14 @@ export const everydayNouns100: TopicWord[] = [
     difficulty: 1,
     forms: { EN: 'sky', DE: 'Himmel', PT: 'céu', ES: 'cielo', FR: 'ciel', IT: 'cielo' },
     articles: { EN: 'the', DE: 'der', PT: 'o', ES: 'el', FR: 'le', IT: 'il' },
+    examples: {
+      EN: 'The sky is blue and clear.',
+      DE: 'Der Himmel ist blau und klar.',
+      PT: 'O céu está azul e limpo.',
+      ES: 'El cielo está azul y despejado.',
+      FR: 'Le ciel est bleu et clair.',
+      IT: 'Il cielo è azzurro e sereno.',
+    },
   },
   {
     concept: 'tree',
@@ -582,6 +1214,14 @@ export const everydayNouns100: TopicWord[] = [
     difficulty: 1,
     forms: { EN: 'tree', DE: 'Baum', PT: 'árvore', ES: 'árbol', FR: 'arbre', IT: 'albero' },
     articles: { EN: 'the', DE: 'der', PT: 'a', ES: 'el', FR: 'l\'', IT: 'l\'' },
+    examples: {
+      EN: 'A bird sits in the tree.',
+      DE: 'Ein Vogel sitzt im Baum.',
+      PT: 'Um pássaro está na árvore.',
+      ES: 'Un pájaro está en el árbol.',
+      FR: 'Un oiseau est dans l’arbre.',
+      IT: 'Un uccello è sull’albero.',
+    },
   },
   {
     concept: 'flower',
@@ -589,6 +1229,14 @@ export const everydayNouns100: TopicWord[] = [
     difficulty: 1,
     forms: { EN: 'flower', DE: 'Blume', PT: 'flor', ES: 'flor', FR: 'fleur', IT: 'fiore' },
     articles: { EN: 'the', DE: 'die', PT: 'a', ES: 'la', FR: 'la', IT: 'il' },
+    examples: {
+      EN: 'She picks a red flower.',
+      DE: 'Sie pflückt eine rote Blume.',
+      PT: 'Ela colhe uma flor vermelha.',
+      ES: 'Ella recoge una flor roja.',
+      FR: 'Elle cueille une fleur rouge.',
+      IT: 'Lei coglie un fiore rosso.',
+    },
   },
   {
     concept: 'grass',
@@ -596,6 +1244,14 @@ export const everydayNouns100: TopicWord[] = [
     difficulty: 1,
     forms: { EN: 'grass', DE: 'Gras', PT: 'relva', ES: 'hierba', FR: 'herbe', IT: 'erba' },
     articles: { EN: 'the', DE: 'das', PT: 'a', ES: 'la', FR: 'l\'', IT: 'l\'' },
+    examples: {
+      EN: 'The grass is wet after rain.',
+      DE: 'Das Gras ist nach dem Regen nass.',
+      PT: 'A relva está molhada depois da chuva.',
+      ES: 'La hierba está mojada después de la lluvia.',
+      FR: 'L’herbe est mouillée après la pluie.',
+      IT: 'L’erba è bagnata dopo la pioggia.',
+    },
   },
   {
     concept: 'river',
@@ -603,6 +1259,14 @@ export const everydayNouns100: TopicWord[] = [
     difficulty: 1,
     forms: { EN: 'river', DE: 'Fluss', PT: 'rio', ES: 'río', FR: 'rivière', IT: 'fiume' },
     articles: { EN: 'the', DE: 'der', PT: 'o', ES: 'el', FR: 'la', IT: 'il' },
+    examples: {
+      EN: 'The river runs through the town.',
+      DE: 'Der Fluss fließt durch das Dorf.',
+      PT: 'O rio passa pela vila.',
+      ES: 'El río pasa por el pueblo.',
+      FR: 'La rivière traverse le village.',
+      IT: 'Il fiume attraversa il paese.',
+    },
   },
   {
     concept: 'sea',
@@ -610,6 +1274,14 @@ export const everydayNouns100: TopicWord[] = [
     difficulty: 1,
     forms: { EN: 'sea', DE: 'Meer', PT: 'mar', ES: 'mar', FR: 'mer', IT: 'mare' },
     articles: { EN: 'the', DE: 'das', PT: 'o', ES: 'el', FR: 'la', IT: 'il' },
+    examples: {
+      EN: 'We walk beside the sea.',
+      DE: 'Wir gehen am Meer entlang.',
+      PT: 'Caminhamos junto ao mar.',
+      ES: 'Paseamos junto al mar.',
+      FR: 'Nous marchons au bord de la mer.',
+      IT: 'Camminiamo accanto al mare.',
+    },
   },
   // things (11)
   {
@@ -618,6 +1290,14 @@ export const everydayNouns100: TopicWord[] = [
     difficulty: 2,
     forms: { EN: 'thing', DE: 'Ding', PT: 'coisa', ES: 'cosa', FR: 'chose', IT: 'cosa' },
     articles: { EN: 'the', DE: 'das', PT: 'a', ES: 'la', FR: 'la', IT: 'la' },
+    examples: {
+      EN: 'That thing is mine.',
+      DE: 'Dieses Ding gehört mir.',
+      PT: 'Essa coisa é minha.',
+      ES: 'Esa cosa es mía.',
+      FR: 'Cette chose est à moi.',
+      IT: 'Quella cosa è mia.',
+    },
   },
   {
     concept: 'money',
@@ -625,6 +1305,14 @@ export const everydayNouns100: TopicWord[] = [
     difficulty: 1,
     forms: { EN: 'money', DE: 'Geld', PT: 'dinheiro', ES: 'dinero', FR: 'argent', IT: 'soldi' },
     articles: { EN: 'the', DE: 'das', PT: 'o', ES: 'el', FR: 'l\'', IT: 'i' },
+    examples: {
+      EN: 'I need money for the bus.',
+      DE: 'Ich brauche Geld für den Bus.',
+      PT: 'Preciso de dinheiro para o autocarro.',
+      ES: 'Necesito dinero para el autobús.',
+      FR: 'J’ai besoin d’argent pour le bus.',
+      IT: 'Mi servono soldi per l’autobus.',
+    },
   },
   {
     concept: 'number',
@@ -632,6 +1320,14 @@ export const everydayNouns100: TopicWord[] = [
     difficulty: 2,
     forms: { EN: 'number', DE: 'Nummer', PT: 'número', ES: 'número', FR: 'numéro', IT: 'numero' },
     articles: { EN: 'the', DE: 'die', PT: 'o', ES: 'el', FR: 'le', IT: 'il' },
+    examples: {
+      EN: 'What is your phone number?',
+      DE: 'Wie ist Ihre Telefonnummer?',
+      PT: 'Qual é o seu número de telefone?',
+      ES: '¿Cuál es su número de teléfono?',
+      FR: 'Quel est votre numéro de téléphone ?',
+      IT: 'Qual è il suo numero di telefono?',
+    },
   },
   {
     concept: 'book',
@@ -639,6 +1335,14 @@ export const everydayNouns100: TopicWord[] = [
     difficulty: 1,
     forms: { EN: 'book', DE: 'Buch', PT: 'livro', ES: 'libro', FR: 'livre', IT: 'libro' },
     articles: { EN: 'the', DE: 'das', PT: 'o', ES: 'el', FR: 'le', IT: 'il' },
+    examples: {
+      EN: 'I read a book every night.',
+      DE: 'Ich lese jeden Abend ein Buch.',
+      PT: 'Leio um livro todas as noites.',
+      ES: 'Leo un libro cada noche.',
+      FR: 'Je lis un livre chaque soir.',
+      IT: 'Leggo un libro ogni sera.',
+    },
   },
   {
     concept: 'word',
@@ -646,6 +1350,14 @@ export const everydayNouns100: TopicWord[] = [
     difficulty: 2,
     forms: { EN: 'word', DE: 'Wort', PT: 'palavra', ES: 'palabra', FR: 'mot', IT: 'parola' },
     articles: { EN: 'the', DE: 'das', PT: 'a', ES: 'la', FR: 'le', IT: 'la' },
+    examples: {
+      EN: 'Write one new word each day.',
+      DE: 'Schreiben Sie jeden Tag ein neues Wort.',
+      PT: 'Escreva uma palavra nova por dia.',
+      ES: 'Escriba una palabra nueva cada día.',
+      FR: 'Écrivez un nouveau mot chaque jour.',
+      IT: 'Scriva una parola nuova ogni giorno.',
+    },
   },
   {
     concept: 'picture',
@@ -653,6 +1365,14 @@ export const everydayNouns100: TopicWord[] = [
     difficulty: 1,
     forms: { EN: 'picture', DE: 'Bild', PT: 'foto', ES: 'foto', FR: 'photo', IT: 'foto' },
     articles: { EN: 'the', DE: 'das', PT: 'a', ES: 'la', FR: 'la', IT: 'la' },
+    examples: {
+      EN: 'This picture is from my trip.',
+      DE: 'Dieses Bild ist von meiner Reise.',
+      PT: 'Esta foto é da minha viagem.',
+      ES: 'Esta foto es de mi viaje.',
+      FR: 'Cette photo est de mon voyage.',
+      IT: 'Questa foto è del mio viaggio.',
+    },
   },
   {
     concept: 'phone',
@@ -660,6 +1380,14 @@ export const everydayNouns100: TopicWord[] = [
     difficulty: 1,
     forms: { EN: 'phone', DE: 'Telefon', PT: 'telefone', ES: 'teléfono', FR: 'téléphone', IT: 'telefono' },
     articles: { EN: 'the', DE: 'das', PT: 'o', ES: 'el', FR: 'le', IT: 'il' },
+    examples: {
+      EN: 'My phone is in my bag.',
+      DE: 'Mein Telefon ist in meiner Tasche.',
+      PT: 'O meu telefone está na minha mala.',
+      ES: 'Mi teléfono está en mi bolsa.',
+      FR: 'Mon téléphone est dans mon sac.',
+      IT: 'Il mio telefono è nella borsa.',
+    },
   },
   {
     concept: 'key',
@@ -667,6 +1395,14 @@ export const everydayNouns100: TopicWord[] = [
     difficulty: 1,
     forms: { EN: 'key', DE: 'Schlüssel', PT: 'chave', ES: 'llave', FR: 'clé', IT: 'chiave' },
     articles: { EN: 'the', DE: 'der', PT: 'a', ES: 'la', FR: 'la', IT: 'la' },
+    examples: {
+      EN: 'I lost my house key.',
+      DE: 'Ich habe meinen Hausschlüssel verloren.',
+      PT: 'Perdi a chave de casa.',
+      ES: 'Perdí la llave de casa.',
+      FR: 'J’ai perdu la clé de la maison.',
+      IT: 'Ho perso la chiave di casa.',
+    },
   },
   {
     concept: 'bag',
@@ -674,6 +1410,14 @@ export const everydayNouns100: TopicWord[] = [
     difficulty: 1,
     forms: { EN: 'bag', DE: 'Tasche', PT: 'saco', ES: 'bolsa', FR: 'sac', IT: 'borsa' },
     articles: { EN: 'the', DE: 'die', PT: 'o', ES: 'la', FR: 'le', IT: 'la' },
+    examples: {
+      EN: 'Her bag is very light.',
+      DE: 'Ihre Tasche ist sehr leicht.',
+      PT: 'O saco dela é muito leve.',
+      ES: 'Su bolsa es muy ligera.',
+      FR: 'Son sac est très léger.',
+      IT: 'La sua borsa è molto leggera.',
+    },
   },
   {
     concept: 'pen',
@@ -681,6 +1425,14 @@ export const everydayNouns100: TopicWord[] = [
     difficulty: 1,
     forms: { EN: 'pen', DE: 'Stift', PT: 'caneta', ES: 'bolígrafo', FR: 'stylo', IT: 'penna' },
     articles: { EN: 'the', DE: 'der', PT: 'a', ES: 'el', FR: 'le', IT: 'la' },
+    examples: {
+      EN: 'May I borrow your pen?',
+      DE: 'Darf ich Ihren Stift leihen?',
+      PT: 'Posso pedir emprestada a sua caneta?',
+      ES: '¿Me presta su bolígrafo?',
+      FR: 'Puis-je emprunter votre stylo ?',
+      IT: 'Posso prendere in prestito la sua penna?',
+    },
   },
   {
     concept: 'paper',
@@ -688,6 +1440,14 @@ export const everydayNouns100: TopicWord[] = [
     difficulty: 1,
     forms: { EN: 'paper', DE: 'Papier', PT: 'papel', ES: 'papel', FR: 'papier', IT: 'carta' },
     articles: { EN: 'the', DE: 'das', PT: 'o', ES: 'el', FR: 'le', IT: 'la' },
+    examples: {
+      EN: 'Write it on this paper.',
+      DE: 'Schreiben Sie es auf dieses Papier.',
+      PT: 'Escreva isto neste papel.',
+      ES: 'Escríbalo en este papel.',
+      FR: 'Écrivez-le sur ce papier.',
+      IT: 'Lo scriva su questo foglio.',
+    },
   },
   // abstract (5)
   {
@@ -696,6 +1456,14 @@ export const everydayNouns100: TopicWord[] = [
     difficulty: 2,
     forms: { EN: 'life', DE: 'Leben', PT: 'vida', ES: 'vida', FR: 'vie', IT: 'vita' },
     articles: { EN: 'the', DE: 'das', PT: 'a', ES: 'la', FR: 'la', IT: 'la' },
+    examples: {
+      EN: 'City life is busy but interesting.',
+      DE: 'Das Leben in der Stadt ist hektisch, aber interessant.',
+      PT: 'A vida na cidade é agitada mas interessante.',
+      ES: 'La vida en la ciudad es ajetreada pero interesante.',
+      FR: 'La vie en ville est animée mais intéressante.',
+      IT: 'La vita in città è frenetica ma interessante.',
+    },
   },
   {
     concept: 'work',
@@ -703,6 +1471,14 @@ export const everydayNouns100: TopicWord[] = [
     difficulty: 2,
     forms: { EN: 'work', DE: 'Arbeit', PT: 'trabalho', ES: 'trabajo', FR: 'travail', IT: 'lavoro' },
     articles: { EN: 'the', DE: 'die', PT: 'o', ES: 'el', FR: 'le', IT: 'il' },
+    examples: {
+      EN: 'My work starts at eight.',
+      DE: 'Meine Arbeit beginnt um acht.',
+      PT: 'O meu trabalho começa às oito.',
+      ES: 'Mi trabajo empieza a las ocho.',
+      FR: 'Mon travail commence à huit heures.',
+      IT: 'Il mio lavoro inizia alle otto.',
+    },
   },
   {
     concept: 'game',
@@ -710,6 +1486,14 @@ export const everydayNouns100: TopicWord[] = [
     difficulty: 1,
     forms: { EN: 'game', DE: 'Spiel', PT: 'jogo', ES: 'juego', FR: 'jeu', IT: 'gioco' },
     articles: { EN: 'the', DE: 'das', PT: 'o', ES: 'el', FR: 'le', IT: 'il' },
+    examples: {
+      EN: 'The children like this game.',
+      DE: 'Die Kinder mögen dieses Spiel.',
+      PT: 'As crianças gostam deste jogo.',
+      ES: 'A los niños les gusta este juego.',
+      FR: 'Les enfants aiment ce jeu.',
+      IT: 'Ai bambini piace questo gioco.',
+    },
   },
   {
     concept: 'music',
@@ -717,6 +1501,14 @@ export const everydayNouns100: TopicWord[] = [
     difficulty: 1,
     forms: { EN: 'music', DE: 'Musik', PT: 'música', ES: 'música', FR: 'musique', IT: 'musica' },
     articles: { EN: 'the', DE: 'die', PT: 'a', ES: 'la', FR: 'la', IT: 'la' },
+    examples: {
+      EN: 'I listen to music on the bus.',
+      DE: 'Ich höre Musik im Bus.',
+      PT: 'Ouço música no autocarro.',
+      ES: 'Escucho música en el autobús.',
+      FR: 'J’écoute de la musique dans le bus.',
+      IT: 'Ascolto musica sull’autobus.',
+    },
   },
   {
     concept: 'question',
@@ -724,5 +1516,13 @@ export const everydayNouns100: TopicWord[] = [
     difficulty: 2,
     forms: { EN: 'question', DE: 'Frage', PT: 'pergunta', ES: 'pregunta', FR: 'question', IT: 'domanda' },
     articles: { EN: 'the', DE: 'die', PT: 'a', ES: 'la', FR: 'la', IT: 'la' },
+    examples: {
+      EN: 'Ask a question if you need help.',
+      DE: 'Stellen Sie eine Frage, wenn Sie Hilfe brauchen.',
+      PT: 'Faça uma pergunta se precisar de ajuda.',
+      ES: 'Haga una pregunta si necesita ayuda.',
+      FR: 'Posez une question si vous avez besoin d’aide.',
+      IT: 'Faccia una domanda se ha bisogno di aiuto.',
+    },
   },
 ]

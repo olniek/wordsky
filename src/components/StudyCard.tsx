@@ -8,6 +8,7 @@ import {
 import type { WordStatus } from '../lib/progress'
 import { languageLabels, strings } from '../lib/strings'
 import { displayWordForm } from '../lib/wordForm'
+import { buildSentenceTokenCloud } from '../lib/sentenceTokenCloud'
 import { isSpeechSupported, speak } from '../lib/speech'
 
 function anchorPhaseExample(word: TopicWord, anchor: LanguageCode): string | undefined {
@@ -18,6 +19,12 @@ function anchorPhaseExample(word: TopicWord, anchor: LanguageCode): string | und
 
 function translationPhaseExample(word: TopicWord, code: LanguageCode): string | undefined {
   return word.examples?.[code]?.trim() || undefined
+}
+
+function corpusLinesForLanguage(word: TopicWord, code: LanguageCode): readonly string[] | undefined {
+  const lines = word.corpusExamples?.[code]
+  if (!lines?.length) return undefined
+  return lines
 }
 
 function PerLanguageMarkRow({
@@ -97,6 +104,7 @@ function StudyCard({
   singleMarkLanguage,
 }: StudyCardProps) {
   const [revealed, setRevealed] = useState(false)
+  const [detailOpen, setDetailOpen] = useState(false)
   const audioSupported = useMemo(() => isSpeechSupported(), [])
 
   const langsForProgress = useMemo(
@@ -129,6 +137,26 @@ function StudyCard({
     return ''
   }
   const anchorExample = useMemo(() => anchorPhaseExample(word, anchor), [word, anchor])
+
+  const orderedCorpusLanguages = useMemo(
+    () =>
+      studyLanguageOrder.filter((code) => {
+        const list = word.corpusExamples?.[code]
+        return Array.isArray(list) && list.length > 0
+      }),
+    [word, studyLanguageOrder],
+  )
+
+  const hasCorpusDetail = orderedCorpusLanguages.length > 0
+
+  const anchorCorpusLines = useMemo(() => corpusLinesForLanguage(word, anchor), [word, anchor])
+
+  const tokenCloud = useMemo(() => {
+    if (!anchorCorpusLines?.length) return []
+    return buildSentenceTokenCloud([...anchorCorpusLines], anchor, {
+      excludeLemmaForms: [word.forms[anchor]],
+    })
+  }, [anchorCorpusLines, anchor, word.forms])
 
   const allLanguagesMarked = useMemo(
     () => langsForProgress.every((code) => getLanguageStatus(code) !== 'unseen'),
@@ -208,6 +236,80 @@ function StudyCard({
             )}
           </div>
         )}
+
+        {hasCorpusDetail ? (
+          <div className="study-corpus-block">
+            <button
+              type="button"
+              className="study-secondary study-corpus-toggle"
+              aria-expanded={detailOpen}
+              aria-controls="study-corpus-detail"
+              id="study-corpus-toggle"
+              onClick={() => setDetailOpen((o) => !o)}
+            >
+              {detailOpen ? strings.topic.moreDetailHide : strings.topic.moreDetail}
+            </button>
+            {detailOpen ? (
+              <div className="study-corpus-detail" id="study-corpus-detail" role="region" aria-labelledby="study-corpus-toggle">
+                <p className="study-corpus-detail-heading">{strings.topic.corpusSentencesLabel}</p>
+                {orderedCorpusLanguages.map((code) => {
+                  const lines = corpusLinesForLanguage(word, code)
+                  if (!lines?.length) return null
+                  const showLangLabel = orderedCorpusLanguages.length > 1
+                  return (
+                    <div
+                      key={code}
+                      className="study-corpus-lang-block"
+                      style={{ '--lang-color': languageColors[code] } as CSSProperties}
+                    >
+                      {showLangLabel ? (
+                        <p className="study-corpus-lang-label">{languageLabels[code]}</p>
+                      ) : null}
+                      <ol className="study-corpus-sentence-list">
+                        {lines.map((line, i) => (
+                          <li key={i} className="study-corpus-sentence-item">
+                            <span className="study-corpus-sentence-text">{line}</span>
+                            {audioSupported && (
+                              <button
+                                type="button"
+                                className="speak-button speak-button-example study-corpus-sentence-speak"
+                                onClick={() => speak(line, code)}
+                                aria-label={strings.topic.speakExampleLabel(languageLabels[code])}
+                                title={strings.topic.speakExampleLabel(languageLabels[code])}
+                              >
+                                <span aria-hidden="true">♪</span>
+                              </button>
+                            )}
+                          </li>
+                        ))}
+                      </ol>
+                    </div>
+                  )
+                })}
+                {tokenCloud.length > 0 ? (
+                  <div className="study-token-cloud-wrap">
+                    <p className="study-corpus-detail-heading">{strings.topic.tokenCloudLabel}</p>
+                    <p className="study-token-cloud" aria-label={strings.topic.tokenCloudLabel}>
+                      {tokenCloud.map((e) => (
+                        <span
+                          key={e.token}
+                          className="study-token-cloud-item"
+                          style={
+                            {
+                              '--tw': String(0.82 + 0.58 * e.weight),
+                            } as CSSProperties
+                          }
+                        >
+                          {e.token}
+                        </span>
+                      ))}
+                    </p>
+                  </div>
+                ) : null}
+              </div>
+            ) : null}
+          </div>
+        ) : null}
 
         {revealed ? (
           <div className="study-anchor-mark-slot">

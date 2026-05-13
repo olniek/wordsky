@@ -28,7 +28,8 @@ function HubEdge({
           strokeWidth: 1.75,
           strokeOpacity: 0.78,
           fill: 'none',
-          filter: `drop-shadow(0 0 6px ${baseColor}55)`,
+          /* Softer glow so it stays visually behind cards without bleeding over labels. */
+          filter: `drop-shadow(0 0 4px ${baseColor}44)`,
           ...style,
         }}
       />

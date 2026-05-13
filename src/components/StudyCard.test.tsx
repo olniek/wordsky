@@ -128,4 +128,28 @@ describe('StudyCard', () => {
     await user.click(continueBtn)
     expect(onContinueToNext).toHaveBeenCalledTimes(1)
   })
+
+  it('shows optional corpus detail for cat in each study language that has corpusExamples', async () => {
+    const user = userEvent.setup()
+    const catWord = topicWords.animals.find((w) => w.concept === 'cat')!
+    render(
+      <StudyCard
+        word={catWord}
+        anchor="EN"
+        translationLanguages={['DE']}
+        studyLanguageOrder={['EN', 'DE']}
+        step={1}
+        total={10}
+        getLanguageStatus={() => 'unseen'}
+        onLanguageStatus={vi.fn()}
+      />,
+    )
+    await user.click(screen.getByRole('button', { name: strings.topic.moreDetail }))
+    expect(screen.getByText('I have a cat at home.')).toBeTruthy()
+    expect(screen.getByText('Ich habe zu Hause eine Katze.')).toBeTruthy()
+    expect(screen.getByText('German')).toBeTruthy()
+    expect(screen.getByText(strings.topic.tokenCloudLabel)).toBeTruthy()
+    await user.click(screen.getByRole('button', { name: strings.topic.moreDetailHide }))
+    expect(screen.queryByText('I have a cat at home.')).toBeNull()
+  })
 })

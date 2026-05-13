@@ -11,7 +11,6 @@ import { Tabs } from './Tabs'
 import StudyCard from './StudyCard'
 import { CosmicStarsBackground } from './CosmicStarsBackground'
 import { useAnchorLanguage } from '../lib/anchor'
-import { useProgressLanguages } from '../lib/progressLanguages'
 import { useTranslationLanguages } from '../lib/translationLanguages'
 import {
   conceptStudyAggregateStatus,
@@ -42,14 +41,12 @@ function TopicPage() {
   const topic = getTopicBySlug(slug) ?? null
   const [anchor] = useAnchorLanguage()
   const [translationLanguages] = useTranslationLanguages(anchor)
-  const [progressLanguages] = useProgressLanguages(anchor, translationLanguages)
-  const { snapshot, getLanguageStatus, setLanguageStatus } = useProgress()
-  const { getTopicIndex, setTopicIndex, setLastTopic } = useSession()
-
-  const mapVisibleLanguages = useMemo(
+  const progressLanguages = useMemo(
     () => mapVisibleLanguageCodes(anchor, translationLanguages),
     [anchor, translationLanguages],
   )
+  const { snapshot, getLanguageStatus, setLanguageStatus } = useProgress()
+  const { getTopicIndex, setTopicIndex, setLastTopic } = useSession()
 
   const getAggregateStatus = useCallback(
     (slug: TopicSlug, concept: string) =>
@@ -233,7 +230,7 @@ function TopicPage() {
               word={activeConceptMeta}
               anchor={anchor}
               translationLanguages={translationLanguages}
-              studyLanguageOrder={mapVisibleLanguages}
+              studyLanguageOrder={progressLanguages}
               progressLanguageOrder={progressLanguages}
               step={activeConceptIndex + 1}
               total={guidedWords.length}
@@ -256,7 +253,7 @@ function TopicPage() {
             anchor={anchor}
             translationLanguages={translationLanguages}
             progressLanguages={progressLanguages}
-            mapVisibleLanguages={mapVisibleLanguages}
+            mapVisibleLanguages={progressLanguages}
             guidedWords={guidedWords}
             snapshot={snapshot}
             getLanguageStatus={getLanguageStatus}

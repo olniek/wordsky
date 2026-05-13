@@ -13,26 +13,26 @@ export const strings = {
     errorReload: 'Reload page',
   },
   landing: {
-    kicker: 'A1 vocabulary across 6 languages',
     title: 'Choose a topic',
-    subtitle:
-      'Start with practical words in English, German, Portuguese, Spanish, French, and Italian.',
+    subtitleShort: 'A1 vocabulary · 6 languages',
     anchorLabel: 'I speak',
-    translationLegend: 'Translations when studying',
-    translationAll: 'All',
-    progressLangLegend: 'Count toward progress',
-    progressLangHint:
-      'Uncheck languages you already speak well. At least one stays checked so Learned matches what you are studying.',
+    translationLegend: 'Translations',
     cardCtaStart: 'Start',
     cardCtaContinue: 'Continue',
     cardCtaReview: 'Review',
     /** Known (got it) count vs topic size — matches UX “learned / total” wording. */
-    progressLearned: (known: number, total: number) => `Learned ${known} / ${total}`,
-    cardStillLearningLine: (n: number) => `Still learning: ${n}`,
-    wordSearchLabel: 'Find a word',
-    wordSearchPlaceholder: 'Type in any language',
-    wordSearchHint: 'Matches English, German, Portuguese, Spanish, French, or Italian. Accents optional (e.g. cafe matches café).',
+    progressLearned: (known: number, total: number) => `${known} / ${total}`,
+    cardStillLearningLine: (n: number) => `${n} still learning`,
+    wordSearchLabel: 'Search any word',
+    wordSearchPlaceholder: 'Search any word',
+    wordSearchHint:
+      'Matches English, German, Portuguese, Spanish, French, or Italian. Accents optional (for example cafe matches café).',
     wordSearchEmpty: 'No matches yet. Try another spelling.',
+    /** Compact summary shown on the Landing language toolbar trigger. */
+    langSummary: (anchor: string, visibleLanguageCount: number) =>
+      `${anchor} · ${visibleLanguageCount} languages`,
+    langPopoverTitle: 'Languages',
+    langPopoverClose: 'Done',
   },
   topic: {
     back: 'Back to topics',
@@ -80,6 +80,11 @@ export const strings = {
     referenceOnlyProgress: 'Shown for reference. Not counted in your Learned score.',
     /** Shown on a translation row when `tags` include `false-friend-L1-L2` for that pair. */
     falseFriendHint: 'Looks like a cognate, but the meaning is not the same here.',
+    /** Optional Study block: extra corpus-style sentences under More detail (per study language that has data). */
+    moreDetail: 'More detail',
+    moreDetailHide: 'Hide detail',
+    corpusSentencesLabel: 'More example sentences',
+    tokenCloudLabel: 'Words that repeat in these sentences',
   },
   details: {
     close: 'Close',

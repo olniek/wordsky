@@ -26,21 +26,25 @@ function WordSearch({ anchor }: Props) {
   return (
     <section className="word-search" aria-label={strings.landing.wordSearchLabel}>
       <div className="word-search-inner">
-        <label className="word-search-label" htmlFor="word-search-input">
+        <label htmlFor="word-search-input" className="visually-hidden">
           {strings.landing.wordSearchLabel}
         </label>
-        <input
-          id="word-search-input"
-          className="word-search-input"
-          type="search"
-          enterKeyHint="search"
-          autoComplete="off"
-          spellCheck={false}
-          placeholder={strings.landing.wordSearchPlaceholder}
-          value={query}
-          onChange={(e) => setQuery(e.target.value)}
-        />
-        <p className="word-search-hint">{strings.landing.wordSearchHint}</p>
+        <div className="word-search-field">
+          <span className="word-search-icon" aria-hidden="true">
+            ⌕
+          </span>
+          <input
+            id="word-search-input"
+            className="word-search-input"
+            type="search"
+            enterKeyHint="search"
+            autoComplete="off"
+            spellCheck={false}
+            placeholder={strings.landing.wordSearchPlaceholder}
+            value={query}
+            onChange={(e) => setQuery(e.target.value)}
+          />
+        </div>
         {query.trim() ? (
           hits.length === 0 ? (
             <p className="word-search-empty" role="status">

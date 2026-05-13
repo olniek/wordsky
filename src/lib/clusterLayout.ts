@@ -13,6 +13,40 @@ import {
 /** First satellite angle (radians): “up” on screen with y increasing downward. */
 const ORBIT_ANGLE_START = -Math.PI / 2
 
+const AXIS_EPS = 1e-6
+
+/**
+ * Minimum orbit radius so each satellite’s axis-aligned box (same size as the anchor)
+ * does not overlap the anchor when the anchor’s top-left is at the origin and satellite
+ * top-left is at `(R cos θ, R sin θ)` for each satellite angle θ.
+ */
+export function minOrbitRadiusClearOfHub(
+  satelliteCount: number,
+  boxW: number,
+  boxH: number,
+  pad: number,
+): number {
+  if (satelliteCount <= 0) return 0
+  const m = satelliteCount
+  const theta0 = ORBIT_ANGLE_START
+  let maxOfMins = 0
+  for (let i = 0; i < m; i += 1) {
+    const theta = theta0 + (2 * Math.PI * i) / m
+    const c = Math.cos(theta)
+    const s = Math.sin(theta)
+    let minR = Number.POSITIVE_INFINITY
+    if (c > AXIS_EPS) minR = Math.min(minR, (boxW + pad) / c)
+    if (c < -AXIS_EPS) minR = Math.min(minR, (-boxW - pad) / c)
+    if (s > AXIS_EPS) minR = Math.min(minR, (boxH + pad) / s)
+    if (s < -AXIS_EPS) minR = Math.min(minR, (-boxH - pad) / s)
+    if (!Number.isFinite(minR)) {
+      minR = Math.hypot(boxW, boxH) + pad
+    }
+    maxOfMins = Math.max(maxOfMins, minR)
+  }
+  return maxOfMins
+}
+
 /** Minimum center-to-center distance between adjacent satellites on the orbit. */
 function minSatelliteCenterDistance(): number {
   return CLUSTER_MAP_NODE_BOX_W + CLUSTER_ORBIT_GAP
@@ -37,9 +71,15 @@ export function orbitRadiusUncapped(satelliteCount: number): number {
 /** Radius after clamping to the map grid budget. */
 export function orbitRadiusForSatelliteCount(satelliteCount: number): number {
   const raw = orbitRadiusUncapped(satelliteCount)
+  const hub = minOrbitRadiusClearOfHub(
+    satelliteCount,
+    CLUSTER_MAP_NODE_BOX_W,
+    CLUSTER_MAP_NODE_BOX_H,
+    CLUSTER_ORBIT_GAP,
+  )
   const cap = maxOrbitRadiusForGrid()
-  if (satelliteCount <= 1) return Math.min(Math.max(raw, CLUSTER_ORBIT_R_MIN), cap)
-  return Math.min(Math.max(raw, CLUSTER_ORBIT_R_MIN), cap)
+  const base = Math.max(CLUSTER_ORBIT_R_MIN, raw, hub)
+  return Math.min(base, cap)
 }
 
 /**

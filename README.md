@@ -13,6 +13,8 @@ npm run dev      # local dev
 npm run build    # production build
 npm run test     # Vitest
 npm run lint     # ESLint
+npm run lint:topic-data   # topic row structure (mapGroup, required six-language examples, …)
+npm run corpus:examples   # validate corpusExamples blocks (optional JSON path argument)
 ```
 
 ## Where things live
@@ -22,6 +24,7 @@ npm run lint     # ESLint
 | Topic registry, types, `MAP_GROUP_ORDER`, merged `topicWords` | [src/data/words.ts](src/data/words.ts) |
 | Everyday nouns (100 words, split module) | [src/data/topicEverydayNouns100.ts](src/data/topicEverydayNouns100.ts) |
 | Data invariants (forms, examples, articles, groups) | [src/data/words.test.ts](src/data/words.test.ts) |
+| Corpus-style extra sentences (authoring + pipeline) | [src/data/corpus/README.md](src/data/corpus/README.md), `npm run corpus:examples` |
 | Latin accent / ß folding (search + lemma compare) | [src/lib/latinFold.ts](src/lib/latinFold.ts) |
 | Cognate similarity + `false-friend-*` tags | [src/lib/crossLangLemmaAffinity.ts](src/lib/crossLangLemmaAffinity.ts) |
 | Find a word (landing) | [src/lib/wordSearch.ts](src/lib/wordSearch.ts), [src/components/WordSearch.tsx](src/components/WordSearch.tsx) |

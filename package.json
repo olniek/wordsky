@@ -13,6 +13,7 @@
     "test:watch": "vitest",
     "test:coverage": "vitest run --coverage",
     "lint:topic-data": "tsx scripts/lint-topic-data.ts",
+    "corpus:examples": "tsx scripts/corpus-examples.ts",
     "generate:pwa-icons": "node scripts/generate-pwa-icons.mjs"
   },
   "dependencies": {

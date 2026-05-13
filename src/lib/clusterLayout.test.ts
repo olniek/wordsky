@@ -7,6 +7,7 @@ import {
 import {
   clusterOffsetsForVisible,
   maxOrbitRadiusForGrid,
+  minOrbitRadiusClearOfHub,
   orbitRadiusForSatelliteCount,
   orbitRadiusUncapped,
 } from './clusterLayout'
@@ -63,6 +64,14 @@ describe('clusterOffsetsForVisible', () => {
     for (let m = 1; m <= 6; m += 1) {
       expect(orbitRadiusForSatelliteCount(m)).toBeLessThanOrEqual(cap + 1e-6)
     }
+  })
+
+  it('requires a larger radius than chord-only math when three satellites wrap the hub', () => {
+    const m = 3
+    expect(orbitRadiusUncapped(m)).toBeLessThan(minOrbitRadiusClearOfHub(m, CLUSTER_MAP_NODE_BOX_W, CLUSTER_MAP_NODE_BOX_H, CLUSTER_ORBIT_GAP) - 1)
+    expect(orbitRadiusForSatelliteCount(m)).toBeGreaterThanOrEqual(
+      minOrbitRadiusClearOfHub(m, CLUSTER_MAP_NODE_BOX_W, CLUSTER_MAP_NODE_BOX_H, CLUSTER_ORBIT_GAP) - 1e-3,
+    )
   })
 
   it('when uncapped radius fits the grid, adjacent satellite centers meet minimum chord', () => {

@@ -40,4 +40,18 @@ describe('pickSpeechVoice', () => {
     const frFr: SpeechVoiceLike = { lang: 'fr_FR', name: 'Daniel' }
     expect(pickSpeechVoice([frFr], 'fr-FR')).toBe(frFr)
   })
+
+  it('for en-US avoids novelty/legacy English voices when a normal voice exists', () => {
+    const albert: SpeechVoiceLike = { lang: 'en-US', name: 'Albert', localService: true }
+    const samantha: SpeechVoiceLike = { lang: 'en-US', name: 'Samantha', localService: true }
+    const voices: SpeechVoiceLike[] = [albert, samantha]
+    expect(pickSpeechVoice(voices, 'en-US')).toBe(samantha)
+  })
+
+  it('for en-US prefers non-local when both match the locale', () => {
+    const local: SpeechVoiceLike = { lang: 'en-US', name: 'Local Voice', localService: true }
+    const cloud: SpeechVoiceLike = { lang: 'en-US', name: 'Cloud Voice', localService: false }
+    const voices: SpeechVoiceLike[] = [local, cloud]
+    expect(pickSpeechVoice(voices, 'en-US')).toBe(cloud)
+  })
 })

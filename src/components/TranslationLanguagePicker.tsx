@@ -17,10 +17,6 @@ function TranslationLanguagePicker({ anchor, value, onChange }: TranslationLangu
   const legendId = useId()
   const candidates = translationCandidates(anchor)
 
-  const setAll = () => {
-    onChange(candidates)
-  }
-
   const toggle = (code: LanguageCode) => {
     const isOn = value.includes(code)
     if (isOn && value.length <= 1) {
@@ -29,8 +25,6 @@ function TranslationLanguagePicker({ anchor, value, onChange }: TranslationLangu
     const next = isOn ? value.filter((c) => c !== code) : [...value, code]
     onChange(sortByLanguageOrder(next))
   }
-
-  const allSelected = candidates.length > 0 && candidates.every((c) => value.includes(c))
 
   return (
     <fieldset className="translation-lang-picker" aria-labelledby={legendId}>
@@ -42,25 +36,22 @@ function TranslationLanguagePicker({ anchor, value, onChange }: TranslationLangu
           const checked = value.includes(code)
           const sole = checked && value.length === 1
           return (
-            <label key={code} className="translation-lang-picker-option">
-              <input
-                type="checkbox"
-                checked={checked}
-                disabled={sole}
-                onChange={() => toggle(code)}
-              />
-              <span>{languageLabels[code]}</span>
-            </label>
+            <button
+              key={code}
+              type="button"
+              role="checkbox"
+              aria-checked={checked}
+              aria-disabled={sole}
+              className={`lang-chip ${checked ? 'lang-chip-on' : ''}`}
+              onClick={() => {
+                if (sole) return
+                toggle(code)
+              }}
+            >
+              {languageLabels[code]}
+            </button>
           )
         })}
-        <button
-          type="button"
-          className="translation-lang-picker-all"
-          onClick={setAll}
-          disabled={allSelected}
-        >
-          {strings.landing.translationAll}
-        </button>
       </div>
     </fieldset>
   )

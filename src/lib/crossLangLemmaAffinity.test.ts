@@ -7,8 +7,17 @@ import {
   normalizeLemmaForCompare,
 } from './crossLangLemmaAffinity'
 
+const dummyExamples: Record<LanguageCode, string> = {
+  EN: 'Example.',
+  DE: 'Beispiel.',
+  PT: 'Exemplo.',
+  ES: 'Ejemplo.',
+  FR: 'Exemple.',
+  IT: 'Esempio.',
+}
+
 function word(forms: Record<LanguageCode, string>, concept = 'test', tags?: string[]): TopicWord {
-  return { concept, mapGroup: 'core', forms, ...(tags?.length ? { tags } : {}) }
+  return { concept, mapGroup: 'core', forms, examples: dummyExamples, ...(tags?.length ? { tags } : {}) }
 }
 
 describe('normalizeLemmaForCompare', () => {

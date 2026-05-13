@@ -4,7 +4,9 @@ import { MAP_GROUP_ORDER, languageOrder, topicWords, type TopicSlug } from '../d
 import {
   buildTopicGraph,
   humanizeMapGroup,
+  mapEdgeHandlesForOffset,
   mapVisibleLanguageCodes,
+  MAP_EDGE_HANDLES,
   type BandLabelNodeData,
   type WordNodeData,
 } from './graph'
@@ -51,6 +53,8 @@ describe('buildTopicGraph', () => {
         (e.source === fatherDe && e.target === fatherEn),
     )
     expect(enToDeFather).toBeDefined()
+    expect(enToDeFather?.sourceHandle).toBeDefined()
+    expect(enToDeFather?.targetHandle).toBeDefined()
     expect(enToDeFather?.data?.kind).toBe('direct')
     expect(enToDeFather?.data?.concept).toBe('father')
     expect(['EN', 'DE']).toContain(enToDeFather?.data?.targetLanguage)
@@ -185,5 +189,21 @@ describe('buildTopicGraph', () => {
     expect(humanizeMapGroup('false-friend-en-de')).toBe('False Friend En De')
     expect(humanizeMapGroup('rodents_and_pests')).toBe('Rodents And Pests')
     expect(humanizeMapGroup('')).toBe('')
+  })
+})
+
+describe('mapEdgeHandlesForOffset', () => {
+  it('uses top source and bottom target when the satellite sits above the hub', () => {
+    expect(mapEdgeHandlesForOffset(0, -40)).toEqual({
+      sourceHandle: MAP_EDGE_HANDLES.top,
+      targetHandle: MAP_EDGE_HANDLES.bottom,
+    })
+  })
+
+  it('uses left source and right target when the satellite sits to the left', () => {
+    expect(mapEdgeHandlesForOffset(-50, 0)).toEqual({
+      sourceHandle: MAP_EDGE_HANDLES.left,
+      targetHandle: MAP_EDGE_HANDLES.right,
+    })
   })
 })
