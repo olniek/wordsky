@@ -4,7 +4,7 @@ export const strings = {
     title: 'Wordsky',
     navTopicHub: 'Topic hub',
     lead1: 'Quick A1 vocabulary across six languages — one concept at a time.',
-    lead2: 'Choose the language you speak and which translations you want beside it.',
+    lead2: 'Choose your study language and which translations you want beside it.',
     lead3: 'Then pick a topic, read the prompt, and tap Show translations when you are ready.',
     langSectionTitle: 'Languages',
     continueToTopics: 'Choose a topic',
@@ -24,23 +24,25 @@ export const strings = {
   landing: {
     title: 'Choose a topic',
     subtitleShort: 'A1 vocabulary · 6 languages',
-    anchorLabel: 'I speak',
-    translationLegend: 'Translations',
-    knownLegend: 'Languages you already know',
+    anchorLabel: 'Your study language',
+    translationLegend: 'Show translations in',
+    knownLegend: 'Languages you know',
     knownHint:
-      'We use these for rough recognition estimates from spelling and cognates across our A1 topic words. This is not a test of fluency.',
+      'Your picks drive cross-language recognition hints on our A1 words—spelling, patterns, and occasional cognate or false-friend tags from the data. This is not the same as measuring everything you can do in a language.',
     recognitionCardTitle: (langLabel: string, pct: number) =>
       `About ${pct}% of ${langLabel} A1 words you may recognise`,
     recognitionStripFootnote:
-      'Rough estimates from our A1 topic vocabulary and the languages you picked — not how well you speak a language.',
+      'Automated overlap hints from this app’s A1 topic list and the languages you picked—useful for planning, not the same as “how well you speak.”',
     /** Opens a short in-app explanation (hover on desktop; tap or keyboard elsewhere). */
     recognitionHowTrigger: 'How we estimate this',
     recognitionHowPopoverTitle: 'How recognition is estimated',
     recognitionHowClose: 'Close',
-    recognitionHowBody:
-      'We compare each word in the target language to the same word in the languages you said you already know. We use spelling similarity, a few regular letter-pattern rules, and occasional author tags for cognates or false friends. The percentage counts words that are not in the “New” bucket across our shared A1 topic list. It is a rough guess, not a measure of fluency.',
+    recognitionHowBody1:
+      'We merge every topic into one A1 list deduplicated by concept, then score each row that has a target-language form against the same concept in the languages you marked as known: spelling similarity, regular letter-pattern rules between pairs, and author tags for cognates or false friends (false friends cap how easy a match can look). Phrases with several words are scored per word and averaged. Each word is sorted into Known, Easy, Learnable, or New; the headline percent is every word that is not New, rounded.',
+    recognitionHowBody2:
+      'Treat it as an automated overlap hint for this app’s shared vocabulary—helpful for seeing where you might skim ahead—not a rating of how naturally you speak or follow speech in real life.',
     recognitionCardCta: 'See breakdown',
-    recognitionCardEmpty: 'Tell us which languages you already know',
+    recognitionCardEmpty: 'Pick which languages you know',
     recognitionCardEmptyCta: 'Pick languages',
     recognitionCardBreakdown: (k: number, e: number, l: number) =>
       `Known ${k} · Easy ${e} · Learnable ${l}`,

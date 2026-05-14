@@ -40,7 +40,7 @@ Topic hub lists topics and **Find a word**; Welcome is where you pick anchor, tr
 
 ### Welcome (language setup)
 
-- First screen: product name **Wordsky**, a **2–3 line** plain-language intro, then **Languages** in one panel: **anchor** (I speak), **translation languages** for Study, and **languages you already know** (for recognition hints). Primary CTA continues to the **topic hub** (`/topics`). Optional slim top bar may repeat the name and link **Topic hub** for wayfinding.
+- First screen: product name **Wordsky**, a **2–3 line** plain-language intro, then **Languages** in one panel: **Your study language**, **Show translations in**, and **Languages you know** (the last drives recognition hints). Below that panel, the same **recognition strip** as the topic hub (percent per target language, footnote, and **How we estimate this**) appears before the primary CTA to the **topic hub** (`/topics`). Optional slim top bar may repeat the name and link **Topic hub** for wayfinding.
 - A small **“How we estimate this”** control (same as on the topic hub and recognition report) sits with the known-languages block and opens a short plain-language explanation without leaving the page.
 - Optional calm **constellation** decoration (readable contrast); optional very slow glow pulse unless **`prefers-reduced-motion`**; must not be required to use the form.
 - Keyboard-friendly controls; chip rows follow the same focus patterns as the rest of the app.
@@ -56,7 +56,7 @@ Topic hub lists topics and **Find a word**; Welcome is where you pick anchor, tr
   - `Review` (all learned)
 - Keep copy short and practical
 - **Find a word** matches across languages with **accents optional** (folding is shared with lemma comparison). Each hit shows the **topic title** and the word’s **`mapGroup`** label (subgroup within the topic) so lookup stays tied to the scene you study.
-- Optional **recognition** strip: percents are **rough estimates** from A1 topic vocabulary and the languages you marked as known—not a fluency score. A **“How we estimate this”** control next to the footnote opens the same short explanation as on Welcome and the recognition report (hover on desktop; tap, **Close**, or keyboard elsewhere).
+- Optional **recognition** strip: percents are **automated overlap hints** from this app’s A1 topic vocabulary and the languages you marked as known—not a general proficiency score. A **“How we estimate this”** control next to the footnote opens the same short explanation as on Welcome and the recognition report (hover on desktop; tap, **Close**, or keyboard elsewhere).
 
 ### Topic Header
 - Keep one compact row:
@@ -76,6 +76,7 @@ Topic hub lists topics and **Find a word**; Welcome is where you pick anchor, tr
 - **Layout and readability:** Keep the **anchor** prompt (and anchor-only example sentence) in one grouped block. After reveal, **translation** rows share a calm, consistent frame; use **language color as an accent** (for example along one edge plus the language tag), not a one-off heavy border treatment that makes one language look like a different screen. **Example sentences** stay visually secondary but **readable** (contrast and line spacing matter; do not rely on faint gray italic alone for long lines). **Meta lines** (step, optional keyboard hint on fine pointers, “up next”) stay short and legible, not whisper-quiet.
 - After translations are shown, some rows may be highlighted when the spelling matches or almost matches the anchor (helpful cognates). If topic data includes a `false-friend-L1-L2` tag for that pair, the row uses a **caution** treatment and a short line of copy instead of the “same spelling” highlight, so learners are not nudged toward the wrong meaning.
 - Topic rows ship a **primary example sentence** per language in data; the line under the anchor word is shown **only in the anchor language** (parallel sentences appear on each translation row after reveal).
+- Where the browser supports **speech synthesis**, small **Listen** controls read the on-screen lemma (with determiner when authored) and example sentences; there are **no separate audio files**—rows must ship non-empty strings per language so Study and listening stay aligned (see [`src/data/topicWordIntegrity.ts`](src/data/topicWordIntegrity.ts) + Vitest in [`src/data/words.test.ts`](src/data/words.test.ts)).
 - Optional **More detail**: when a row includes **`corpusExamples`** for any language in your current Study set (anchor plus translation languages from **language setup**), you can open short lists of extra example sentences per language that has them, in the same order as Study. A small word-frequency strip is built from the **anchor** language’s extra lines only when that language has a list. It is optional reading and does not change how you mark `Got it` / `Still learning`.
 
 ### Map (Secondary)
@@ -123,7 +124,7 @@ Every screen must answer:
 Persist in `localStorage`:
 - anchor language
 - which languages appear in Study translations (subset of non-anchor, or all)
-- **languages you already know** (declared on Welcome; drives recognition estimates on the topic hub and optional report)
+- **languages you know** (declared on Welcome; drives recognition estimates on the topic hub and optional report)
 - current topic
 - last word index in topic
 - per-word **per language** status: `unseen | learning | known` (each anchor and translation surface is tracked separately)

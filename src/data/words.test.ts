@@ -1,10 +1,10 @@
 import { describe, expect, it } from 'vitest'
+import { collectTopicWordStudyDataIssues } from './topicWordIntegrity'
 import { everydayNouns100 } from './topicEverydayNouns100'
 import {
   MAP_GROUP_ORDER,
   cefrHintLevels,
   getGuidedTopicWords,
-  languageOrder,
   topicWords,
   topics,
   type TopicSlug,
@@ -19,87 +19,31 @@ describe('topic data integrity', () => {
     }
   })
 
-  it('every concept has a non-empty form in every language', () => {
-    const failures: string[] = []
-    for (const [slug, rows] of Object.entries(topicWords) as [TopicSlug, TopicWord[]][]) {
-      for (const row of rows) {
-        for (const lang of languageOrder) {
-          if (!row.forms[lang] || row.forms[lang].trim() === '') {
-            failures.push(`${slug}/${row.concept} missing ${lang}`)
-          }
-        }
-      }
-    }
-    expect(failures).toEqual([])
-  })
-
-  it('when examples are set, every language has a non-empty sentence', () => {
-    const failures: string[] = []
-    for (const [slug, rows] of Object.entries(topicWords) as [TopicSlug, TopicWord[]][]) {
-      for (const row of rows) {
-        if (!row.examples) continue
-        for (const lang of languageOrder) {
-          if (!row.examples[lang]?.trim()) {
-            failures.push(`${slug}/${row.concept} missing example for ${lang}`)
-          }
-        }
-      }
-    }
-    expect(failures).toEqual([])
-  })
-
-  it('when corpusExamples is set for a language, that list has 1–5 non-empty strings', () => {
-    const failures: string[] = []
-    for (const [slug, rows] of Object.entries(topicWords) as [TopicSlug, TopicWord[]][]) {
-      for (const row of rows) {
-        const c = row.corpusExamples
-        if (!c) continue
-        for (const lang of languageOrder) {
-          const list = c[lang]
-          if (list === undefined) continue
-          if (!Array.isArray(list) || list.length === 0 || list.length > 5) {
-            failures.push(`${slug}/${row.concept} corpusExamples.${lang} bad length`)
-          }
-          for (const line of list) {
-            if (typeof line !== 'string' || !line.trim()) {
-              failures.push(`${slug}/${row.concept} corpusExamples.${lang} empty line`)
-            }
-          }
-        }
-      }
-    }
-    expect(failures).toEqual([])
-  })
-
-  it('every word has a non-empty article in every language', () => {
-    const failures: string[] = []
-    for (const [slug, rows] of Object.entries(topicWords) as [TopicSlug, TopicWord[]][]) {
-      for (const row of rows) {
-        if (!row.articles) {
-          failures.push(`${slug}/${row.concept} missing articles`)
-          continue
-        }
-        for (const lang of languageOrder) {
-          if (!row.articles[lang]?.trim()) {
-            failures.push(`${slug}/${row.concept} missing article for ${lang}`)
-          }
-        }
-      }
-    }
-    expect(failures).toEqual([])
-  })
-
-  it("every word's mapGroup is declared in MAP_GROUP_ORDER for its topic", () => {
+  it('every word card has translations, example sentences, articles, mapGroup, and speakable text (Study + TTS)', () => {
     const failures: string[] = []
     for (const [slug, rows] of Object.entries(topicWords) as [TopicSlug, TopicWord[]][]) {
       const allowed = new Set(MAP_GROUP_ORDER[slug])
       for (const row of rows) {
-        if (!allowed.has(row.mapGroup)) {
-          failures.push(`${slug}/${row.concept} has unknown mapGroup "${row.mapGroup}"`)
-        }
+        failures.push(...collectTopicWordStudyDataIssues(slug, row, allowed))
       }
     }
     expect(failures).toEqual([])
+  })
+
+  it('flags an incomplete newly added card (authoring regression guard)', () => {
+    const allowed = new Set(MAP_GROUP_ORDER.animals)
+    const incomplete = {
+      concept: '__fixture-incomplete-row__',
+      mapGroup: 'pets',
+      forms: { EN: 'cat', DE: '', PT: '', ES: '', FR: '', IT: '' },
+      examples: { EN: 'A cat.', DE: '', PT: '', ES: '', FR: '', IT: '' },
+      articles: { EN: 'a', DE: '', PT: 'o', ES: 'u', FR: 'u', IT: 'u' },
+    } as unknown as TopicWord
+    const issues = collectTopicWordStudyDataIssues('animals', incomplete, allowed)
+    expect(issues.length).toBeGreaterThan(0)
+    expect(issues.some((m) => m.includes('forms.DE'))).toBe(true)
+    expect(issues.some((m) => m.includes('examples.DE'))).toBe(true)
+    expect(issues.some((m) => m.includes('article (DE)'))).toBe(true)
   })
 
   it('concepts are unique within each topic', () => {

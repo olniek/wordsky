@@ -1,6 +1,6 @@
-# Languages you already know & cross-language recognition
+# Languages you know & cross-language recognition
 
-This document describes the **“Languages you already know”** feature in Words Sky: what problem it solves, how it behaves in the product, how data is stored, and how the **recognition estimate** is computed from topic vocabulary.
+This document describes the **“Languages you know”** feature in Words Sky: what problem it solves, how it behaves in the product, how data is stored, and how the **recognition estimate** is computed from topic vocabulary.
 
 It is aimed at engineers and anyone extending the A1 corpus, scoring rules, or UI around this flow.
 
@@ -12,35 +12,36 @@ Many learners already speak one or more of the six app languages (EN, DE, PT, ES
 
 The feature:
 
-1. Lets the user declare which languages they **already know** (orthogonal to “I speak” anchor and translation checkboxes).
+1. Lets the user declare which languages they **know** (orthogonal to the study-language anchor and translation-language toggles).
 2. Uses that list to **estimate**, for each *other* language in the set, what percentage of the shared A1 corpus they might **recognise** without fresh study.
 3. Surfaces that as a **landing strip** of cards and a **drill-down report** with buckets (Known / Easy / Learnable / New) and optional “bridge” forms.
 
-Copy lives in `src/lib/strings.ts` under `strings.landing` (e.g. `knownLegend`, `knownHint`, `recognitionStripLabel`, `recognitionCardTitle`, and the recognition “how it works” popover keys `recognitionHowTrigger`, `recognitionHowBody`, `recognitionHowClose`).
+Copy lives in `src/lib/strings.ts` under `strings.landing` (e.g. `knownLegend`, `knownHint`, `recognitionStripLabel`, `recognitionCardTitle`, and the recognition “how it works” popover keys `recognitionHowTrigger`, `recognitionHowBody1`, `recognitionHowBody2`, `recognitionHowClose`).
 
 ---
 
 ## 2. User-visible flow
 
-### 2.1 Where to set “languages you already know”
+### 2.1 Where to set “languages you know”
 
 - **Welcome** (`WelcomeLanding` at `/`): the **Languages** panel includes `KnownLanguagesPicker` alongside anchor and translation language pickers (`AnchorPicker`, `TranslationLanguagePicker`, `KnownLanguagesPicker`). The same **`RecognitionHowPopover`** appears below the known-languages picker for the same short explanation.
+- **Welcome** also mounts **`RecognitionStrip`** below the Languages card (before the primary CTA): when no known languages are selected, the empty state’s **Pick languages** control scrolls to `#welcome-lang-heading` instead of linking away; when at least one is selected, the strip matches the topic hub (cards, footnote, **How we estimate this**).
 - The picker is a **fieldset** of chip buttons (role `checkbox`, `aria-checked`) for each `languageOrder` code, with a short hint explaining that the choice drives recognition estimates.
 
-### 2.2 Topic hub: recognition strip
+### 2.2 Topic hub and Welcome: recognition strip
 
-- If **no** known languages are selected, `RecognitionStrip` shows an empty state pointing users to **Welcome** to pick languages (`strings.landing.recognitionCardEmpty` and link `strings.landing.recognitionCardEmptyCta`).
+- If **no** known languages are selected, `RecognitionStrip` shows an empty state. On **Welcome**, the CTA targets `#welcome-lang-heading` when `emptyCtaHash` is passed; on the **topic hub**, it links to **`/`** (Welcome) (`strings.landing.recognitionCardEmpty` and `strings.landing.recognitionCardEmptyCta`).
 - If at least one language is known, the strip lists **every language that is not** in the known set as a **target**. For each target, it calls `summarize(target, knownLanguages)` and renders a **card** with:
   - Target language label
   - **Recognition percent** (rounded)
   - A progress bar
   - A short breakdown: counts for **Known**, **Easy**, and **Learnable** (`strings.landing.recognitionCardBreakdown`)
-- Next to the footnote, **`RecognitionHowPopover`** (`src/components/RecognitionHowPopover.tsx`) offers a plain-language explanation of how the estimate is computed: hover shows the panel on fine pointers; tap / keyboard / **Close** cover touch and screen readers (see `strings.landing.recognitionHow*`).
+- Next to the footnote, **`RecognitionHowPopover`** (`src/components/recognition/RecognitionHowPopover.tsx`) offers a plain-language explanation of how the estimate is computed: hover shows the panel on fine pointers; tap / keyboard / **Close** cover touch and screen readers (see `strings.landing.recognitionHow*`).
 - Each card links to `/recognize/:target` (e.g. `/recognize/ES`).
 
 ### 2.3 Report page
 
-- Route: `RecognitionReport` at `/recognize/:target` (see `src/App.tsx`).
+- Route: `RecognitionReport` at `/recognize/:target` (see `src/app/App.tsx`).
 - Invalid `target` → redirect to topic hub (`/topics`).
 - If known languages are empty → empty state with back link and the same hint as the strip.
 - Otherwise: headline with percent, subtitle listing **known → target** and total **A1 word** count, a ring visualisation, **tablist** of four levels, and a **word list** (up to 100 per selected tab) showing target form, optional bridge from a known language, rule label, and numeric score. The same **`RecognitionHowPopover`** appears beside the disclaimer line as on the topic hub.
@@ -156,6 +157,7 @@ Vitest coverage includes:
 
 - `src/lib/knownLanguages.test.ts` — normalisation and `loadKnownLanguages` with mocked storage.
 - `src/lib/recognition/*.test.ts` — patterns, scoring edge cases, summarisation aggregates, `levelForScore` / pair thresholds.
+- `src/data/words.test.ts` — topic registry, `getGuidedTopicWords` ordering, and **Study-ready** vocabulary rows via `collectTopicWordStudyDataIssues` (forms, `examples`, `articles`, `mapGroup`, speakable surface, optional `corpusExamples` bounds)—relevant when `topicWords` changes recognition’s corpus surface.
 
 When changing `topicWords` shape, tags (`cognate-*`, `false-friend-*`), or scoring thresholds, extend or adjust these tests.
 
@@ -178,13 +180,13 @@ When changing `topicWords` shape, tags (`cognate-*`, `false-friend-*`), or scori
 | Area | Path |
 |------|------|
 | Persisted known languages + hook | `src/lib/knownLanguages.ts` |
-| Chip picker UI | `src/components/KnownLanguagesPicker.tsx` |
-| Welcome + language panel | `src/components/WelcomeLanding.tsx` |
-| Welcome constellation (decorative) | `src/components/WelcomeConstellations.tsx` |
-| Topic hub recognition strip | `src/components/RecognitionStrip.tsx` |
-| Recognition “how it works” popover | `src/components/RecognitionHowPopover.tsx` |
-| Report page | `src/components/RecognitionReport.tsx` |
-| Routes | `src/App.tsx` |
+| Chip picker UI | `src/components/recognition/KnownLanguagesPicker.tsx` |
+| Welcome + language panel | `src/components/welcome/WelcomeLanding.tsx` |
+| Welcome constellation (decorative) | `src/components/welcome/WelcomeConstellations.tsx` |
+| Topic hub recognition strip | `src/components/recognition/RecognitionStrip.tsx` |
+| Recognition “how it works” popover | `src/components/recognition/RecognitionHowPopover.tsx` |
+| Report page | `src/components/recognition/RecognitionReport.tsx` |
+| Routes | `src/app/App.tsx` |
 | Copy | `src/lib/strings.ts` |
 | Recognition QA (dev) | `npm run recognition:qa` → `scripts/recognition-qa.ts` |
 | Scoring & summary | `src/lib/recognition/score.ts`, `summarize.ts`, `types.ts` |

@@ -21,7 +21,7 @@ Run a **structured product review** against the in-repo rulebook and shipped beh
 
 ## Steps
 
-1. **Read ground truth:** [`UX.md`](UX.md) (contradictions = bugs unless superseded); [`src/App.tsx`](src/App.tsx) routes (`/`, `/topics`, `/topic/:slug`); [`src/lib/progress.ts`](src/lib/progress.ts) (`WordStatus`, `wordssky.progress.v2`). For graph changes, also read [`.cursor/skills/words-sky-map-layout/SKILL.md`](../words-sky-map-layout/SKILL.md).
+1. **Read ground truth:** [`UX.md`](UX.md) (contradictions = bugs unless superseded); [`src/app/App.tsx`](src/app/App.tsx) routes (`/`, `/topics`, `/topic/:slug`); [`src/lib/progress.ts`](src/lib/progress.ts) (`WordStatus`, `wordssky.progress.v2`). For graph changes, also read [`.cursor/skills/words-sky-map-layout/SKILL.md`](../words-sky-map-layout/SKILL.md).
 2. **Run the core flow gate** (below). If any item fails, treat as P0 unless clearly out of scope.
 3. **Screen-through-smoke checklist:** open [references/pm-check-screen-checklist.md](references/pm-check-screen-checklist.md) and work Welcome → topic hub → Map → copy → interaction → state → scope flags → build order → engineering smoke.
 4. **Copy-only work:** cross-check strings with [`.cursor/skills/words-sky-language/SKILL.md`](../words-sky-language/SKILL.md); the screen checklist still carries the UX copy table for full PM passes.

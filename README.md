@@ -13,26 +13,33 @@ npm run dev      # local dev
 npm run build    # production build
 npm run test     # Vitest
 npm run lint     # ESLint
-npm run lint:topic-data   # topic row structure (mapGroup, required six-language examples, …)
+npm run lint:topic-data   # topic row structure (mapGroup, examples, corpus bounds, …); Vitest adds Study-ready strings (see topicWordIntegrity.ts)
 npm run corpus:examples   # validate corpusExamples blocks (optional JSON path argument)
 npm run recognition:qa  # dev: high fuzzy recognition hits per target language
 ```
 
 ## Where things live
 
+### Source layout (`src/`)
+
+- **`app/`** — Vite entry (`main.tsx`), root `App`, and React Router routes.
+- **`components/`** — UI grouped by area: `shell/` (error boundary, storage/PWA banners), `welcome/`, `topic-hub/` (topic list + search), `topic/` (topic shell, Study card, tabs), `map/` (React Flow graph), `recognition/`, `language/` (anchor + translation pickers).
+- **`lib/`**, **`data/`**, **`hooks/`** — domain logic, vocabulary and topics, shared React hooks.
+
 | Area | Location |
 |------|----------|
 | Topic registry, types, `MAP_GROUP_ORDER`, merged `topicWords` | [src/data/words.ts](src/data/words.ts) |
 | Everyday nouns (100 words, split module) | [src/data/topicEverydayNouns100.ts](src/data/topicEverydayNouns100.ts) |
-| Data invariants (forms, examples, articles, groups) | [src/data/words.test.ts](src/data/words.test.ts) |
+| Study-ready row checklist (`collectTopicWordStudyDataIssues`) | [src/data/topicWordIntegrity.ts](src/data/topicWordIntegrity.ts) |
+| Topic data Vitest (registry, uniqueness, guided order, Study checklist, …) | [src/data/words.test.ts](src/data/words.test.ts) |
 | Corpus-style extra sentences (authoring + pipeline) | [src/data/corpus/README.md](src/data/corpus/README.md), `npm run corpus:examples` |
 | Latin accent / ß folding (search + lemma compare) | [src/lib/latinFold.ts](src/lib/latinFold.ts) |
 | Cognate similarity + `false-friend-*` tags | [src/lib/crossLangLemmaAffinity.ts](src/lib/crossLangLemmaAffinity.ts) |
-| Find a word (landing) | [src/lib/wordSearch.ts](src/lib/wordSearch.ts), [src/components/WordSearch.tsx](src/components/WordSearch.tsx) |
-| Welcome (language setup), optional constellation | [src/components/WelcomeLanding.tsx](src/components/WelcomeLanding.tsx), [src/components/WelcomeConstellations.tsx](src/components/WelcomeConstellations.tsx) |
-| Languages you already know (storage + hook) | [src/lib/knownLanguages.ts](src/lib/knownLanguages.ts), [src/components/KnownLanguagesPicker.tsx](src/components/KnownLanguagesPicker.tsx) |
-| Recognition strip + report (`/recognize/:target`) | [src/components/RecognitionStrip.tsx](src/components/RecognitionStrip.tsx), [src/components/RecognitionReport.tsx](src/components/RecognitionReport.tsx), [src/lib/recognition/](src/lib/recognition/) |
-| Study card (markup + scoped CSS: `study-*`, `speak-button`) | [src/components/StudyCard.tsx](src/components/StudyCard.tsx), [src/index.css](src/index.css) |
+| Find a word (topic hub) | [src/lib/wordSearch.ts](src/lib/wordSearch.ts), [src/components/topic-hub/WordSearch.tsx](src/components/topic-hub/WordSearch.tsx) |
+| Welcome (language setup), optional constellation | [src/components/welcome/WelcomeLanding.tsx](src/components/welcome/WelcomeLanding.tsx), [src/components/welcome/WelcomeConstellations.tsx](src/components/welcome/WelcomeConstellations.tsx) |
+| Languages you know (storage + hook) | [src/lib/knownLanguages.ts](src/lib/knownLanguages.ts), [src/components/recognition/KnownLanguagesPicker.tsx](src/components/recognition/KnownLanguagesPicker.tsx) |
+| Recognition strip + report (`/recognize/:target`) | [src/components/recognition/RecognitionStrip.tsx](src/components/recognition/RecognitionStrip.tsx), [src/components/recognition/RecognitionReport.tsx](src/components/recognition/RecognitionReport.tsx), [src/lib/recognition/](src/lib/recognition/) |
+| Study card (markup + scoped CSS: `study-*`, `speak-button`) | [src/components/topic/StudyCard.tsx](src/components/topic/StudyCard.tsx), [src/index.css](src/index.css) |
 | UI strings | [src/lib/strings.ts](src/lib/strings.ts) |
 
 ## Roadmap (graded vocabulary / CEFRLex-style)

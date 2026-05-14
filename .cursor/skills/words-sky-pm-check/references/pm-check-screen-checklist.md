@@ -9,7 +9,7 @@ Use with [`.cursor/skills/words-sky-pm-check/SKILL.md`](../SKILL.md) after the c
 ### Welcome (`/`)
 
 - [ ] **Wordsky** title + **2–3 line** intro explains what the app is and what to do next.
-- [ ] **Languages** panel: anchor (I speak), translations for Study, known languages for recognition — all usable without hunting in a popover.
+- [ ] **Languages** panel: study-language anchor, translations for Study, known languages for recognition — all usable without hunting in a popover.
 - [ ] One clear **primary CTA** to the topic list (`/topics`).
 - [ ] Constellation art (if present) stays **decorative**; contrast remains readable.
 
@@ -81,7 +81,7 @@ Global copy rule: **simple words only**. Each screen: (1) what is this? (2) what
 
 ## State and persistence (PM + risk)
 
-- [ ] **localStorage** holds: anchor language, which languages appear in Study translations, **languages you already know** (recognition), current topic, last word index in topic, per-word status — and behavior matches user mental model when refreshing or revisiting.
+- [ ] **localStorage** holds: anchor language, which languages appear in Study translations, **languages you know** (recognition), current topic, last word index in topic, per-word status — and behavior matches user mental model when refreshing or revisiting.
 - [ ] **No account** required; no surprise login walls.
 - [ ] Call out **data loss** risks (private mode, clear site data, quota) in “known issues” if not mitigated in UI.
 

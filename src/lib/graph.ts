@@ -35,7 +35,7 @@ export type WordNodeData = {
   related: string[]
   color: string
   status: WordStatusFlag
-  /** True for the node matching the learner's anchor ("I speak") — centered on the Map cluster. */
+  /** True for the node matching the learner's study-language anchor — centered on the Map cluster. */
   isAnchorLanguage: boolean
 }
 

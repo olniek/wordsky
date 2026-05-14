@@ -15,6 +15,7 @@ alwaysApply: true
 
 - Map / React Flow: [.cursor/skills/words-sky-map-layout/SKILL.md](.cursor/skills/words-sky-map-layout/SKILL.md)
 - Topic example sentences (`examples`): [.cursor/skills/words-sky-topic-examples/SKILL.md](.cursor/skills/words-sky-topic-examples/SKILL.md)
+- Topic QA across all topics / languages: [.cursor/skills/words-sky-topic-cross-check/SKILL.md](.cursor/skills/words-sky-topic-cross-check/SKILL.md)
 - Copy / voice: [.cursor/skills/words-sky-language/SKILL.md](.cursor/skills/words-sky-language/SKILL.md)
 - PM / ship check: [.cursor/skills/words-sky-pm-check/SKILL.md](.cursor/skills/words-sky-pm-check/SKILL.md)
 - PWA: [.cursor/skills/words-sky-pwa/SKILL.md](.cursor/skills/words-sky-pwa/SKILL.md)
@@ -22,9 +23,9 @@ alwaysApply: true
 ## Code
 
 - Stack: React, Vite, TypeScript, Vitest, react-router-dom, React Flow (`reactflow`).
-- Study UI: [`src/components/StudyCard.tsx`](src/components/StudyCard.tsx) plus scoped styles in [`src/index.css`](src/index.css) (`study-*`, `study-anchor-panel`, `speak-button`). Follow [UX.md](UX.md) Study bullets on layout, contrast, cognate/caution rows, and interaction (including `prefers-reduced-motion`).
+- Study UI: [`src/components/topic/StudyCard.tsx`](src/components/topic/StudyCard.tsx) plus scoped styles in [`src/index.css`](src/index.css) (`study-*`, `study-anchor-panel`, `speak-button`). Follow [UX.md](UX.md) Study bullets on layout, contrast, cognate/caution rows, and interaction (including `prefers-reduced-motion`).
 - Pure logic in `src/lib/` (e.g. progress, queue, anchor, **wordSearch**, **latinFold**, **crossLangLemmaAffinity**, **knownLanguages**, **recognition** under `src/lib/recognition/`): extend or add **unit tests** when behavior changes.
-- Topic rows and tags: [.cursor/rules/words-sky-topic-data.mdc](.cursor/rules/words-sky-topic-data.mdc) (`false-friend-XX-YY`, required full **`examples`**, optional `articles`). **A1 / CEFRLex-style** manual checks and **planned build-later tasks** are in that file (*A1 level checks*).
+- Topic rows and tags: [.cursor/rules/words-sky-topic-data.mdc](.cursor/rules/words-sky-topic-data.mdc) (`false-friend-XX-YY`, required full **`examples`**, required **`articles`** for all six languages on shipped rows). **A1 / CEFRLex-style** manual checks and **planned build-later tasks** are in that file (*A1 level checks*).
 - Match existing patterns; keep changes scoped.
 
 ## Documentation

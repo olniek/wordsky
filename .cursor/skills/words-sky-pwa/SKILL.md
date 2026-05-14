@@ -12,22 +12,22 @@ disable-model-invocation: true
 
 ## Steps
 
-1. **Locate the change** — [`vite.config.ts`](vite.config.ts) `VitePWA` options, [`src/main.tsx`](src/main.tsx) `registerSW`, manifest/icons, Workbox `globPatterns` / `navigateFallback`, or [`src/vite-env.d.ts`](src/vite-env.d.ts) / [`tsconfig.app.json`](tsconfig.app.json) types — then read the matching subsection below.
-2. **Edit safely** — keep **one** registration path (`injectRegister: false` + `registerSW`); never add a second `<link rel="manifest">` in `index.html`; do not hand-write `public/sw.js` (Workbox emits into `dist/`).
+1. **Locate the change** — [`vite.config.ts`](vite.config.ts) `VitePWA` options, [`src/app/main.tsx`](src/app/main.tsx) (`registerPwaServiceWorker` from [`src/lib/pwaRegister.ts`](src/lib/pwaRegister.ts)), manifest/icons, Workbox `globPatterns` / `navigateFallback`, or [`src/vite-env.d.ts`](src/vite-env.d.ts) / [`tsconfig.app.json`](tsconfig.app.json) types — then read the matching subsection below.
+2. **Edit safely** — keep **one** registration path (`injectRegister: false` + `registerPwaServiceWorker()` in [`src/app/main.tsx`](src/app/main.tsx)); never add a second `<link rel="manifest">` in `index.html`; do not hand-write `public/sw.js` (Workbox emits into `dist/`).
 3. **Verify** — `npm run build` then `npm run preview`; confirm offline shell and SPA fallback where expected; confirm **`wordssky.progress.v2`** (and related keys) still behave if origin or HTTPS assumptions change.
 4. **Optional** — Lighthouse PWA if manifest, icons, or SW strategy changed materially.
 
 ## Where config lives
 
 - **[`vite.config.ts`](vite.config.ts)** — `VitePWA({ ... })`: `registerType`, `injectRegister`, `includeAssets`, `manifest`, `workbox`, `devOptions`.
-- **[`src/main.tsx`](src/main.tsx)** — `import { registerSW } from 'virtual:pwa-register'` then `registerSW({ immediate: true })` (single registration path; **`injectRegister: false`** in the plugin so nothing is auto-injected into `index.html`).
+- **[`src/app/main.tsx`](src/app/main.tsx)** — calls `registerPwaServiceWorker()` from [`src/lib/pwaRegister.ts`](src/lib/pwaRegister.ts) (single registration path; **`injectRegister: false`** in the plugin so nothing is auto-injected into `index.html`).
 - **`index.html`** — do **not** add a second `<link rel="manifest">`; the plugin injects manifest + meta on build.
 - **No hand-written `public/sw.js` or `public/manifest.webmanifest`** — Workbox emits the service worker and manifest into **`dist/`** at build time.
 
 ## Current behavior (verify after edits)
 
 - **`registerType: 'autoUpdate'`** — new builds activate when the user focuses the app; there is no custom “update available” UI yet.
-- **`injectRegister: false`** + **`registerSW`** in **`main.tsx`** — explicit client registration only (no duplicate inject).
+- **`injectRegister: false`** + **`registerPwaServiceWorker()`** in **`src/app/main.tsx`** — explicit client registration only (no duplicate inject).
 - **`devOptions.enabled: false`** — no service worker in dev (avoids stale HMR caches). Test SW behavior with **`npm run build`** then **`npm run preview`**.
 - **`workbox.globPatterns`** — precaches emitted static assets (`js`, `css`, `html`, `svg`, etc.); **`navigateFallback: '/index.html'`** — SPA routes work offline after assets have been cached at least once online.
 - **`includeAssets`** — extra files in precache scope (e.g. `favicon.svg`, `icons.svg`).

@@ -3,6 +3,8 @@ description: Topic word data — mapGroup, languages, MAP_GROUP_ORDER, tags, sea
 globs:
   - src/data/words.ts
   - src/data/topicEverydayNouns100.ts
+  - src/data/topicWordIntegrity.ts
+  - src/data/words.test.ts
 alwaysApply: false
 ---
 
@@ -10,6 +12,7 @@ alwaysApply: false
 
 - Every `TopicWord` needs **`mapGroup`** (learner-meaningful band for that topic): pick by **scene / subdomain** (e.g. animals: pets vs `rodents` vs farm vs birds—not by synonym sets). Same band = words that belong in the same mental “island” on the Map.
 - Every word needs **`forms`** with all of `EN`, `DE`, `PT`, `ES`, `FR`, `IT` (see `LanguageCode`).
+- **`articles`**: ship **all six** language keys with non-empty strings on every row (determiner or `—` / language-appropriate placeholder where grammar has no article). Study display and **Web Speech** listening use [`displayWordForm`](src/lib/wordForm.ts) (`forms` + optional article); Vitest enforces non-empty speakable text per language via [`collectTopicWordStudyDataIssues`](src/data/topicWordIntegrity.ts).
 - **`examples`** (required): `Record<LanguageCode, string>` — short A1 example sentences for **every** language (`EN`–`IT`); same meaning across languages (like `forms`). Study shows the **anchor** example only in the anchor language (no silent fallback to English). `npm run lint:topic-data` rejects missing or empty entries.
 - Optional **`corpusExamples`**: `Partial<Record<LanguageCode, readonly string[]>>` — **1 to 5** extra sentences per language key you set. Study shows them only under **More detail**, in **study language order** (anchor plus translation languages from **language setup**), for each language key that has a list. The word-frequency strip uses the **anchor** language’s lines only when present. You may author any subset of languages (full parallel sets are ideal when you have them). Optional authoring-only **`corpusMeta`** (`sourceId`, `licensedAs`) documents imports. Conventions and pipeline notes: [`src/data/corpus/README.md`](src/data/corpus/README.md). Validate with `npm run lint:topic-data` and `npm run corpus:examples`.
 - New `mapGroup` id: append it to **`MAP_GROUP_ORDER`** for that topic’s slug (order = vertical bands on the Map).
@@ -20,7 +23,9 @@ alwaysApply: false
   - **`cognate-*`**: reserved for author notes; does not change UI today. Do not replace `mapGroup` with tags.
 - After edits: `npm run test`, `npm run build`, and `npm run lint` when you change TypeScript or topic data that affects types.
 - **Search / lemma folding** for EU Latin script lives in [`src/lib/latinFold.ts`](src/lib/latinFold.ts) (accent-insensitive match, `ß`↔`ss`) and [`src/lib/crossLangLemmaAffinity.ts`](src/lib/crossLangLemmaAffinity.ts) (cognate detection and `false-friend-*` handling).
-- **Automated checks**: run `npm run lint:topic-data` after editing topic data in [`src/data/words.ts`](src/data/words.ts) or an imported module such as [`src/data/topicEverydayNouns100.ts`](src/data/topicEverydayNouns100.ts) (unique `concept`, `mapGroup` vs `MAP_GROUP_ORDER`, **`examples` required** with all six languages non-empty, optional `corpusExamples` per-language length 1–5, optional `corpusMeta` shape, optional `cefrHint` allowed values).
+- **Automated checks**:
+  - `npm run lint:topic-data` after editing topic data in [`src/data/words.ts`](src/data/words.ts) or an imported module such as [`src/data/topicEverydayNouns100.ts`](src/data/topicEverydayNouns100.ts) (unique `concept`, `mapGroup` vs `MAP_GROUP_ORDER`, **`examples` required** with all six languages non-empty, optional `corpusExamples` per-language length 1–5, optional `corpusMeta` shape, optional `cefrHint` allowed values).
+  - `npm run test` runs [`src/data/words.test.ts`](src/data/words.test.ts), which applies **`collectTopicWordStudyDataIssues`** in [`src/data/topicWordIntegrity.ts`](src/data/topicWordIntegrity.ts) to every row: `forms` and **`examples`** for all six languages, **`articles`** for all six, `mapGroup` allowed for the topic, non-empty **speakable** surface per language (`displayWordForm`), and `corpusExamples` shape when present. Keeps Study + listen behaviour from silently degrading when a new card is added.
 
 ---
 
@@ -57,7 +62,7 @@ Background: [LREC 2020](https://www.aclweb.org/anthology/2020.lrec-1.43/) — gr
 ### Planned tasks (build later, in order)
 
 1. **Optional metadata in `words.ts`** — `cefrHint?: 'A1' | 'A2' | …` on `TopicWord` (**authoring-only**, no UI); `npm run lint:topic-data` validates allowed values. Per-language codes can follow if needed.
-2. **CI or dev script: cross-language sanity** — flag concepts where aligned languages disagree by more than *N* CEFR steps once per-language hints exist (idea: multilingual δ from Gräen et al.; lightweight table, not full regression). `npm run lint:topic-data` already covers structural checks (see above).
+2. **CI or dev script: cross-language sanity** — flag concepts where aligned languages disagree by more than *N* CEFR steps once per-language hints exist (idea: multilingual δ from Gräen et al.; lightweight table, not full regression). `npm run lint:topic-data` covers schema; Vitest + [`topicWordIntegrity.ts`](src/data/topicWordIntegrity.ts) covers **Study-ready** strings (forms, examples, articles, speakable surface).
 3. **Offline tooling** — small Node script or CSV pipeline that suggests `difficulty` from a **static, license-cleared** extract (e.g. EFLLex snapshot, KELLY); output is a report for humans, not runtime fetches. Keep frequency / BNC-style signals out of the app bundle.
 4. **Batch QA at scale** — if vocabulary grows large, consider ingesting [multiCEFRLex](http://pub.cl.uzh.ch/purl/multiCEFRLex) or similar for alignment-backed checks; verify URL, license, and language coverage (including Italian) before depending on it.
 5. **Product: readability / “hard words in pasted text”** — only after an explicit [UX.md](UX.md) product decision (today treated like other §8 expansions: not default MVP).

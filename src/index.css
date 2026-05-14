@@ -145,23 +145,25 @@ body {
 }
 
 .welcome-constellation-glow {
-  color: rgba(51, 217, 235, 0.38);
+  color: rgba(51, 217, 235, 0.44);
   animation: welcome-constellation-pulse 8s ease-in-out infinite;
 }
 
 .welcome-constellation-star-dots {
-  opacity: 0.92;
+  opacity: 0.98;
 }
 
 @keyframes welcome-constellation-pulse {
   0%,
   100% {
-    opacity: 0.72;
-    filter: drop-shadow(0 0 5px rgba(51, 217, 235, 0.22)) drop-shadow(0 0 14px rgba(51, 217, 235, 0.12));
+    opacity: 0.78;
+    filter: drop-shadow(0 0 8px rgba(51, 217, 235, 0.35)) drop-shadow(0 0 22px rgba(51, 217, 235, 0.22))
+      drop-shadow(0 0 38px rgba(51, 217, 235, 0.1));
   }
   50% {
-    opacity: 0.98;
-    filter: drop-shadow(0 0 8px rgba(51, 217, 235, 0.38)) drop-shadow(0 0 22px rgba(51, 217, 235, 0.18));
+    opacity: 1;
+    filter: drop-shadow(0 0 12px rgba(51, 217, 235, 0.48)) drop-shadow(0 0 32px rgba(51, 217, 235, 0.28))
+      drop-shadow(0 0 52px rgba(51, 217, 235, 0.14));
   }
 }
 
@@ -174,6 +176,22 @@ body {
   display: flex;
   flex-direction: column;
   gap: 28px;
+}
+
+.welcome-recognition-wrap {
+  width: 100%;
+  max-width: 580px;
+  margin: 0 auto;
+  padding: 0 2px;
+}
+
+.welcome-recognition-wrap .recognition-strip {
+  max-width: 100%;
+  margin: 0 0 8px;
+}
+
+.welcome-recognition-wrap .recognition-strip-row {
+  padding-bottom: 2px;
 }
 
 .welcome-top-nav {
@@ -365,8 +383,8 @@ body {
 
   .welcome-constellation-glow {
     animation: none;
-    opacity: 0.88;
-    filter: drop-shadow(0 0 6px rgba(51, 217, 235, 0.28));
+    opacity: 0.92;
+    filter: drop-shadow(0 0 10px rgba(51, 217, 235, 0.4)) drop-shadow(0 0 26px rgba(51, 217, 235, 0.22));
   }
 }
 
@@ -688,10 +706,18 @@ body {
 }
 
 .recognition-how-panel-body {
-  margin: 0 0 12px;
+  margin: 0;
   font-size: 13px;
   line-height: 1.5;
   color: rgba(225, 233, 255, 0.92);
+}
+
+.recognition-how-panel-body + .recognition-how-panel-body {
+  margin-top: 10px;
+}
+
+.recognition-how-panel-body:last-of-type {
+  margin-bottom: 12px;
 }
 
 .recognition-how-close {
@@ -2137,7 +2163,7 @@ body {
     0 0 24px color-mix(in srgb, var(--node-color), transparent 58%);
 }
 
-/* Map: learner anchor at cluster center (matches Study I speak).
+/* Map: learner anchor at cluster center (matches Study anchor language).
    Soft radial halo replaces the older hard outline so the hub reads as
    the center of gravity rather than a bordered chip. */
 .word-node-anchor::before {
