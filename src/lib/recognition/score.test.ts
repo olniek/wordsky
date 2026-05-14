@@ -175,4 +175,111 @@ describe('scoreWord — multi-word target', () => {
     // "good" vs "guten" + "morning" vs "Morgen" — both share substantial substrings.
     expect(r.score).toBeGreaterThan(0)
   })
+
+  it('treats multi-word identical surface strings as identical', () => {
+    const w = word({
+      EN: 'hello world',
+      DE: 'x',
+      PT: 'x',
+      ES: 'hello world',
+      FR: 'x',
+      IT: 'x',
+    })
+    const r = scoreWord(w, 'ES', ['EN'])
+    expect(r.score).toBe(100)
+    expect(r.matchedRule).toBe('identical')
+    expect(r.matchedVia).toBe('EN')
+  })
+})
+
+describe('scoreWord — empty known', () => {
+  it('returns new with no match when there are no known languages', () => {
+    const w = word({
+      EN: 'cat',
+      DE: 'Katze',
+      PT: 'gato',
+      ES: 'gato',
+      FR: 'chat',
+      IT: 'gatto',
+    })
+    const r = scoreWord(w, 'ES', [])
+    expect(r.score).toBe(0)
+    expect(r.level).toBe('new')
+    expect(r.matchedRule).toBe('none')
+    expect(r.matchedVia).toBeNull()
+  })
+})
+
+describe('scoreWord — missing target form', () => {
+  it('returns new with empty target when the target language form is blank', () => {
+    const w = word({
+      EN: 'cat',
+      DE: 'Katze',
+      PT: 'gato',
+      ES: '',
+      FR: 'chat',
+      IT: 'gatto',
+    })
+    const r = scoreWord(w, 'ES', ['EN'])
+    expect(r.targetForm).toBe('')
+    expect(r.score).toBe(0)
+    expect(r.level).toBe('new')
+    expect(r.matchedRule).toBe('none')
+  })
+})
+
+describe('scoreWord — known includes target', () => {
+  it('returns identical when the target language is listed first in known', () => {
+    const w = word({
+      EN: 'cat',
+      DE: 'Katze',
+      PT: 'gato',
+      ES: 'gato',
+      FR: 'chat',
+      IT: 'gatto',
+    })
+    const r = scoreWord(w, 'PT', ['PT', 'EN'])
+    expect(r.score).toBe(100)
+    expect(r.matchedRule).toBe('identical')
+    expect(r.matchedVia).toBe('PT')
+  })
+})
+
+describe('scoreWord — known language with empty form', () => {
+  it('returns new when the only known language has an empty form', () => {
+    const w = word({
+      EN: '',
+      DE: 'Katze',
+      PT: 'gato',
+      ES: 'gato',
+      FR: 'chat',
+      IT: 'gatto',
+    })
+    const r = scoreWord(w, 'ES', ['EN'])
+    expect(r.score).toBe(0)
+    expect(r.level).toBe('new')
+    expect(r.matchedRule).toBe('none')
+    expect(r.matchedVia).toBeNull()
+  })
+})
+
+describe('scoreWord — false friend fuzzy cap', () => {
+  it('caps fuzzy similarity when a false-friend tag applies and raw score would exceed the cap', () => {
+    const w = word(
+      {
+        EN: 'library',
+        DE: 'x',
+        PT: 'x',
+        ES: 'x',
+        FR: 'librairie',
+        IT: 'x',
+      },
+      'lib-false',
+      ['false-friend-EN-FR'],
+    )
+    const r = scoreWord(w, 'FR', ['EN'])
+    expect(r.score).toBeLessThanOrEqual(49)
+    expect(r.matchedRule).toBe('false-friend-cap')
+    expect(r.level).toBe('new')
+  })
 })

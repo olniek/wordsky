@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react'
+import { useCallback, useId, useMemo, useRef, useState, type KeyboardEvent } from 'react'
 import { Link, Navigate, useParams } from 'react-router-dom'
 import { languageOrder, type LanguageCode } from '../../data/words'
 import { useKnownLanguages } from '../../lib/knownLanguages'
@@ -35,10 +35,102 @@ function isLanguageCode(value: string | undefined): value is LanguageCode {
   return !!value && (languageOrder as readonly string[]).includes(value)
 }
 
+type RecognitionLevelRadiosProps = {
+  activeLevel: RecognitionLevel
+  onLevelChange: (level: RecognitionLevel) => void
+  byLevel: Record<RecognitionLevel, number>
+  totalWords: number
+  wordsRegionId: string
+}
+
+/** One-of-many level filter: radiogroup + roving tabindex + arrow keys (APG-aligned). */
+function RecognitionLevelRadios({
+  activeLevel,
+  onLevelChange,
+  byLevel,
+  totalWords,
+  wordsRegionId,
+}: RecognitionLevelRadiosProps) {
+  const groupId = useId()
+  const refs = useRef<Partial<Record<RecognitionLevel, HTMLButtonElement | null>>>({})
+
+  const focusByOffset = useCallback(
+    (currentIndex: number, offset: number) => {
+      const len = LEVEL_ORDER.length
+      const nextIndex = (currentIndex + offset + len) % len
+      const next = LEVEL_ORDER[nextIndex]
+      refs.current[next]?.focus()
+      onLevelChange(next)
+    },
+    [onLevelChange],
+  )
+
+  const handleKeyDown = (event: KeyboardEvent<HTMLButtonElement>, currentIndex: number) => {
+    switch (event.key) {
+      case 'ArrowRight':
+      case 'ArrowDown':
+        event.preventDefault()
+        focusByOffset(currentIndex, 1)
+        break
+      case 'ArrowLeft':
+      case 'ArrowUp':
+        event.preventDefault()
+        focusByOffset(currentIndex, -1)
+        break
+      case 'Home':
+        event.preventDefault()
+        focusByOffset(0, 0)
+        break
+      case 'End':
+        event.preventDefault()
+        focusByOffset(LEVEL_ORDER.length - 1, 0)
+        break
+      default:
+        break
+    }
+  }
+
+  return (
+    <div className="recognition-report-bars" role="radiogroup" aria-label={strings.landing.recognitionLevelsGroupAria}>
+      {LEVEL_ORDER.map((level, index) => {
+        const count = byLevel[level]
+        const pct = totalWords > 0 ? (count / totalWords) * 100 : 0
+        const selected = activeLevel === level
+        return (
+          <button
+            key={level}
+            ref={(el) => {
+              refs.current[level] = el
+            }}
+            id={`${groupId}-${level}`}
+            type="button"
+            role="radio"
+            aria-checked={selected}
+            aria-controls={wordsRegionId}
+            tabIndex={selected ? 0 : -1}
+            className={`recognition-bar recognition-bar-${level} ${selected ? 'recognition-bar-active' : ''}`}
+            onClick={() => onLevelChange(level)}
+            onKeyDown={(e) => handleKeyDown(e, index)}
+          >
+            <span className="recognition-bar-label">{LEVEL_LABELS[level]}</span>
+            <span className="recognition-bar-count">{count}</span>
+            <span className="recognition-bar-track" aria-hidden="true">
+              <span className="recognition-bar-fill" style={{ width: `${pct}%` }} />
+            </span>
+            <span className="recognition-bar-hint">{LEVEL_HINTS[level]}</span>
+          </button>
+        )
+      })}
+    </div>
+  )
+}
+
 function RecognitionReport() {
   const { target } = useParams<{ target: string }>()
   const [knownLanguages] = useKnownLanguages()
   const [activeLevel, setActiveLevel] = useState<RecognitionLevel>('known')
+  const wordsRegionId = useId()
+  const wordsHeadingId = useId()
   const validTarget = isLanguageCode(target) ? target : null
 
   const summary = useMemo(
@@ -90,34 +182,21 @@ function RecognitionReport() {
           </div>
         </div>
 
-        <div className="recognition-report-bars" role="tablist" aria-label="Recognition levels">
-          {LEVEL_ORDER.map((level) => {
-            const count = summary.byLevel[level]
-            const pct = summary.totalWords > 0 ? (count / summary.totalWords) * 100 : 0
-            return (
-              <button
-                key={level}
-                type="button"
-                role="tab"
-                aria-selected={activeLevel === level}
-                className={`recognition-bar recognition-bar-${level} ${
-                  activeLevel === level ? 'recognition-bar-active' : ''
-                }`}
-                onClick={() => setActiveLevel(level)}
-              >
-                <span className="recognition-bar-label">{LEVEL_LABELS[level]}</span>
-                <span className="recognition-bar-count">{count}</span>
-                <span className="recognition-bar-track" aria-hidden="true">
-                  <span className="recognition-bar-fill" style={{ width: `${pct}%` }} />
-                </span>
-                <span className="recognition-bar-hint">{LEVEL_HINTS[level]}</span>
-              </button>
-            )
-          })}
-        </div>
+        <RecognitionLevelRadios
+          activeLevel={activeLevel}
+          onLevelChange={setActiveLevel}
+          byLevel={summary.byLevel}
+          totalWords={summary.totalWords}
+          wordsRegionId={wordsRegionId}
+        />
 
-        <section className="recognition-words">
-          <h2 className="recognition-words-title">
+        <section
+          id={wordsRegionId}
+          className="recognition-words"
+          role="region"
+          aria-labelledby={wordsHeadingId}
+        >
+          <h2 id={wordsHeadingId} className="recognition-words-title">
             {LEVEL_LABELS[activeLevel]} · {wordsForLevel.length}
           </h2>
           {wordsForLevel.length === 0 ? (

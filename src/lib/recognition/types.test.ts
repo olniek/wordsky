@@ -16,6 +16,11 @@ describe('levelForScore', () => {
     expect(levelForScore(68, 'EN-PT')).toBe('learnable')
   })
 
+  it('buckets 85–89 as known for EN-PT but not with default thresholds', () => {
+    expect(levelForScore(87, 'EN-PT')).toBe('known')
+    expect(levelForScore(87)).toBe('easy')
+  })
+
   it('mirrors EN-PT thresholds for PT-EN', () => {
     expect(levelForScore(48, 'PT-EN')).toBe('learnable')
   })

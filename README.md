@@ -1,6 +1,6 @@
 # Words Sky
 
-A1 vocabulary across six languages (English, German, Portuguese, Spanish, French, Italian). **Product rulebook:** [UX.md](UX.md). **Known languages & recognition (persistence, scoring, UI):** [docs/known-languages-and-recognition.md](docs/known-languages-and-recognition.md). **Topic data conventions:** [.cursor/rules/words-sky-topic-data.mdc](.cursor/rules/words-sky-topic-data.mdc).
+A1 vocabulary across six languages (English, German, Portuguese, Spanish, French, Italian). **Product rulebook:** [UX.md](UX.md). **Known languages & recognition (persistence, scoring, UI):** [docs/known-languages-and-recognition.md](docs/known-languages-and-recognition.md). **Topic data conventions:** [.cursor/rules/words-sky-topic-data.mdc](.cursor/rules/words-sky-topic-data.mdc). **Draft product ideas (review):** [docs/ideas-for-review.md](docs/ideas-for-review.md).
 
 ## Flow
 

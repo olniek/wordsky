@@ -172,6 +172,7 @@ When changing `topicWords` shape, tags (`cognate-*`, `false-friend-*`), or scori
 - **Declared knowledge:** If the user does not select a language they actually know, bridges and percentages shift accordingly.
 - **False friends:** Tag-driven caps depend on topic rows carrying `false-friend-XX-YY` where curators need them (see `.cursor/rules/words-sky-topic-data.mdc`).
 - **Performance:** Corpus is static at runtime; `summarize` memoises per `(target, known[])`. Prefer **profiling on real devices** before adding a Web Worker or offline precompute—both add complexity and bundle size and are not the default.
+- **Report page (a11y):** Level filters are a single **`radiogroup`** with **`role="radio"`**, roving `tabIndex`, arrow/Home/End keys, and the word list in a **`role="region"`** linked via `aria-controls` / `aria-labelledby`—not a tablist/tabpanel pattern.
 
 ---
 

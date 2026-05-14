@@ -46,6 +46,8 @@ export const strings = {
     recognitionCardEmptyCta: 'Pick languages',
     recognitionCardBreakdown: (k: number, e: number, l: number) =>
       `Known ${k} · Easy ${e} · Learnable ${l}`,
+    /** Recognition report: level filter controls (radiogroup). */
+    recognitionLevelsGroupAria: 'Filter words by recognition level',
     recognitionStripLabel: 'Words you may already know',
     cardCtaStart: 'Start',
     cardCtaContinue: 'Continue',
