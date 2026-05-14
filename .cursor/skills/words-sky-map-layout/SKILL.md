@@ -20,7 +20,7 @@ disable-model-invocation: true
 ## Mental model
 
 - **Study** teaches one word at a time (Study card).
-- **Map** is a visual overview: each **concept** is a small cluster with **one node per selected language** (your anchor plus the translation languages you picked on Landing; same subset as Study).
+- **Map** is a visual overview: each **concept** is a small cluster with **one node per selected language** (your anchor plus the translation languages from **language setup**; same subset as Study).
 - **Lines on the map** mean only one thing: **same concept, different languages** (translation links). There are no “next word in list” edges.
 
 ## Data: `mapGroup` and `MAP_GROUP_ORDER`
@@ -33,7 +33,7 @@ disable-model-invocation: true
   - **City**: `mobility`, `public`, `commerce`, `home`.
   - **Nature**: `sky`, `land`, `water`, `plants`, `weather`.
 
-When adding a word: pick the smallest existing `mapGroup` that fits by **scene/subdomain** (not by fine synonym clusters), or add a new id and append it to `MAP_GROUP_ORDER` for that topic. Use optional `tags` on `TopicWord` for author notes and Study behaviour: **`false-friend-XX-YY`** (two language codes) turns off misleading cognate highlighting for that pair; **`cognate-*`** is author-only for now. Full tag rules: [.cursor/rules/words-sky-topic-data.mdc](../../rules/words-sky-topic-data.mdc). **`mapGroup`** ids also appear on Landing **Find a word** hits (humanized label next to the topic title).
+When adding a word: pick the smallest existing `mapGroup` that fits by **scene/subdomain** (not by fine synonym clusters), or add a new id and append it to `MAP_GROUP_ORDER` for that topic. Use optional `tags` on `TopicWord` for author notes and Study behaviour: **`false-friend-XX-YY`** (two language codes) turns off misleading cognate highlighting for that pair; **`cognate-*`** is author-only for now. Full tag rules: [.cursor/rules/words-sky-topic-data.mdc](../../rules/words-sky-topic-data.mdc). **`mapGroup`** ids also appear on **Find a word** hits on the topic hub (humanized label next to the topic title).
 
 ## Code: where layout lives
 

@@ -6,12 +6,20 @@ Use with [`.cursor/skills/words-sky-pm-check/SKILL.md`](../SKILL.md) after the c
 
 ## Screen-by-screen PM checklist
 
-### Landing (`/`)
+### Welcome (`/`)
 
-- [ ] **Topic cards only** (no extra competing primary surfaces).
+- [ ] **Wordsky** title + **2–3 line** intro explains what the app is and what to do next.
+- [ ] **Languages** panel: anchor (I speak), translations for Study, known languages for recognition — all usable without hunting in a popover.
+- [ ] One clear **primary CTA** to the topic list (`/topics`).
+- [ ] Constellation art (if present) stays **decorative**; contrast remains readable.
+
+### Topic hub (`/topics`)
+
+- [ ] **Topic cards only** as the main grid (no competing language popover on this screen).
 - [ ] Each card shows **learned / total** (or equivalent clear progress).
 - [ ] **One CTA** per card, label matches state: **Start** (none), **Continue** (partial), **Review** (all learned).
 - [ ] Copy is **short and practical**; every card answers “what is this?” and “what do I do?”.
+- [ ] **Read-only** language summary + **Language setup** link back to Welcome when the learner wants to change languages.
 - [ ] **Find a word** (if present): hint explains multilingual + **accent-optional** matching; each hit shows **topic** and **`mapGroup`** so results stay tied to the scene the learner studies.
 
 ### Topic header (`/topic/:slug`)
@@ -97,7 +105,7 @@ UX.md build order is a **priority ladder**, not a strict legal order — use it 
 1. Anchor language selection + persistence  
 2. Study two-state card clarity  
 3. Progress model (`unseen | learning | known`)  
-4. Landing progress + Start / Continue / Review  
+4. Topic hub progress + Start / Continue / Review  
 5. Map visual states  
 
 Note misalignment when **polish** ships before **core flow** is solid.

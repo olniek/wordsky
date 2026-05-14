@@ -7,17 +7,19 @@ import {
   topicAllFormsKnown,
   useProgress,
 } from '../lib/progress'
-import { strings } from '../lib/strings'
-import LanguageToolbar from './LanguageToolbar'
+import { languageLabels, strings } from '../lib/strings'
+import RecognitionStrip from './RecognitionStrip'
 import WordSearch from './WordSearch'
 import { useAnchorLanguage } from '../lib/anchor'
 import { mapVisibleLanguageCodes } from '../lib/graph'
+import { useKnownLanguages } from '../lib/knownLanguages'
 import { useTranslationLanguages } from '../lib/translationLanguages'
 import { useSession } from '../lib/session'
 
 function TopicLanding() {
-  const [anchor, setAnchor] = useAnchorLanguage()
-  const [translationLanguages, setTranslationLanguages] = useTranslationLanguages(anchor)
+  const [anchor] = useAnchorLanguage()
+  const [translationLanguages] = useTranslationLanguages(anchor)
+  const [knownLanguages] = useKnownLanguages()
   const progressLanguages = useMemo(
     () => mapVisibleLanguageCodes(anchor, translationLanguages),
     [anchor, translationLanguages],
@@ -32,16 +34,20 @@ function TopicLanding() {
           <div className="landing-intro-copy">
             <h1>{strings.landing.title}</h1>
             <p>{strings.landing.subtitleShort}</p>
+            <p className="landing-lang-setup-row">
+              <span className="landing-lang-summary">
+                {strings.landing.langSummary(languageLabels[anchor], progressLanguages.length)}
+              </span>
+              <Link className="landing-lang-setup-link" to="/">
+                {strings.landing.openLanguageSetup}
+              </Link>
+            </p>
           </div>
-          <LanguageToolbar
-            anchor={anchor}
-            onAnchorChange={setAnchor}
-            translationLanguages={translationLanguages}
-            onTranslationLanguagesChange={setTranslationLanguages}
-          />
         </div>
         <WordSearch anchor={anchor} />
       </section>
+
+      <RecognitionStrip knownLanguages={knownLanguages} />
 
       <section className="topic-grid">
         {topics.map((topic) => {

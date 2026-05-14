@@ -2,7 +2,7 @@
 name: words-sky-pm-check
 description: >-
   Product-manager readiness and UX compliance checks for Words Sky (A1 vocab
-  app: Landing, Study, Map, localStorage progress). Use when the user asks for
+  app: Welcome, topic hub, Study, Map, localStorage progress). Use when the user asks for
   a PM review, ship checklist, UX audit, release gate, or "does this match the
   product spec" before merge or launch.
 disable-model-invocation: true
@@ -21,9 +21,9 @@ Run a **structured product review** against the in-repo rulebook and shipped beh
 
 ## Steps
 
-1. **Read ground truth:** [`UX.md`](UX.md) (contradictions = bugs unless superseded); [`src/App.tsx`](src/App.tsx) routes (`/`, `/topic/:slug`); [`src/lib/progress.ts`](src/lib/progress.ts) (`WordStatus`, `wordssky.progress.v2`). For graph changes, also read [`.cursor/skills/words-sky-map-layout/SKILL.md`](../words-sky-map-layout/SKILL.md).
+1. **Read ground truth:** [`UX.md`](UX.md) (contradictions = bugs unless superseded); [`src/App.tsx`](src/App.tsx) routes (`/`, `/topics`, `/topic/:slug`); [`src/lib/progress.ts`](src/lib/progress.ts) (`WordStatus`, `wordssky.progress.v2`). For graph changes, also read [`.cursor/skills/words-sky-map-layout/SKILL.md`](../words-sky-map-layout/SKILL.md).
 2. **Run the core flow gate** (below). If any item fails, treat as P0 unless clearly out of scope.
-3. **Screen-through-smoke checklist:** open [references/pm-check-screen-checklist.md](references/pm-check-screen-checklist.md) and work Landing → Map → copy → interaction → state → scope flags → build order → engineering smoke.
+3. **Screen-through-smoke checklist:** open [references/pm-check-screen-checklist.md](references/pm-check-screen-checklist.md) and work Welcome → topic hub → Map → copy → interaction → state → scope flags → build order → engineering smoke.
 4. **Copy-only work:** cross-check strings with [`.cursor/skills/words-sky-language/SKILL.md`](../words-sky-language/SKILL.md); the screen checklist still carries the UX copy table for full PM passes.
 5. **Write the review** using [references/pm-check-output-template.md](references/pm-check-output-template.md) (verdict, P0/P1/P2, traceability, copy scan, when to deepen).
 
@@ -38,11 +38,11 @@ Run a **structured product review** against the in-repo rulebook and shipped beh
 
 ## Core flow gate
 
-Canonical: **`Landing → Topic → Study → (optional) Map → back to Study`**.
+Canonical: **`Welcome → Topic hub → Topic → Study → (optional) Map → back to Study`**.
 
 - [ ] Study is the **default** and primary destination after choosing a topic.
 - [ ] Map is **optional** and never required to advance learning.
-- [ ] Returning from Map does not lose place or contradict progress on Landing.
+- [ ] Returning from Map does not lose place or contradict progress on the topic hub.
 
 ## Related skills
 

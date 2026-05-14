@@ -1,0 +1,63 @@
+import { useMemo } from 'react'
+import { Link } from 'react-router-dom'
+import { languageLabels, strings } from '../lib/strings'
+import { useAnchorLanguage } from '../lib/anchor'
+import { mapVisibleLanguageCodes } from '../lib/graph'
+import { useTranslationLanguages } from '../lib/translationLanguages'
+import { useKnownLanguages } from '../lib/knownLanguages'
+import AnchorPicker from './AnchorPicker'
+import KnownLanguagesPicker from './KnownLanguagesPicker'
+import TranslationLanguagePicker from './TranslationLanguagePicker'
+import WelcomeConstellations from './WelcomeConstellations'
+
+function WelcomeLanding() {
+  const [anchor, setAnchor] = useAnchorLanguage()
+  const [translationLanguages, setTranslationLanguages] = useTranslationLanguages(anchor)
+  const [knownLanguages, setKnownLanguages] = useKnownLanguages()
+  const visibleCount = useMemo(
+    () => mapVisibleLanguageCodes(anchor, translationLanguages).length,
+    [anchor, translationLanguages],
+  )
+
+  return (
+    <main className="page-shell welcome-page">
+      <div className="welcome-sky" aria-hidden="true">
+        <WelcomeConstellations />
+      </div>
+      <div className="welcome-inner">
+        <header className="welcome-header">
+          <h1 className="welcome-title">{strings.welcome.title}</h1>
+          <p className="welcome-lead">{strings.welcome.lead1}</p>
+          <p className="welcome-lead">{strings.welcome.lead2}</p>
+          <p className="welcome-lead">{strings.welcome.lead3}</p>
+        </header>
+
+        <section className="welcome-lang-card" aria-labelledby="welcome-lang-heading">
+          <h2 id="welcome-lang-heading" className="welcome-lang-card-title">
+            {strings.welcome.langSectionTitle}
+          </h2>
+          <div className="welcome-lang-card-body">
+            <AnchorPicker value={anchor} onChange={setAnchor} variant="chips" />
+            <TranslationLanguagePicker
+              anchor={anchor}
+              value={translationLanguages}
+              onChange={setTranslationLanguages}
+            />
+            <KnownLanguagesPicker value={knownLanguages} onChange={setKnownLanguages} />
+          </div>
+        </section>
+
+        <div className="welcome-actions">
+          <Link className="welcome-primary-cta" to="/topics">
+            {strings.welcome.continueToTopics}
+          </Link>
+          <p className="welcome-lang-hint">
+            {strings.landing.langSummary(languageLabels[anchor], visibleCount)}
+          </p>
+        </div>
+      </div>
+    </main>
+  )
+}
+
+export default WelcomeLanding

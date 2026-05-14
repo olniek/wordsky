@@ -55,6 +55,6 @@ Search UI for forbidden terms and legacy labels (adjust for i18n if added later)
 - **Onboarding / first run:** walk anchor language selection cold.
 - **Return visit:** refresh mid-topic; confirm Continue and index behavior.
 - **Review mode:** all known — confirm Review loop feels intentional, not empty.
-- **Map + Study together:** progress changes in Map reflect immediately on Landing and Study queue.
+- **Map + Study together:** progress changes in Map reflect immediately on the topic hub and Study queue.
 
 End state: the team can act on **ordered, spec-traced** feedback without re-deriving product intent from chat history.

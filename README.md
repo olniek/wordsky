@@ -4,7 +4,7 @@ A1 vocabulary across six languages (English, German, Portuguese, Spanish, French
 
 ## Flow
 
-`Landing → Topic → Study → (optional) Map` — see UX.md for copy, gestures, out-of-scope items (§8), and deferred graded-vocabulary tooling (§9).
+`Welcome → Topic hub → Topic → Study → (optional) Map` — see UX.md for copy, gestures, out-of-scope items (§8), and deferred graded-vocabulary tooling (§9).
 
 ## Scripts
 

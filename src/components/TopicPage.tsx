@@ -142,7 +142,7 @@ function TopicPage() {
   )
 
   if (!topic) {
-    return <Navigate to="/" replace />
+    return <Navigate to="/topics" replace />
   }
 
   const activeConceptMeta = guidedWords[activeConceptIndex]
@@ -154,7 +154,7 @@ function TopicPage() {
       <CosmicStarsBackground />
 
       <header className="topic-header">
-        <Link className="back-link" to="/" aria-label={strings.topic.back}>
+        <Link className="back-link" to="/topics" aria-label={strings.topic.back}>
           <span aria-hidden="true">←</span>
           <span className="back-link-title">{topic.title}</span>
         </Link>

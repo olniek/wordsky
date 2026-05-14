@@ -7,7 +7,7 @@ alwaysApply: true
 
 ## Product
 
-- Treat [UX.md](UX.md) as the rulebook. Core flow: `Landing → Topic → Study → (optional) Map`.
+- Treat [UX.md](UX.md) as the rulebook. Core flow: `Welcome → Topic hub → Topic → Study → (optional) Map`.
 - Copy: Study (not Learn), Map (not Explore), Show translations (not Reveal), Got it (not Next as primary), Still learning (no negative framing), Close (not lone × without label).
 - Do not ship [UX.md](UX.md) section 8 out-of-scope items (accounts, streaks/XP, advanced graph editing, pronunciation scoring) without an explicit product decision.
 

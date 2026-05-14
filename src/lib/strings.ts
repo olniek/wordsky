@@ -1,5 +1,13 @@
 // Single source of truth for UI copy. Future i18n hooks can replace this map.
 export const strings = {
+  welcome: {
+    title: 'Wordsky',
+    lead1: 'Quick A1 vocabulary across six languages — one concept at a time.',
+    lead2: 'Choose the language you speak and which translations you want beside it.',
+    lead3: 'Then pick a topic, read the prompt, and tap Show translations when you are ready.',
+    langSectionTitle: 'Languages',
+    continueToTopics: 'Choose a topic',
+  },
   app: {
     storageWarning:
       'We could not save your progress on this device (storage may be full or blocked). Your session still works, but progress may not persist after you close the tab.',
@@ -17,6 +25,16 @@ export const strings = {
     subtitleShort: 'A1 vocabulary · 6 languages',
     anchorLabel: 'I speak',
     translationLegend: 'Translations',
+    knownLegend: 'Languages you already know',
+    knownHint: 'We use these to estimate words you may already recognise in other languages.',
+    recognitionCardTitle: (langLabel: string, pct: number) =>
+      `You already recognise ${pct}% of ${langLabel} A1`,
+    recognitionCardCta: 'See breakdown',
+    recognitionCardEmpty: 'Tell us which languages you already know',
+    recognitionCardEmptyCta: 'Pick languages',
+    recognitionCardBreakdown: (k: number, e: number, l: number) =>
+      `Known ${k} · Easy ${e} · Learnable ${l}`,
+    recognitionStripLabel: 'Words you may already know',
     cardCtaStart: 'Start',
     cardCtaContinue: 'Continue',
     cardCtaReview: 'Review',
@@ -28,11 +46,13 @@ export const strings = {
     wordSearchHint:
       'Matches English, German, Portuguese, Spanish, French, or Italian. Accents optional (for example cafe matches café).',
     wordSearchEmpty: 'No matches yet. Try another spelling.',
-    /** Compact summary shown on the Landing language toolbar trigger. */
+    /** Summary line: shown on Welcome under CTA and read-only on topic hub. */
     langSummary: (anchor: string, visibleLanguageCount: number) =>
       `${anchor} · ${visibleLanguageCount} languages`,
     langPopoverTitle: 'Languages',
     langPopoverClose: 'Done',
+    /** Topic hub: link back to Welcome to change anchor / translations / known languages. */
+    openLanguageSetup: 'Language setup',
   },
   topic: {
     back: 'Back to topics',

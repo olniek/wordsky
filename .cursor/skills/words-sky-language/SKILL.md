@@ -51,7 +51,7 @@ If UX.md and shipped copy disagree, **UX.md wins** unless there is a documented 
 | Still learning | Negative framing (“Wrong”, “Failed”, “Incorrect”, …) |
 | Close | A lone × or icon with no accessible name; if there is a visible label, use **Close** (icon may accompany the label) |
 
-**Landing CTAs (one per topic card):** **Start** (no progress), **Continue** (in progress), **Review** (all learned).
+**Topic hub CTAs (one per topic card):** **Start** (no progress), **Continue** (in progress), **Review** (all learned).
 
 **Topic shell:** mode tabs **Study** and **Map**; keep the header row compact (UX.md).
 
@@ -60,8 +60,8 @@ If UX.md and shipped copy disagree, **UX.md wins** unless there is a documented 
 ## Domain words (use consistently)
 
 - **Anchor language** — the language the learner already knows well; base for showing the word first where the flow requires it.
-- **Topic** — a themed word set (card on Landing).
-- **Learned / total** — progress on Landing cards (or equivalent clear counts).
+- **Topic** — a themed word set (card on the topic hub).
+- **Learned / total** — progress on topic hub cards (or equivalent clear counts).
 - **Map** — optional visual progress; not the primary teaching surface.
 - **Find a word** — landing search across all languages; matches are **accent-insensitive** (and treat German **ß** like **ss** for typing). Hit lines show **topic title** and **`mapGroup`** (scene band within the topic). Hint copy lives in [`strings.landing`](src/lib/strings.ts) (`wordSearchHint`, `wordSearchPlaceholder`, …).
 

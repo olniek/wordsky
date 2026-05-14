@@ -66,6 +66,11 @@ function similarityRatio(a: string, b: string): number {
   return 1 - levenshtein(a, b) / maxLen
 }
 
+/** Normalized 0–1 similarity of two raw strings after `latinFoldForSearch`. */
+export function normalizedSimilarity(a: string, b: string): number {
+  return similarityRatio(normalizeLemmaForCompare(a), normalizeLemmaForCompare(b))
+}
+
 function isSameLemma(word: TopicWord, a: LanguageCode, b: LanguageCode): boolean {
   return normalizeLemmaForCompare(word.forms[a]) === normalizeLemmaForCompare(word.forms[b])
 }
