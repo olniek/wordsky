@@ -23,14 +23,14 @@ alwaysApply: true
 
 - Stack: React, Vite, TypeScript, Vitest, react-router-dom, React Flow (`reactflow`).
 - Study UI: [`src/components/StudyCard.tsx`](src/components/StudyCard.tsx) plus scoped styles in [`src/index.css`](src/index.css) (`study-*`, `study-anchor-panel`, `speak-button`). Follow [UX.md](UX.md) Study bullets on layout, contrast, cognate/caution rows, and interaction (including `prefers-reduced-motion`).
-- Pure logic in `src/lib/` (e.g. progress, queue, anchor, **wordSearch**, **latinFold**, **crossLangLemmaAffinity**): extend or add **unit tests** when behavior changes.
+- Pure logic in `src/lib/` (e.g. progress, queue, anchor, **wordSearch**, **latinFold**, **crossLangLemmaAffinity**, **knownLanguages**, **recognition** under `src/lib/recognition/`): extend or add **unit tests** when behavior changes.
 - Topic rows and tags: [.cursor/rules/words-sky-topic-data.mdc](.cursor/rules/words-sky-topic-data.mdc) (`false-friend-XX-YY`, required full **`examples`**, optional `articles`). **A1 / CEFRLex-style** manual checks and **planned build-later tasks** are in that file (*A1 level checks*).
 - Match existing patterns; keep changes scoped.
 
 ## Documentation
 
 - When a change affects user-visible behavior, copy or flows, configuration, build/run steps, public APIs, or topic/agent conventions—update the **minimum** docs that would otherwise go stale.
-- Prefer existing sources of truth: [UX.md](UX.md); [.cursor/rules/words-sky-topic-data.mdc](.cursor/rules/words-sky-topic-data.mdc); the relevant [.cursor/skills/](.cursor/skills/) `SKILL.md` when its conventions change; [README.md](README.md) only if install, dev, or build workflow changes.
+- Prefer existing sources of truth: [UX.md](UX.md); [docs/known-languages-and-recognition.md](docs/known-languages-and-recognition.md) when changing known-language persistence or recognition scoring/UI; [.cursor/rules/words-sky-topic-data.mdc](.cursor/rules/words-sky-topic-data.mdc); the relevant [.cursor/skills/](.cursor/skills/) `SKILL.md` when its conventions change; [README.md](README.md) only if install, dev, or build workflow changes.
 - Do not add or expand markdown without a concrete stale-doc reason; if nothing needs updating, skip (note in summary if helpful).
 
 ## Before claiming a task done

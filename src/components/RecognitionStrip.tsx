@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import { languageOrder, type LanguageCode } from '../data/words'
 import { summarize } from '../lib/recognition'
 import { languageLabels, strings } from '../lib/strings'
+import RecognitionHowPopover from './RecognitionHowPopover'
 
 type RecognitionStripProps = {
   knownLanguages: LanguageCode[]
@@ -61,6 +62,10 @@ function RecognitionStrip({ knownLanguages }: RecognitionStripProps) {
           </li>
         ))}
       </ul>
+      <div className="recognition-strip-footnote-wrap">
+        <p className="recognition-strip-footnote">{strings.landing.recognitionStripFootnote}</p>
+        <RecognitionHowPopover />
+      </div>
     </section>
   )
 }

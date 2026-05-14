@@ -4,6 +4,7 @@ import { languageOrder, type LanguageCode } from '../data/words'
 import { useKnownLanguages } from '../lib/knownLanguages'
 import { summarize, type RecognitionLevel, type WordRecognition } from '../lib/recognition'
 import { languageLabels, strings } from '../lib/strings'
+import RecognitionHowPopover from './RecognitionHowPopover'
 
 const LEVEL_ORDER: RecognitionLevel[] = ['known', 'easy', 'learnable', 'new']
 
@@ -15,8 +16,8 @@ const LEVEL_LABELS: Record<RecognitionLevel, string> = {
 }
 
 const LEVEL_HINTS: Record<RecognitionLevel, string> = {
-  known: 'Spelled the same (or near enough).',
-  easy: "You'll spot this on first read.",
+  known: 'Same spelling (or very close) in the bridge language — still an estimate.',
+  easy: 'You would probably spot this on first read.',
   learnable: 'Close to something you already know.',
   new: 'No clear bridge — best to study fresh.',
 }
@@ -74,6 +75,10 @@ function RecognitionReport() {
             {knownLanguages.map((c) => languageLabels[c]).join(', ')} → {targetLabel} ·{' '}
             {summary.totalWords} A1 words
           </p>
+          <div className="recognition-report-disclaimer-wrap">
+            <p className="recognition-report-disclaimer">{strings.landing.recognitionStripFootnote}</p>
+            <RecognitionHowPopover />
+          </div>
         </header>
 
         <div className="recognition-report-ring" role="img" aria-label={`${summary.recognitionPercent} percent`}>

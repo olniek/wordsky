@@ -2,6 +2,7 @@
 export const strings = {
   welcome: {
     title: 'Wordsky',
+    navTopicHub: 'Topic hub',
     lead1: 'Quick A1 vocabulary across six languages — one concept at a time.',
     lead2: 'Choose the language you speak and which translations you want beside it.',
     lead3: 'Then pick a topic, read the prompt, and tap Show translations when you are ready.',
@@ -26,9 +27,18 @@ export const strings = {
     anchorLabel: 'I speak',
     translationLegend: 'Translations',
     knownLegend: 'Languages you already know',
-    knownHint: 'We use these to estimate words you may already recognise in other languages.',
+    knownHint:
+      'We use these for rough recognition estimates from spelling and cognates across our A1 topic words. This is not a test of fluency.',
     recognitionCardTitle: (langLabel: string, pct: number) =>
-      `You already recognise ${pct}% of ${langLabel} A1`,
+      `About ${pct}% of ${langLabel} A1 words you may recognise`,
+    recognitionStripFootnote:
+      'Rough estimates from our A1 topic vocabulary and the languages you picked — not how well you speak a language.',
+    /** Opens a short in-app explanation (hover on desktop; tap or keyboard elsewhere). */
+    recognitionHowTrigger: 'How we estimate this',
+    recognitionHowPopoverTitle: 'How recognition is estimated',
+    recognitionHowClose: 'Close',
+    recognitionHowBody:
+      'We compare each word in the target language to the same word in the languages you said you already know. We use spelling similarity, a few regular letter-pattern rules, and occasional author tags for cognates or false friends. The percentage counts words that are not in the “New” bucket across our shared A1 topic list. It is a rough guess, not a measure of fluency.',
     recognitionCardCta: 'See breakdown',
     recognitionCardEmpty: 'Tell us which languages you already know',
     recognitionCardEmptyCta: 'Pick languages',

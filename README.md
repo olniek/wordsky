@@ -1,6 +1,6 @@
 # Words Sky
 
-A1 vocabulary across six languages (English, German, Portuguese, Spanish, French, Italian). **Product rulebook:** [UX.md](UX.md). **Topic data conventions:** [.cursor/rules/words-sky-topic-data.mdc](.cursor/rules/words-sky-topic-data.mdc).
+A1 vocabulary across six languages (English, German, Portuguese, Spanish, French, Italian). **Product rulebook:** [UX.md](UX.md). **Known languages & recognition (persistence, scoring, UI):** [docs/known-languages-and-recognition.md](docs/known-languages-and-recognition.md). **Topic data conventions:** [.cursor/rules/words-sky-topic-data.mdc](.cursor/rules/words-sky-topic-data.mdc).
 
 ## Flow
 
@@ -15,6 +15,7 @@ npm run test     # Vitest
 npm run lint     # ESLint
 npm run lint:topic-data   # topic row structure (mapGroup, required six-language examples, …)
 npm run corpus:examples   # validate corpusExamples blocks (optional JSON path argument)
+npm run recognition:qa  # dev: high fuzzy recognition hits per target language
 ```
 
 ## Where things live
@@ -28,6 +29,9 @@ npm run corpus:examples   # validate corpusExamples blocks (optional JSON path a
 | Latin accent / ß folding (search + lemma compare) | [src/lib/latinFold.ts](src/lib/latinFold.ts) |
 | Cognate similarity + `false-friend-*` tags | [src/lib/crossLangLemmaAffinity.ts](src/lib/crossLangLemmaAffinity.ts) |
 | Find a word (landing) | [src/lib/wordSearch.ts](src/lib/wordSearch.ts), [src/components/WordSearch.tsx](src/components/WordSearch.tsx) |
+| Welcome (language setup), optional constellation | [src/components/WelcomeLanding.tsx](src/components/WelcomeLanding.tsx), [src/components/WelcomeConstellations.tsx](src/components/WelcomeConstellations.tsx) |
+| Languages you already know (storage + hook) | [src/lib/knownLanguages.ts](src/lib/knownLanguages.ts), [src/components/KnownLanguagesPicker.tsx](src/components/KnownLanguagesPicker.tsx) |
+| Recognition strip + report (`/recognize/:target`) | [src/components/RecognitionStrip.tsx](src/components/RecognitionStrip.tsx), [src/components/RecognitionReport.tsx](src/components/RecognitionReport.tsx), [src/lib/recognition/](src/lib/recognition/) |
 | Study card (markup + scoped CSS: `study-*`, `speak-button`) | [src/components/StudyCard.tsx](src/components/StudyCard.tsx), [src/index.css](src/index.css) |
 | UI strings | [src/lib/strings.ts](src/lib/strings.ts) |
 

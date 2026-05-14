@@ -146,6 +146,14 @@ export const everydayNouns100: TopicWord[] = [
     concept: 'family',
     mapGroup: 'people',
     difficulty: 1,
+    tags: [
+      'cognate-EN-DE',
+      'cognate-EN-ES',
+      'cognate-EN-FR',
+      'cognate-EN-IT',
+      'cognate-EN-PT',
+      'cognate-ES-PT',
+    ],
     forms: { EN: 'family', DE: 'Familie', PT: 'família', ES: 'familia', FR: 'famille', IT: 'famiglia' },
     articles: { EN: 'the', DE: 'die', PT: 'a', ES: 'la', FR: 'la', IT: 'la' },
     examples: {

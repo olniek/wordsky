@@ -12,6 +12,7 @@
     "test": "vitest run",
     "test:watch": "vitest",
     "test:coverage": "vitest run --coverage",
+    "recognition:qa": "tsx scripts/recognition-qa.ts",
     "lint:topic-data": "tsx scripts/lint-topic-data.ts",
     "corpus:examples": "tsx scripts/corpus-examples.ts",
     "generate:pwa-icons": "node scripts/generate-pwa-icons.mjs"

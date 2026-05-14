@@ -32,6 +32,34 @@ const PATTERNS: Partial<Record<LangPair, PatternRule[]>> = {
     { from: /ph/gi, to: 'f' },
     { from: /c(?=[aou])/gi, to: 'k' },
   ],
+  /** German shares many Latin internationalisms with Romance languages. */
+  'DE-ES': [
+    { from: /tion$/i, to: 'ción' },
+    { from: /sion$/i, to: 'sión' },
+    { from: /ph/gi, to: 'f' },
+  ],
+  'DE-PT': [
+    { from: /tion$/i, to: 'ção' },
+    { from: /sion$/i, to: 'são' },
+    { from: /ph/gi, to: 'f' },
+  ],
+  'DE-FR': [
+    { from: /tion$/i, to: 'tion' },
+    { from: /ph/gi, to: 'f' },
+  ],
+  'DE-IT': [
+    { from: /tion$/i, to: 'zione' },
+    { from: /ph/gi, to: 'f' },
+  ],
+  /** French ↔ Romance suffix bridges (conservative suffix swaps only). */
+  'FR-ES': [
+    { from: /tion$/i, to: 'ción' },
+    { from: /ph/gi, to: 'f' },
+  ],
+  'FR-PT': [
+    { from: /tion$/i, to: 'ção' },
+    { from: /ph/gi, to: 'f' },
+  ],
   'PT-ES': [
     { from: /ção$/i, to: 'ción' },
     { from: /são$/i, to: 'sión' },

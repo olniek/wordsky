@@ -16,7 +16,7 @@ The feature:
 2. Uses that list to **estimate**, for each *other* language in the set, what percentage of the shared A1 corpus they might **recognise** without fresh study.
 3. Surfaces that as a **landing strip** of cards and a **drill-down report** with buckets (Known / Easy / Learnable / New) and optional “bridge” forms.
 
-Copy lives in `src/lib/strings.ts` under `strings.landing` (e.g. `knownLegend`, `knownHint`, `recognitionStripLabel`, `recognitionCardTitle`).
+Copy lives in `src/lib/strings.ts` under `strings.landing` (e.g. `knownLegend`, `knownHint`, `recognitionStripLabel`, `recognitionCardTitle`, and the recognition “how it works” popover keys `recognitionHowTrigger`, `recognitionHowBody`, `recognitionHowClose`).
 
 ---
 
@@ -24,7 +24,7 @@ Copy lives in `src/lib/strings.ts` under `strings.landing` (e.g. `knownLegend`, 
 
 ### 2.1 Where to set “languages you already know”
 
-- **Welcome** (`WelcomeLanding` at `/`): the **Languages** panel includes `KnownLanguagesPicker` alongside anchor and translation language pickers (`AnchorPicker`, `TranslationLanguagePicker`, `KnownLanguagesPicker`).
+- **Welcome** (`WelcomeLanding` at `/`): the **Languages** panel includes `KnownLanguagesPicker` alongside anchor and translation language pickers (`AnchorPicker`, `TranslationLanguagePicker`, `KnownLanguagesPicker`). The same **`RecognitionHowPopover`** appears below the known-languages picker for the same short explanation.
 - The picker is a **fieldset** of chip buttons (role `checkbox`, `aria-checked`) for each `languageOrder` code, with a short hint explaining that the choice drives recognition estimates.
 
 ### 2.2 Topic hub: recognition strip
@@ -35,15 +35,15 @@ Copy lives in `src/lib/strings.ts` under `strings.landing` (e.g. `knownLegend`, 
   - **Recognition percent** (rounded)
   - A progress bar
   - A short breakdown: counts for **Known**, **Easy**, and **Learnable** (`strings.landing.recognitionCardBreakdown`)
-
-Each card links to `/recognize/:target` (e.g. `/recognize/ES`).
+- Next to the footnote, **`RecognitionHowPopover`** (`src/components/RecognitionHowPopover.tsx`) offers a plain-language explanation of how the estimate is computed: hover shows the panel on fine pointers; tap / keyboard / **Close** cover touch and screen readers (see `strings.landing.recognitionHow*`).
+- Each card links to `/recognize/:target` (e.g. `/recognize/ES`).
 
 ### 2.3 Report page
 
 - Route: `RecognitionReport` at `/recognize/:target` (see `src/App.tsx`).
 - Invalid `target` → redirect to topic hub (`/topics`).
 - If known languages are empty → empty state with back link and the same hint as the strip.
-- Otherwise: headline with percent, subtitle listing **known → target** and total **A1 word** count, a ring visualisation, **tablist** of four levels, and a **word list** (up to 100 per selected tab) showing target form, optional bridge from a known language, rule label, and numeric score.
+- Otherwise: headline with percent, subtitle listing **known → target** and total **A1 word** count, a ring visualisation, **tablist** of four levels, and a **word list** (up to 100 per selected tab) showing target form, optional bridge from a known language, rule label, and numeric score. The same **`RecognitionHowPopover`** appears beside the disclaimer line as on the topic hub.
 
 ---
 
@@ -125,6 +125,8 @@ The **best** score across all known languages `k` wins; `WordRecognition` record
 
 ### 4.4 Levels: `levelForScore` (`src/lib/recognition/types.ts`)
 
+Default buckets (score 0–100) use `LEVEL_THRESHOLDS`:
+
 | Score range | Level |
 |---------------|--------|
 | ≥ 90 | `known` |
@@ -132,17 +134,19 @@ The **best** score across all known languages `k` wins; `WordRecognition` record
 | ≥ 50 | `learnable` |
 | &lt; 50 | `new` |
 
+For the winning bridge pair (`matchedVia` → target), `scoreWord` passes `LangPair` into `levelForScore` so optional **`PAIR_THRESHOLDS`** can tighten buckets for specific pairs (today: **EN↔PT** uses a lower `learnable` floor to reduce over-optimism). Unknown pairs use the defaults only.
+
 These thresholds define the report tabs and the strip’s “Known / Easy / Learnable” counts.
 
 ### 4.5 Supporting modules
 
 - **`cognates.ts`:** Regex for `cognate-XX-YY` tags; `isFalseFriend` delegates to `isFalseFriendPair` in `crossLangLemmaAffinity`; `identicalAfterFold`; `cognateByPattern` cross-checks pattern-expanded strings.
-- **`patterns.ts`:** Small, conservative **per-direction** regex replace tables for specific `LangPair`s (e.g. EN→ES `-tion` → `-ción`). Undeclared pairs derive **reverse** rules when possible via `reverseRule`. `hasPatternsFor` exposes whether a pair has rules (for tests or future UI).
+- **`patterns.ts`:** Small, conservative **per-direction** regex replace tables for specific `LangPair`s (e.g. EN→ES `-tion` → `-ción`, DE→ES borrowings, FR→PT). Undeclared pairs derive **reverse** rules when possible via `reverseRule`. `hasPatternsFor` exposes whether a pair has rules (for tests or future UI).
 - **`crossLangLemmaAffinity.ts`:** Shared string normalisation and similarity used by Study/search and recognition.
 
 ### 4.6 Public API surface
 
-`src/lib/recognition/index.ts` re-exports types, `levelForScore`, `recognitionLevels`, `scoreWord`, `summarize`, `getA1Corpus`, pattern helpers, and cognate helpers—keep this stable if other features import recognition.
+`src/lib/recognition/index.ts` re-exports types, `levelForScore`, `LEVEL_THRESHOLDS`, `PAIR_THRESHOLDS`, `recognitionLevels`, `scoreWord`, `summarize`, `getA1Corpus`, pattern helpers, and cognate helpers—keep this stable if other features import recognition.
 
 ---
 
@@ -151,9 +155,11 @@ These thresholds define the report tabs and the strip’s “Known / Easy / Lear
 Vitest coverage includes:
 
 - `src/lib/knownLanguages.test.ts` — normalisation and `loadKnownLanguages` with mocked storage.
-- `src/lib/recognition/*.test.ts` — patterns, scoring edge cases, summarisation aggregates.
+- `src/lib/recognition/*.test.ts` — patterns, scoring edge cases, summarisation aggregates, `levelForScore` / pair thresholds.
 
 When changing `topicWords` shape, tags (`cognate-*`, `false-friend-*`), or scoring thresholds, extend or adjust these tests.
+
+**Dev aid:** `npm run recognition:qa` runs `scripts/recognition-qa.ts`, which scans the corpus for unusually high `fuzzy` scores per target language (handy after editing patterns or tags).
 
 ---
 
@@ -163,7 +169,7 @@ When changing `topicWords` shape, tags (`cognate-*`, `false-friend-*`), or scori
 - **A1 corpus bound:** Percentages are over **deduplicated topic words** that have a target form—not a full dictionary.
 - **Declared knowledge:** If the user does not select a language they actually know, bridges and percentages shift accordingly.
 - **False friends:** Tag-driven caps depend on topic rows carrying `false-friend-XX-YY` where curators need them (see `.cursor/rules/words-sky-topic-data.mdc`).
-- **Performance:** Corpus is static at runtime; memoisation in `summarize` keeps repeated navigations cheap.
+- **Performance:** Corpus is static at runtime; `summarize` memoises per `(target, known[])`. Prefer **profiling on real devices** before adding a Web Worker or offline precompute—both add complexity and bundle size and are not the default.
 
 ---
 
@@ -174,10 +180,13 @@ When changing `topicWords` shape, tags (`cognate-*`, `false-friend-*`), or scori
 | Persisted known languages + hook | `src/lib/knownLanguages.ts` |
 | Chip picker UI | `src/components/KnownLanguagesPicker.tsx` |
 | Welcome + language panel | `src/components/WelcomeLanding.tsx` |
+| Welcome constellation (decorative) | `src/components/WelcomeConstellations.tsx` |
 | Topic hub recognition strip | `src/components/RecognitionStrip.tsx` |
+| Recognition “how it works” popover | `src/components/RecognitionHowPopover.tsx` |
 | Report page | `src/components/RecognitionReport.tsx` |
 | Routes | `src/App.tsx` |
 | Copy | `src/lib/strings.ts` |
+| Recognition QA (dev) | `npm run recognition:qa` → `scripts/recognition-qa.ts` |
 | Scoring & summary | `src/lib/recognition/score.ts`, `summarize.ts`, `types.ts` |
 | Patterns & cognate helpers | `src/lib/recognition/patterns.ts`, `cognates.ts` |
 | Shared similarity / fold | `src/lib/crossLangLemmaAffinity.ts` |

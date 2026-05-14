@@ -20,6 +20,8 @@ Use with [`.cursor/skills/words-sky-pm-check/SKILL.md`](../SKILL.md) after the c
 - [ ] **One CTA** per card, label matches state: **Start** (none), **Continue** (partial), **Review** (all learned).
 - [ ] Copy is **short and practical**; every card answers “what is this?” and “what do I do?”.
 - [ ] **Read-only** language summary + **Language setup** link back to Welcome when the learner wants to change languages.
+- [ ] **Recognition strip** (above the topic grid): if no known languages, empty state points to Welcome; otherwise a **card per target** language (not in the known set) with percent, bar, breakdown, and link to **`/recognize/:target`**.
+- [ ] **Recognition report** (`/recognize/:target`): invalid target redirects to the topic hub; no known languages → empty state with back link; tabs and word lists are keyboard- and screen-reader-friendly.
 - [ ] **Find a word** (if present): hint explains multilingual + **accent-optional** matching; each hit shows **topic** and **`mapGroup`** so results stay tied to the scene the learner studies.
 
 ### Topic header (`/topic/:slug`)
@@ -79,7 +81,7 @@ Global copy rule: **simple words only**. Each screen: (1) what is this? (2) what
 
 ## State and persistence (PM + risk)
 
-- [ ] **localStorage** holds: anchor language, current topic, last word index in topic, per-word status — and behavior matches user mental model when refreshing or revisiting.
+- [ ] **localStorage** holds: anchor language, which languages appear in Study translations, **languages you already know** (recognition), current topic, last word index in topic, per-word status — and behavior matches user mental model when refreshing or revisiting.
 - [ ] **No account** required; no surprise login walls.
 - [ ] Call out **data loss** risks (private mode, clear site data, quota) in “known issues” if not mitigated in UI.
 
@@ -116,7 +118,7 @@ Note misalignment when **polish** ships before **core flow** is solid.
 
 When the user cares about “ready to merge”:
 
-- [ ] `npm run test` passes (progress, queue, anchor, **topic data**, **wordSearch**, **latinFold**, **crossLangLemmaAffinity**, graph, …).
+- [ ] `npm run test` passes (progress, queue, anchor, **topic data**, **wordSearch**, **latinFold**, **crossLangLemmaAffinity**, **knownLanguages**, **recognition**, graph, …).
 - [ ] `npm run build` passes.
 - [ ] `npm run lint` passes or gaps are acknowledged with owner.
 

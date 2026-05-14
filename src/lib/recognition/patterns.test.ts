@@ -14,6 +14,14 @@ describe('applyPatterns', () => {
     expect(applyPatterns('information', 'EN-ES')).toContain('información')
   })
 
+  it('transforms -tion → -ción for DE-ES (Latin borrowings)', () => {
+    expect(applyPatterns('Information', 'DE-ES')).toContain('Información')
+  })
+
+  it('transforms -tion → -ção for FR-PT', () => {
+    expect(applyPatterns('information', 'FR-PT')).toContain('informação')
+  })
+
   it('transforms ph → f', () => {
     expect(applyPatterns('philosophy', 'EN-IT')).toContain('filosofy')
   })

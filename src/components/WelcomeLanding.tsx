@@ -9,6 +9,7 @@ import AnchorPicker from './AnchorPicker'
 import KnownLanguagesPicker from './KnownLanguagesPicker'
 import TranslationLanguagePicker from './TranslationLanguagePicker'
 import WelcomeConstellations from './WelcomeConstellations'
+import RecognitionHowPopover from './RecognitionHowPopover'
 
 function WelcomeLanding() {
   const [anchor, setAnchor] = useAnchorLanguage()
@@ -25,7 +26,17 @@ function WelcomeLanding() {
         <WelcomeConstellations />
       </div>
       <div className="welcome-inner">
+        <nav className="welcome-top-nav" aria-label="Welcome">
+          <Link className="welcome-top-brand" to="/">
+            {strings.welcome.title}
+          </Link>
+          <Link className="welcome-top-nav-link" to="/topics">
+            {strings.welcome.navTopicHub}
+          </Link>
+        </nav>
+
         <header className="welcome-header">
+          <p className="welcome-eyebrow">{strings.landing.subtitleShort}</p>
           <h1 className="welcome-title">{strings.welcome.title}</h1>
           <p className="welcome-lead">{strings.welcome.lead1}</p>
           <p className="welcome-lead">{strings.welcome.lead2}</p>
@@ -44,6 +55,9 @@ function WelcomeLanding() {
               onChange={setTranslationLanguages}
             />
             <KnownLanguagesPicker value={knownLanguages} onChange={setKnownLanguages} />
+            <div className="welcome-recognition-how">
+              <RecognitionHowPopover />
+            </div>
           </div>
         </section>
 

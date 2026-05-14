@@ -276,20 +276,7 @@ export const topicWords: Record<TopicSlug, TopicWord[]> = {
         IT: 'I miei genitori mi aiutano con i compiti.',
       },
     },
-    {
-      concept: 'child',
-      mapGroup: 'core',
-      forms: { EN: 'child', DE: 'Kind', PT: 'criança', ES: 'niño', FR: 'enfant', IT: 'bambino' },
-      articles: { EN: 'the', DE: 'das', PT: 'a', ES: 'el', FR: 'l\'', IT: 'il' },
-      examples: {
-        EN: 'Every child needs sleep and food.',
-        DE: 'Jedes Kind braucht Schlaf und Essen.',
-        PT: 'Toda a criança precisa de sono e de comida.',
-        ES: 'Todo niño necesita dormir y comer.',
-        FR: 'Chaque enfant a besoin de sommeil et de nourriture.',
-        IT: 'Ogni bambino ha bisogno di sonno e cibo.',
-      },
-    },
+    mirrorEveryday('child', { mapGroup: 'core', difficulty: 1 }),
     {
       concept: 'husband',
       mapGroup: 'core',
@@ -580,10 +567,10 @@ export const topicWords: Record<TopicSlug, TopicWord[]> = {
     {
       concept: 'station',
       mapGroup: 'mobility',
+      tags: ['city-transport', 'cognate-EN-ES', 'cognate-EN-IT', 'cognate-EN-PT'],
       forms: { EN: 'station', DE: 'Bahnhof', PT: 'estação', ES: 'estación', FR: 'gare', IT: 'stazione' },
       articles: { EN: 'the', DE: 'der', PT: 'a', ES: 'la', FR: 'la', IT: 'la' },
       difficulty: 1,
-      tags: ['city-transport'],
       examples: {
         EN: 'The train station is nearby.',
         DE: 'Der Bahnhof ist in der Nähe.',

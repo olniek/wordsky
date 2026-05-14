@@ -148,8 +148,9 @@ describe('topic data integrity', () => {
     const guided = getGuidedTopicWords('family').map((w) => w.concept)
     // difficulty 1: core (alphabetical) round-robin with extended (friend only)
     expect(guided.slice(0, 4)).toEqual(['baby', 'friend', 'boy', 'brother'])
-    // difficulty 2: core vs extended round-robin (unchanged band after new d=1 mirrors)
-    expect(guided.slice(11, 13)).toEqual(['child', 'aunt'])
+    // `child` uses `mirrorEveryday` with explicit difficulty 1 (was previously implicit d=2 in
+    // `words.ts`), so it joins the d=1 interleave band and shifts later indices vs older snapshots.
+    expect(guided.slice(11, 13)).toEqual(['woman', 'daughter'])
   })
 
   it('everyday mirrors in family and city match everyday source forms and articles', () => {
@@ -161,6 +162,7 @@ describe('topic data integrity', () => {
       ['family', 'baby'],
       ['family', 'family'],
       ['family', 'friend'],
+      ['family', 'child'],
       ['city', 'country'],
       ['city', 'city'],
       ['city', 'town'],

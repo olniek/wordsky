@@ -201,11 +201,12 @@ export function scoreWord(
     }
   }
 
+  const pair: LangPair = `${best.lang}-${target}`
   return {
     concept: word.concept,
     targetForm,
     score: best.score,
-    level: levelForScore(best.score),
+    level: levelForScore(best.score, pair),
     matchedVia: best.lang,
     matchedForm: best.knownForm,
     matchedRule: best.rule,

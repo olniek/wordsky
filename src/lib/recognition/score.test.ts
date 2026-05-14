@@ -98,6 +98,17 @@ describe('scoreWord — pattern bonus EN→PT (-tion / -ção)', () => {
   })
 })
 
+describe('scoreWord — corpus cognate tags (family)', () => {
+  it('uses cognate-EN-ES on the shipped family row', async () => {
+    const { everydayNouns100 } = await import('../../data/topicEverydayNouns100')
+    const row = everydayNouns100.find((r) => r.concept === 'family')
+    expect(row?.tags).toContain('cognate-EN-ES')
+    const r = scoreWord(row!, 'ES', ['EN'])
+    expect(r.score).toBeGreaterThanOrEqual(95)
+    expect(r.matchedRule).toBe('cognate-tag')
+  })
+})
+
 describe('scoreWord — PT↔ES pattern (-ade / -idad)', () => {
   it('recognises cidade / ciudad as similar via pattern', () => {
     const w = word({

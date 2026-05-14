@@ -40,8 +40,9 @@ Topic hub lists topics and **Find a word**; Welcome is where you pick anchor, tr
 
 ### Welcome (language setup)
 
-- First screen: product name **Wordsky**, a **2–3 line** plain-language intro, then **Languages** in one panel: **anchor** (I speak), **translation languages** for Study, and **languages you already know** (for recognition hints). Primary CTA continues to the **topic hub** (`/topics`).
-- Optional calm **constellation** decoration (static; readable contrast); must not be required to use the form.
+- First screen: product name **Wordsky**, a **2–3 line** plain-language intro, then **Languages** in one panel: **anchor** (I speak), **translation languages** for Study, and **languages you already know** (for recognition hints). Primary CTA continues to the **topic hub** (`/topics`). Optional slim top bar may repeat the name and link **Topic hub** for wayfinding.
+- A small **“How we estimate this”** control (same as on the topic hub and recognition report) sits with the known-languages block and opens a short plain-language explanation without leaving the page.
+- Optional calm **constellation** decoration (readable contrast); optional very slow glow pulse unless **`prefers-reduced-motion`**; must not be required to use the form.
 - Keyboard-friendly controls; chip rows follow the same focus patterns as the rest of the app.
 
 ### Topic hub
@@ -55,6 +56,7 @@ Topic hub lists topics and **Find a word**; Welcome is where you pick anchor, tr
   - `Review` (all learned)
 - Keep copy short and practical
 - **Find a word** matches across languages with **accents optional** (folding is shared with lemma comparison). Each hit shows the **topic title** and the word’s **`mapGroup`** label (subgroup within the topic) so lookup stays tied to the scene you study.
+- Optional **recognition** strip: percents are **rough estimates** from A1 topic vocabulary and the languages you marked as known—not a fluency score. A **“How we estimate this”** control next to the footnote opens the same short explanation as on Welcome and the recognition report (hover on desktop; tap, **Close**, or keyboard elsewhere).
 
 ### Topic Header
 - Keep one compact row:
@@ -121,6 +123,7 @@ Every screen must answer:
 Persist in `localStorage`:
 - anchor language
 - which languages appear in Study translations (subset of non-anchor, or all)
+- **languages you already know** (declared on Welcome; drives recognition estimates on the topic hub and optional report)
 - current topic
 - last word index in topic
 - per-word **per language** status: `unseen | learning | known` (each anchor and translation surface is tracked separately)
@@ -160,4 +163,5 @@ We target **A1** with curated topics, not an automated CEFR engine. Optional **m
 ## 10) Related (contributors)
 
 - [README.md](README.md) — scripts and where key modules live.
+- **Known languages** persistence, recognition scoring, and routes: [docs/known-languages-and-recognition.md](docs/known-languages-and-recognition.md).
 - Topic row schema, `tags`, data tests, and CEFR-style **planned tasks**: [.cursor/rules/words-sky-topic-data.mdc](.cursor/rules/words-sky-topic-data.mdc).
